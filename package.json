@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "bygg-karta": "node scripts/bygg-karta.mjs",
+    "hamta-tavlingar": "node scripts/hamta-tavlingar.mjs",
     "start": "npx --yes serve public"
   },
   "devDependencies": {

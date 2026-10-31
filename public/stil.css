@@ -1,0 +1,77 @@
+* { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #222;
+}
+
+header { padding: 0.5rem 1rem; border-bottom: 1px solid #ddd; }
+header h1 { margin: 0; font-size: 1.3rem; }
+
+/* Dator: karta till vänster, sidomeny till höger */
+main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+}
+
+#karta { min-height: 0; }
+
+#sidomeny {
+  overflow-y: auto;
+  padding: 1rem;
+  border-left: 1px solid #ddd;
+}
+
+/* Mobil: sidomenyn under kartan */
+@media (max-width: 800px) {
+  /* Ingen "scroll anchoring": sidan ska inte hoppa när PM och dokument laddats in i menyn */
+  body { height: auto; display: block; overflow-anchor: none; }
+  main { display: block; }
+  #karta { height: 60vh; }
+  /* Minsta höjd så att menyns början alltid kan scrollas upp till mitten av skärmen */
+  #sidomeny { border-left: none; border-top: 1px solid #ddd; overflow: visible; min-height: 60vh; }
+}
+
+/* Teckenförklaring */
+.forklaring { font-size: 0.85rem; margin-bottom: 1rem; }
+.forklaring div { display: flex; align-items: center; gap: 0.4rem; margin: 0.2rem 0; }
+.prick { display: inline-block; width: 12px; height: 12px; border-radius: 50%; flex: none; }
+.prick.fis { background: #d62828; }
+.prick.ovriga { background: #1d4ed8; }
+
+/* Lista */
+#sidomeny h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+#sidomeny h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin: 1.2rem 0 0.3rem; }
+
+.lista { list-style: none; margin: 0; padding: 0; }
+.lista button {
+  display: flex; gap: 0.6rem; align-items: baseline;
+  width: 100%; padding: 0.45rem 0.3rem;
+  border: none; border-bottom: 1px solid #eee; background: none;
+  text-align: left; font: inherit; cursor: pointer;
+}
+.lista button:hover { background: #f4f4f4; }
+.lista .text { flex: 1; min-width: 0; }
+.lista .namn { display: block; font-weight: 600; }
+.lista .info { display: block; font-size: 0.85rem; color: #555; }
+.nedrakning { font-size: 0.8rem; color: #444; white-space: nowrap; }
+.nedrakning.snart { font-weight: 700; color: #000; }
+
+/* Detaljer */
+.tillbaka { border: none; background: none; padding: 0; margin-bottom: 0.8rem; font: inherit; color: #1d4ed8; cursor: pointer; }
+.detaljer dl { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 0.8rem; margin: 0.8rem 0; font-size: 0.9rem; }
+.detaljer dt { color: #666; }
+.detaljer dd { margin: 0; }
+.detaljer .notis { font-size: 0.8rem; color: #8a5a00; }
+.pm { display: inline-block; margin: 0.3rem 0; padding: 0.4rem 0.8rem; background: #222; color: #fff; text-decoration: none; border-radius: 4px; }
+.etikett { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; color: #fff; font-size: 0.8rem; }
+.etikett.fis { background: #d62828; }
+.etikett.ovriga { background: #1d4ed8; }
+.detaljer ul { padding-left: 1.2rem; font-size: 0.9rem; }
+.kalla { font-size: 0.75rem; color: #777; margin-top: 1.5rem; }

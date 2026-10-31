@@ -1,19 +1,22 @@
-# Publicerar mappen public/ på GitHub Pages vid varje push till main
+# Hämtar aktuella tävlingar från SSF-TA och publicerar mappen public/ på GitHub Pages.
+# Körs vid varje push till main och varje natt, så att tävlingslistan hålls uppdaterad.
 name: Publicera på GitHub Pages
 
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '0 3 * * *' # varje natt kl. 03:00 UTC
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # för att committa uppdaterade tävlingar
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   publicera:
@@ -23,6 +26,29 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      # Om SSF-TA inte svarar publiceras sidan ändå, med tävlingarna från förra körningen
+      - name: Hämta tävlingar
+        continue-on-error: true
+        run: node scripts/hamta-tavlingar.mjs
+
+      - name: Committa uppdaterade tävlingar
+        run: |
+          git add public/tavlingar.json scripts/geokod-cache.json
+          if git diff --cached --quiet; then
+            echo "Inga ändringar."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Uppdatera tävlingar från SSF-TA"
+            git pull --rebase
+            git push
+          fi
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
