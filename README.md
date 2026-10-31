@@ -21,17 +21,21 @@ npm start
 
 ## Uppdatera kartdatan
 
-1. **Lantmäteriet, Topografi 1M Nedladdning, vektor** (GeoPackage, CC0). Beställs gratis via [Geotorget](https://geotorget.lantmateriet.se/geodataprodukter) (kräver konto). Lägg alla zip-filer (`mark_sverige.zip`, `hydrografi_sverige.zip` osv.) direkt i `data/`.
+1. **Lantmäteriet, Topografi 1M Nedladdning, vektor** (GeoPackage, CC0). Beställs gratis via [Geotorget](https://geotorget.lantmateriet.se/geodataprodukter) (kräver konto). Lägg de här zip-filerna direkt i `data/` (övriga i beställningen används inte):
+   - `mark_sverige.zip`
+   - `hydrografi_sverige.zip`
+   - `kommunikation_sverige.zip`
+   - `administrativindelning_sverige.zip`
 2. **Natural Earth** (public domain), för grannländerna. Ladda ner till `data/natural-earth/`:
    - [ne_10m_admin_0_countries.geojson](https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson)
    - [ne_10m_lakes.geojson](https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_lakes.geojson)
 3. Kör `npm run bygg-karta`. Det tar några sekunder och ersätter allt i `public/kartdata/`.
 
-Vilka lager som tas med, och hur långt man kan zooma, ställs in högst upp i `scripts/bygg-karta.mjs`. Områdena där måste stämma med `bounds` i `public/index.html`.
+Vilka lager och objekttyper som tas med, och hur långt man kan zooma, ställs in högst upp i `scripts/bygg-karta.mjs`. Bara det som kartan ritar tas med, så om du lägger till ett lager i `public/index.html` måste det också läggas till där. Områdena måste stämma med `bounds` i `public/index.html`.
 
 ## Publicera
 
-Publicera mappen `public/` som en statisk webbplats, t.ex. på Cloudflare Pages (utan byggkommando, med `public` som utdatamapp).
+Sidan publiceras på GitHub Pages automatiskt vid varje push till `main` (se `.github/workflows/pages.yml`). Det som publiceras är mappen `public/` som den ligger i git – kör alltså `npm run bygg-karta` och committa `public/kartdata/` om kartdatan har ändrats.
 
 ## Källor
 

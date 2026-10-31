@@ -21,13 +21,14 @@ const SVERIGE = { mapp: 'sverige', omrade: [10.0, 54.8, 25.0, 69.5], minZoom: 2,
 // Samma område som kartans maxBounds, så att ingen kant syns
 const GRANNLAND = { mapp: 'grannland', omrade: [-25.0, 50.0, 60.0, 73.0], minZoom: 2, maxZoom: 7 };
 
-// Lantmäteriet: [zipfil, tabell i GeoPackage, kolumner att behålla]
+// Lantmäteriet: [zipfil, tabell i GeoPackage, kolumner att behålla, SQL-villkor]
+// Bara det som kartan i index.html faktiskt ritar tas med.
 const LM_LAGER = [
-  ['mark_sverige.zip', 'mark', ['objekttyp']],
-  ['hydrografi_sverige.zip', 'hydrolinje', ['objekttyp', 'storleksklass']],
+  ['mark_sverige.zip', 'mark', ['objekttyp'], `objekttyp <> 'Ej karterat område'`],
+  ['hydrografi_sverige.zip', 'hydrolinje', []],
   ['kommunikation_sverige.zip', 'vaglinje', ['objekttyp']],
-  ['kommunikation_sverige.zip', 'ralstrafik', ['objekttyp']],
-  ['administrativindelning_sverige.zip', 'administrativ_grans', ['objekttyp']],
+  ['kommunikation_sverige.zip', 'ralstrafik', []],
+  ['administrativindelning_sverige.zip', 'administrativ_grans', ['objekttyp'], `objekttyp IN ('Riksgräns', 'Länsgräns')`],
 ];
 
 // Natural Earth: [lagernamn, fil i data/natural-earth]
@@ -68,9 +69,9 @@ function lasLantmateriet() {
   };
 
   const lager = {};
-  for (const [zipnamn, tabell, kolumner] of LM_LAGER) {
+  for (const [zipnamn, tabell, kolumner, villkor] of LM_LAGER) {
     const rader = oppnaGpkg(zipnamn)
-      .prepare(`SELECT geom, ${kolumner.map((k) => `"${k}"`).join(', ')} FROM "${tabell}"`)
+      .prepare(`SELECT ${['geom', ...kolumner.map((k) => `"${k}"`)].join(', ')} FROM "${tabell}"${villkor ? ` WHERE ${villkor}` : ''}`)
       .all();
     lager[tabell] = rader
       .filter((r) => r.geom)
@@ -81,11 +82,26 @@ function lasLantmateriet() {
   return lager;
 }
 
+// Yttergränser [väst, syd, öst, nord] för en geometri
+function utbredning(koord, b = [Infinity, Infinity, -Infinity, -Infinity]) {
+  if (typeof koord[0] === 'number') {
+    b[0] = Math.min(b[0], koord[0]); b[1] = Math.min(b[1], koord[1]);
+    b[2] = Math.max(b[2], koord[0]); b[3] = Math.max(b[3], koord[1]);
+  } else for (const k of koord) utbredning(k, b);
+  return b;
+}
+
 function lasNaturalEarth() {
+  // Bara länder och sjöar som når in i grannlandsområdet
+  const [v, s, o, n] = GRANNLAND.omrade;
+  const inom = (f) => {
+    const [fv, fs, fo, fn] = utbredning(f.geometry.coordinates);
+    return fo >= v && fv <= o && fn >= s && fs <= n;
+  };
   const lager = {};
   for (const [namn, fil] of NE_LAGER) {
     const { features } = JSON.parse(readFileSync(join(DATA, 'natural-earth', fil), 'utf8'));
-    lager[namn] = features.map((f) => ({ ...f, properties: {} }));
+    lager[namn] = features.filter(inom).map((f) => ({ ...f, properties: {} }));
   }
   return lager;
 }

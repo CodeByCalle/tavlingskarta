@@ -56,8 +56,6 @@
         },
         {
           id: 'mark', type: 'fill', source: 'lm', 'source-layer': 'mark',
-          // "Ej karterat område" = utanför Sverige; där syns grannländerna under i stället
-          filter: ['!=', ['get', 'objekttyp'], 'Ej karterat område'],
           paint: {
             'fill-color': ['match', ['get', 'objekttyp'],
               'Skog', '#d5e8c8',
@@ -76,7 +74,6 @@
         },
         {
           id: 'granser', type: 'line', source: 'lm', 'source-layer': 'administrativ_grans',
-          filter: ['in', ['get', 'objekttyp'], ['literal', ['Riksgräns', 'Länsgräns']]],
           paint: {
             'line-color': '#8a7a99',
             'line-width': ['match', ['get', 'objekttyp'], 'Riksgräns', 1.5, 0.7],
