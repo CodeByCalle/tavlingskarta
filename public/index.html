@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tävlingskarta längdskidor</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
+  <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+</head>
+<body>
+  <h1>Tävlingskarta längdskidor</h1>
+
+  <div id="karta" style="height: 80vh;"></div>
+
+  <script>
+    // Kartdata, omgjord till tiles med `npm run bygg-karta`:
+    //   Sverige: Lantmäteriet, Topografi 1M (CC0)
+    //   Grannländer: Natural Earth (public domain), grövre och nedtonat
+    // Byggs som vanlig text: new URL() skulle koda om {z}/{x}/{y} till %7Bz%7D osv.
+    const kartdata = location.href.replace(/[^/]*([?#].*)?$/, '') + 'kartdata/';
+
+    const stil = {
+      version: 8,
+      sources: {
+        lm: {
+          type: 'vector',
+          tiles: [kartdata + 'sverige/{z}/{x}/{y}.pbf'],
+          minzoom: 2,
+          maxzoom: 10,
+          bounds: [10.0, 54.8, 25.0, 69.5], // samma område som i scripts/bygg-karta.mjs
+          attribution: '© <a href="https://www.lantmateriet.se">Lantmäteriet</a>'
+        },
+        ne: {
+          type: 'vector',
+          tiles: [kartdata + 'grannland/{z}/{x}/{y}.pbf'],
+          minzoom: 2,
+          maxzoom: 7,
+          bounds: [-25.0, 50.0, 60.0, 73.0], // samma område som i scripts/bygg-karta.mjs
+          attribution: '<a href="https://www.naturalearthdata.com">Natural Earth</a>'
+        }
+      },
+      layers: [
+        { id: 'bakgrund', type: 'background', paint: { 'background-color': '#c6dcef' } },
+        {
+          id: 'grannland', type: 'fill', source: 'ne', 'source-layer': 'land',
+          paint: { 'fill-color': '#ffffff', 'fill-opacity': 0.6 }
+        },
+        {
+          id: 'grannland-sjoar', type: 'fill', source: 'ne', 'source-layer': 'sjoar',
+          paint: { 'fill-color': '#c6dcef' }
+        },
+        {
+          id: 'grannland-granser', type: 'line', source: 'ne', 'source-layer': 'land',
+          paint: { 'line-color': '#8a7a99', 'line-width': 0.6, 'line-opacity': 0.4 }
+        },
+        {
+          id: 'mark', type: 'fill', source: 'lm', 'source-layer': 'mark',
+          // "Ej karterat område" = utanför Sverige; där syns grannländerna under i stället
+          filter: ['!=', ['get', 'objekttyp'], 'Ej karterat område'],
+          paint: {
+            'fill-color': ['match', ['get', 'objekttyp'],
+              'Skog', '#d5e8c8',
+              'Öppen mark', '#f4f1e6',
+              'Kalfjäll', '#ece8dc',
+              'Glaciär', '#ffffff',
+              'Bebyggelse', '#e6d3c8',
+              'Vattenyta', '#c6dcef',
+              'Hav', '#c6dcef',
+              '#f4f1e6']
+          }
+        },
+        {
+          id: 'vattendrag', type: 'line', source: 'lm', 'source-layer': 'hydrolinje',
+          paint: { 'line-color': '#9cc0e0', 'line-width': 0.8 }
+        },
+        {
+          id: 'granser', type: 'line', source: 'lm', 'source-layer': 'administrativ_grans',
+          filter: ['in', ['get', 'objekttyp'], ['literal', ['Riksgräns', 'Länsgräns']]],
+          paint: {
+            'line-color': '#8a7a99',
+            'line-width': ['match', ['get', 'objekttyp'], 'Riksgräns', 1.5, 0.7],
+            'line-dasharray': [3, 2]
+          }
+        },
+        {
+          id: 'jarnvag', type: 'line', source: 'lm', 'source-layer': 'ralstrafik', minzoom: 6,
+          paint: { 'line-color': '#999999', 'line-width': 0.8 }
+        },
+        {
+          id: 'vagar', type: 'line', source: 'lm', 'source-layer': 'vaglinje',
+          filter: ['any', ['>=', ['zoom'], 7], ['!=', ['get', 'objekttyp'], 'Landsväg liten']],
+          paint: {
+            'line-color': ['match', ['get', 'objekttyp'], ['Motorväg', 'Motortrafikled', 'Mötesfri väg'], '#e8a35c', '#ffffff'],
+            'line-width': ['match', ['get', 'objekttyp'], ['Motorväg', 'Motortrafikled', 'Mötesfri väg'], 1.6, 'Landsväg', 1.2, 0.7]
+          }
+        }
+      ]
+    };
+
+    // Ungefärliga gränser för Sverige
+    const sverige = [[10.5, 55.0], [24.5, 69.2]];
+
+    const karta = new maplibregl.Map({
+      container: 'karta',
+      style: stil,
+      bounds: sverige,
+      // Måste vara bred: hela vyn (inte bara mitten) hålls inom maxBounds, och Sverige är smalt
+      maxBounds: [[-25.0, 50.0], [60.0, 73.0]],
+      minZoom: 3
+    });
+
+    karta.addControl(new maplibregl.NavigationControl());
+  </script>
+</body>
+</html>

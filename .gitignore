@@ -1,0 +1,4 @@
+node_modules/
+
+# Rådata (stor, kan laddas ner igen – se README)
+data/
