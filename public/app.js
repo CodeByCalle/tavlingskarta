@@ -146,7 +146,7 @@ let hamtad = null;
 const perId = new Map();
 
 const forklaringHtml = `
-  <p class="forklaring">Klicka på en prick för detaljer. Prickar som ligger nära varandra slås ihop till en.</p>`;
+  <p class="forklaring">Klicka på en prick för detaljer. Prickar som ligger nära varandra slås ihop till en större – ju fler tävlingar, desto större prick.</p>`;
 
 function listaHtml(lista) {
   return `<ul class="lista">${lista.map((t) => `
@@ -270,6 +270,61 @@ sidomeny.addEventListener('click', (e) => {
   visaTavling(t.id);
 });
 
+// ---- Prickar som slås ihop när de nuddar varandra ----
+//
+// En sammanslagen prick har samma yta som prickarna den består av tillsammans (n prickar → radie × √n)
+// och ligger i deras viktade mittpunkt. Eftersom den då växer kan den nudda nya grannar, så
+// sammanslagningen upprepas tills inga prickar nuddar varandra. Resultatet sparas per zoomsteg.
+
+const ZOOMSTEG = 0.25;
+const prickcache = new Map();
+
+// Webbmercator i enheter där hela världen är 1 × 1
+const tillEnhet = (lon, lat) => {
+  const s = Math.sin((lat * Math.PI) / 180);
+  return [(lon + 180) / 360, 0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)];
+};
+const franEnhet = (x, y) => [x * 360 - 180, (Math.atan(Math.sinh(Math.PI * (1 - 2 * y))) * 180) / Math.PI];
+
+function prickarForZoom(zoom) {
+  if (prickcache.has(zoom)) return prickcache.get(zoom);
+  const pixlarPerEnhet = 512 * 2 ** zoom; // MapLibre ritar världen som 512 × 2^zoom pixlar
+  const radie = (n) => (PRICK_RADIE * Math.sqrt(n)) / pixlarPerEnhet;
+
+  let prickar = tavlingar.map((t) => {
+    const [x, y] = tillEnhet(t.lon, t.lat);
+    return { x, y, ids: [t.id] };
+  });
+  for (;;) {
+    // Hitta de två prickar som överlappar mest
+    let basta = null;
+    for (let i = 0; i < prickar.length; i++) {
+      for (let j = i + 1; j < prickar.length; j++) {
+        const a = prickar[i], b = prickar[j];
+        const overlapp = radie(a.ids.length) + radie(b.ids.length) - Math.hypot(a.x - b.x, a.y - b.y);
+        if (overlapp >= 0 && (!basta || overlapp > basta.overlapp)) basta = { i, j, overlapp };
+      }
+    }
+    if (!basta) break;
+    const a = prickar[basta.i], b = prickar[basta.j];
+    const na = a.ids.length, nb = b.ids.length;
+    const ihop = { x: (a.x * na + b.x * nb) / (na + nb), y: (a.y * na + b.y * nb) / (na + nb), ids: [...a.ids, ...b.ids] };
+    prickar = prickar.filter((_, k) => k !== basta.i && k !== basta.j);
+    prickar.push(ihop);
+  }
+
+  const data = {
+    type: 'FeatureCollection',
+    features: prickar.map((p) => ({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: franEnhet(p.x, p.y) },
+      properties: { ids: JSON.stringify(p.ids), radie: PRICK_RADIE * Math.sqrt(p.ids.length) },
+    })),
+  };
+  prickcache.set(zoom, data);
+  return data;
+}
+
 // ---- Ladda tävlingar och rita dem på kartan ----
 
 async function laddaTavlingar() {
@@ -294,50 +349,44 @@ karta.on('load', async () => {
     type: 'geojson',
     attribution:
       'Tävlingar: <a href="https://ssfta.skidor.com">SSF-TA</a> · Platser: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    data: {
-      type: 'FeatureCollection',
-      features: tavlingar.map((t) => ({
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [t.lon, t.lat] },
-        properties: { id: t.id },
-      })),
-    },
-    // Prickar som skulle överlappa slås ihop till en (ungefär när avståndet är mindre än två radier)
-    cluster: true,
-    clusterRadius: PRICK_RADIE * 2,
+    data: { type: 'FeatureCollection', features: [] },
   });
   karta.addSource('vald', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
 
-  // Enskilda och sammanslagna prickar ser likadana ut
   karta.addLayer({
     id: 'tavlingar', type: 'circle', source: 'tavlingar',
-    paint: { 'circle-color': PRICK_FARG, 'circle-radius': PRICK_RADIE },
+    paint: { 'circle-color': PRICK_FARG, 'circle-radius': ['get', 'radie'] },
   });
   karta.addLayer({
     id: 'tavlingar-vald', type: 'circle', source: 'vald',
     paint: { 'circle-radius': PRICK_RADIE + 4, 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#000', 'circle-stroke-width': 2 },
   });
 
-  karta.on('click', 'tavlingar', async (e) => {
-    // Sammanslagen prick: lista alla tävlingar i den och zooma in så att de delar på sig
-    const kluster = e.features.find((f) => f.properties.cluster);
-    if (kluster) {
-      const kalla = karta.getSource('tavlingar');
-      const id = kluster.properties.cluster_id;
-      const [delar, zoom] = await Promise.all([kalla.getClusterLeaves(id, Infinity), kalla.getClusterExpansionZoom(id)]);
-      visaFlera(delar.map((f) => perId.get(f.properties.id)).filter(Boolean).sort((a, b) => a.start.localeCompare(b.start)));
-      karta.easeTo({ center: kluster.geometry.coordinates, zoom: Math.min(zoom, 12) });
-      return;
-    }
-    // Annars: tävlingar som ligger på exakt samma plats delar inte på sig – samla alla under klicket
-    const { x, y } = e.point;
-    const traffar = karta.queryRenderedFeatures([[x - 6, y - 6], [x + 6, y + 6]], { layers: ['tavlingar'] });
-    const lista = [...new Set(traffar.map((f) => f.properties.id))]
+  let senasteSteg = null;
+  const ritaPrickar = () => {
+    // Avrunda nedåt: på verklig zoom ligger prickarna då minst så långt isär som beräknat
+    const steg = Math.floor(karta.getZoom() / ZOOMSTEG);
+    if (steg === senasteSteg) return;
+    senasteSteg = steg;
+    karta.getSource('tavlingar').setData(prickarForZoom(steg * ZOOMSTEG));
+  };
+  ritaPrickar();
+  karta.on('zoom', ritaPrickar);
+
+  karta.on('click', 'tavlingar', (e) => {
+    const prick = e.features[0];
+    const lista = JSON.parse(prick.properties.ids)
       .map((id) => perId.get(id))
       .filter(Boolean)
       .sort((a, b) => a.start.localeCompare(b.start));
-    if (lista.length === 1) visaTavling(lista[0].id);
-    else if (lista.length > 1) visaFlera(lista);
+    if (lista.length === 1) return visaTavling(lista[0].id);
+
+    // Sammanslagen prick: lista tävlingarna och zooma in så att de delar på sig
+    visaFlera(lista);
+    const lon = lista.map((t) => t.lon);
+    const lat = lista.map((t) => t.lat);
+    const yta = [[Math.min(...lon), Math.min(...lat)], [Math.max(...lon), Math.max(...lat)]];
+    if (yta[0][0] !== yta[1][0] || yta[0][1] !== yta[1][1]) karta.fitBounds(yta, { padding: 60, maxZoom: 12 });
   });
   karta.on('mouseenter', 'tavlingar', () => (karta.getCanvas().style.cursor = 'pointer'));
   karta.on('mouseleave', 'tavlingar', () => (karta.getCanvas().style.cursor = ''));
