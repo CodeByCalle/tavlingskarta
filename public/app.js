@@ -34,7 +34,6 @@ const stil = {
       minzoom: 2,
       maxzoom: 10,
       bounds: [10.0, 54.8, 25.0, 69.5], // samma område som i scripts/bygg-karta.mjs
-      attribution: '© <a href="https://www.lantmateriet.se">Lantmäteriet</a>',
     },
     ne: {
       type: 'vector',
@@ -42,7 +41,6 @@ const stil = {
       minzoom: 2,
       maxzoom: 7,
       bounds: [-25.0, 50.0, 60.0, 73.0], // samma område som i scripts/bygg-karta.mjs
-      attribution: '<a href="https://www.naturalearthdata.com">Natural Earth</a>',
     },
   },
   layers: [
@@ -96,8 +94,13 @@ const karta = new maplibregl.Map({
   maxBounds: [[-25.0, 50.0], [60.0, 73.0]],
   minZoom: 3,
   maxZoom: MAX_ZOOM,
+  // Ingen standardruta (den lägger till "MapLibre" och fälls ihop på mobil). Kartan visar bara
+  // OpenStreetMap, som krävs eftersom tävlingarnas positioner kommer därifrån; övriga källor
+  // (CC0, public domain, BSD) kräver inget och står i stället längst ner i sidomenyn.
+  attributionControl: false,
 });
 karta.addControl(new maplibregl.NavigationControl());
+karta.addControl(new maplibregl.AttributionControl({ compact: false }));
 
 const sidomeny = document.getElementById('sidomeny');
 const arMobil = () => matchMedia('(max-width: 800px)').matches;
@@ -172,7 +175,15 @@ function visaOversikt() {
     perManad.get(n).push(t);
   }
   for (const [nyckel, lista] of perManad) html += `<h3>${esc(manadRubrik(nyckel))}</h3>${listaHtml(lista)}`;
-  if (hamtad) html += `<p class="kalla">Från Svenska Skidförbundets SSF-TA, uppdaterad ${esc(new Date(hamtad).toLocaleString('sv-SE', { dateStyle: 'medium', timeStyle: 'short' }))}.</p>`;
+  const uppdaterad = hamtad
+    ? `, uppdaterade ${esc(new Date(hamtad).toLocaleString('sv-SE', { dateStyle: 'medium', timeStyle: 'short' }))}`
+    : '';
+  html += `<p class="kalla">Källor: tävlingar från Svenska Skidförbundets
+    <a href="${SSF_WEBB}" target="_blank" rel="noopener">SSF-TA</a>${uppdaterad}.
+    Karta: <a href="https://www.lantmateriet.se" target="_blank" rel="noopener">Lantmäteriet</a> och
+    <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a>.
+    Platser: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-bidragsgivare.
+    Kartbibliotek: <a href="https://maplibre.org" target="_blank" rel="noopener">MapLibre</a>.</p>`;
   sidomeny.innerHTML = html;
   sidomeny.scrollTop = 0;
 }
@@ -354,8 +365,7 @@ karta.on('load', async () => {
 
   karta.addSource('tavlingar', {
     type: 'geojson',
-    attribution:
-      'Tävlingar: <a href="https://ssfta.skidor.com">SSF-TA</a> · Platser: © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     data: {
       type: 'FeatureCollection',
       features: tavlingar.map((t) => ({
