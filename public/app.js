@@ -168,7 +168,6 @@ const forklaringHtml = `
 function listaHtml(lista) {
   return `<ul class="lista">${lista.map((t) => `
     <li><button type="button" data-id="${t.id}">
-      <span class="prick"></span>
       <span class="text">
         <span class="namn">${esc(t.namn)}${arFis(t) ? ' <span class="etikett fis">FIS</span>' : ''}</span>
         <span class="info">${esc(formateraDatum(t.start, t.slut))} ${esc(t.plats ?? t.distrikt ?? '')}</span>
