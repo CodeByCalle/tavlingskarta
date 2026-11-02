@@ -1,3 +1,26 @@
+/* Roboto (SIL Open Font License, se typsnitt/LICENSE.txt), latinska tecken, från @fontsource/roboto */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(typsnitt/roboto-latin-400-normal.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(typsnitt/roboto-latin-500-normal.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(typsnitt/roboto-latin-700-normal.woff2) format('woff2');
+}
+
 * { box-sizing: border-box; }
 
 html, body { height: 100%; margin: 0; }
@@ -5,7 +28,7 @@ html, body { height: 100%; margin: 0; }
 body {
   display: flex;
   flex-direction: column;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: Roboto, system-ui, sans-serif;
   color: #222;
 }
 
@@ -21,6 +44,7 @@ main {
 }
 
 #karta { min-height: 0; }
+.maplibregl-map { font-family: Roboto, system-ui, sans-serif; } /* MapLibre sätter annars Helvetica */
 
 #sidomeny {
   overflow-y: auto;
@@ -54,7 +78,7 @@ main {
 }
 .lista button:hover { background: #f4f4f4; }
 .lista .text { flex: 1; min-width: 0; }
-.lista .namn { display: block; font-weight: 600; }
+.lista .namn { display: block; font-weight: 500; }
 .lista .info { display: block; font-size: 0.85rem; color: #555; }
 .nedrakning { font-size: 0.8rem; color: #444; white-space: nowrap; }
 .nedrakning.snart { font-weight: 700; color: #000; }

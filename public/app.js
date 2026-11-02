@@ -26,7 +26,6 @@ const bas = location.href.replace(/[^/]*([?#].*)?$/, '');
 
 const stil = {
   version: 8,
-  glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf', // typsnitt för antalet i bubblorna
   sources: {
     lm: {
       type: 'vector',
@@ -129,12 +128,13 @@ function nedrakning(t) {
   return `Om ${Math.round(t.dagar / 30)} mån`;
 }
 
-const GRUPPER = [
-  { rubrik: 'Pågår och i dag', max: 0 },
-  { rubrik: 'Inom en vecka', max: 7 },
-  { rubrik: 'Inom en månad', max: 30 },
-  { rubrik: 'Senare', max: Infinity },
-];
+// Listan delas upp per månad. En tävling som redan har börjat räknas till innevarande månad.
+const manadNyckel = (t) => (t.start < IDAG ? IDAG : t.start).slice(0, 7);
+function manadRubrik(nyckel) {
+  const namn = new Date(+nyckel.slice(0, 4), +nyckel.slice(5, 7) - 1, 1)
+    .toLocaleDateString('sv-SE', { month: 'long', year: 'numeric' });
+  return namn.charAt(0).toUpperCase() + namn.slice(1);
+}
 
 // ---- Hjälpfunktioner för HTML ----
 
@@ -167,12 +167,14 @@ function listaHtml(lista) {
 function visaOversikt() {
   valj(null);
   let html = `<h2>${tavlingar.length} kommande tävlingar</h2>${forklaringHtml}`;
-  let fran = -1;
-  for (const g of GRUPPER) {
-    const i = tavlingar.filter((t) => t.dagar > fran && t.dagar <= g.max);
-    if (i.length) html += `<h3>${g.rubrik}</h3>${listaHtml(i)}`;
-    fran = g.max;
+  // Tävlingarna är redan sorterade på datum, så månaderna kommer i ordning
+  const perManad = new Map();
+  for (const t of tavlingar) {
+    const n = manadNyckel(t);
+    if (!perManad.has(n)) perManad.set(n, []);
+    perManad.get(n).push(t);
   }
+  for (const [nyckel, lista] of perManad) html += `<h3>${esc(manadRubrik(nyckel))}</h3>${listaHtml(lista)}`;
   if (hamtad) html += `<p class="kalla">Från Svenska Skidförbundets SSF-TA, uppdaterad ${esc(new Date(hamtad).toLocaleString('sv-SE', { dateStyle: 'medium', timeStyle: 'short' }))}.</p>`;
   sidomeny.innerHTML = html;
   sidomeny.scrollTop = 0;
@@ -274,6 +276,37 @@ sidomeny.addEventListener('click', (e) => {
   visaTavling(t.id);
 });
 
+// ---- Bubblor med antal ----
+
+const BUBBLA_TEXT = 12;
+// Tre fasta storlekar: färre än 5, 5–14 och 15 eller fler
+const bubbelRadie = (antal) => (antal < 5 ? 12 : antal < 15 ? 15 : 19);
+
+// Blå cirkel med vit kant och antalet i Roboto. Ritas i skärmens upplösning så att den blir skarp.
+function ritaBubbla(antal) {
+  const skala = Math.ceil(devicePixelRatio || 1);
+  const kant = 2;
+  const radie = bubbelRadie(antal);
+  const storlek = (radie + kant) * 2;
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = storlek * skala;
+  const g = canvas.getContext('2d');
+  g.scale(skala, skala);
+  g.beginPath();
+  g.arc(storlek / 2, storlek / 2, radie + kant / 2, 0, 2 * Math.PI);
+  g.fillStyle = PRICK_FARG;
+  g.fill();
+  g.lineWidth = kant;
+  g.strokeStyle = '#fff';
+  g.stroke();
+  g.fillStyle = '#fff';
+  g.font = `500 ${BUBBLA_TEXT}px Roboto, sans-serif`;
+  g.textAlign = 'center';
+  g.textBaseline = 'middle';
+  g.fillText(String(antal), storlek / 2, storlek / 2 + 0.5);
+  return [g.getImageData(0, 0, canvas.width, canvas.height), { pixelRatio: skala }];
+}
+
 // ---- Ladda tävlingar och rita dem på kartan ----
 
 async function laddaTavlingar() {
@@ -315,25 +348,19 @@ karta.on('load', async () => {
   });
   karta.addSource('vald', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
 
-  karta.addLayer({
-    id: 'kluster', type: 'circle', source: 'tavlingar', filter: ['has', 'point_count'],
-    paint: {
-      'circle-color': PRICK_FARG,
-      // Tre fasta storlekar: färre än 5, 5–14 och 15 eller fler
-      'circle-radius': ['step', ['get', 'point_count'], 12, 5, 15, 15, 19],
-      'circle-stroke-color': '#fff',
-      'circle-stroke-width': 2,
-    },
+  // Bubblorna ritas som bilder av sidan själv (se ritaBubbla), så att siffrorna får samma
+  // typsnitt som resten av sidan. Bilden "bubbla-12" skapas första gången den behövs.
+  await document.fonts.load(`500 ${BUBBLA_TEXT}px Roboto`);
+  karta.on('styleimagemissing', (e) => {
+    const antal = /^bubbla-(\d+)$/.exec(e.id)?.[1];
+    if (antal && !karta.hasImage(e.id)) karta.addImage(e.id, ...ritaBubbla(+antal));
   });
   karta.addLayer({
-    id: 'kluster-antal', type: 'symbol', source: 'tavlingar', filter: ['has', 'point_count'],
+    id: 'kluster', type: 'symbol', source: 'tavlingar', filter: ['has', 'point_count'],
     layout: {
-      'text-field': ['get', 'point_count_abbreviated'],
-      'text-font': ['Noto Sans Medium'],
-      'text-size': 12,
-      'text-allow-overlap': true,
+      'icon-image': ['concat', 'bubbla-', ['get', 'point_count']],
+      'icon-allow-overlap': true,
     },
-    paint: { 'text-color': '#fff' },
   });
   karta.addLayer({
     id: 'tavlingar', type: 'circle', source: 'tavlingar', filter: ['!', ['has', 'point_count']],
