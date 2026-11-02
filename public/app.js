@@ -7,8 +7,8 @@
 
 const SSF_API = 'https://api.skidor.com/api/v1';
 const SSF_WEBB = 'https://ssfta.skidor.com';
-const FARG_FIS = '#d62828';
-const FARG_OVRIGA = '#1d4ed8';
+const PRICK_FARG = '#1d4ed8';
+const PRICK_RADIE = 6;
 
 const NIVAER = {
   FIS: 'Internationell (FIS)',
@@ -146,16 +146,12 @@ let hamtad = null;
 const perId = new Map();
 
 const forklaringHtml = `
-  <div class="forklaring">
-    <div><span class="prick fis"></span> FIS-tävling</div>
-    <div><span class="prick ovriga"></span> Övriga tävlingar</div>
-    <div>Större och starkare prick = närmare i tid. Tjock vit ring = inom en vecka.</div>
-  </div>`;
+  <p class="forklaring">Klicka på en prick för detaljer. Prickar som ligger nära varandra slås ihop till en.</p>`;
 
 function listaHtml(lista) {
   return `<ul class="lista">${lista.map((t) => `
     <li><button type="button" data-id="${t.id}">
-      <span class="prick ${klass(t)}"></span>
+      <span class="prick"></span>
       <span class="text">
         <span class="namn">${esc(t.namn)}</span>
         <span class="info">${esc(formateraDatum(t.start, t.slut))} · ${esc(t.plats ?? t.distrikt ?? '')}</span>
@@ -182,7 +178,7 @@ function visaFlera(lista) {
   valj(null);
   sidomeny.innerHTML = `
     <button type="button" class="tillbaka">← Alla tävlingar</button>
-    <h2>${lista.length} tävlingar på samma plats</h2>
+    <h2>${lista.length} tävlingar här</h2>
     ${listaHtml(lista)}`;
   visaSidomeny();
 }
@@ -254,7 +250,12 @@ function visaSidomeny() {
 }
 
 function valj(id) {
-  if (karta.getLayer('tavlingar-vald')) karta.setFilter('tavlingar-vald', ['==', ['get', 'id'], id ?? -1]);
+  // Egen källa för markeringen: den valda tävlingen kan ligga i en sammanslagen prick
+  const t = perId.get(id);
+  karta.getSource('vald')?.setData({
+    type: 'FeatureCollection',
+    features: t ? [{ type: 'Feature', geometry: { type: 'Point', coordinates: [t.lon, t.lat] }, properties: {} }] : [],
+  });
   const hash = id ? `#${id}` : '';
   if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname + location.search);
 }
@@ -298,32 +299,37 @@ karta.on('load', async () => {
       features: tavlingar.map((t) => ({
         type: 'Feature',
         geometry: { type: 'Point', coordinates: [t.lon, t.lat] },
-        properties: { id: t.id, fis: arFis(t), dagar: t.dagar },
+        properties: { id: t.id },
       })),
     },
+    // Prickar som skulle överlappa slås ihop till en (ungefär när avståndet är mindre än två radier)
+    cluster: true,
+    clusterRadius: PRICK_RADIE * 2,
   });
+  karta.addSource('vald', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
 
-  // Tid kvar visas med storlek och styrka: nära i tid = stor och stark, långt bort = liten och blek
+  // Enskilda och sammanslagna prickar ser likadana ut
   karta.addLayer({
     id: 'tavlingar', type: 'circle', source: 'tavlingar',
-    layout: { 'circle-sort-key': ['-', ['get', 'dagar']] }, // närmast i tid ritas överst
-    paint: {
-      'circle-color': ['case', ['get', 'fis'], FARG_FIS, FARG_OVRIGA],
-      'circle-radius': ['interpolate', ['linear'], ['get', 'dagar'], 0, 9, 14, 7, 60, 5, 120, 4],
-      'circle-opacity': ['interpolate', ['linear'], ['get', 'dagar'], 0, 1, 14, 0.85, 60, 0.45, 120, 0.3],
-      'circle-stroke-color': '#ffffff',
-      'circle-stroke-width': ['case', ['<=', ['get', 'dagar'], 7], 2.5, 1],
-      'circle-stroke-opacity': ['interpolate', ['linear'], ['get', 'dagar'], 0, 1, 60, 0.6],
-    },
+    paint: { 'circle-color': PRICK_FARG, 'circle-radius': PRICK_RADIE },
   });
   karta.addLayer({
-    id: 'tavlingar-vald', type: 'circle', source: 'tavlingar',
-    filter: ['==', ['get', 'id'], -1],
-    paint: { 'circle-radius': 13, 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#000', 'circle-stroke-width': 3 },
+    id: 'tavlingar-vald', type: 'circle', source: 'vald',
+    paint: { 'circle-radius': PRICK_RADIE + 4, 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#000', 'circle-stroke-width': 2 },
   });
 
-  karta.on('click', 'tavlingar', (e) => {
-    // Flera tävlingar kan ligga på samma plats – samla alla under klicket
+  karta.on('click', 'tavlingar', async (e) => {
+    // Sammanslagen prick: lista alla tävlingar i den och zooma in så att de delar på sig
+    const kluster = e.features.find((f) => f.properties.cluster);
+    if (kluster) {
+      const kalla = karta.getSource('tavlingar');
+      const id = kluster.properties.cluster_id;
+      const [delar, zoom] = await Promise.all([kalla.getClusterLeaves(id, Infinity), kalla.getClusterExpansionZoom(id)]);
+      visaFlera(delar.map((f) => perId.get(f.properties.id)).filter(Boolean).sort((a, b) => a.start.localeCompare(b.start)));
+      karta.easeTo({ center: kluster.geometry.coordinates, zoom: Math.min(zoom, 12) });
+      return;
+    }
+    // Annars: tävlingar som ligger på exakt samma plats delar inte på sig – samla alla under klicket
     const { x, y } = e.point;
     const traffar = karta.queryRenderedFeatures([[x - 6, y - 6], [x + 6, y + 6]], { layers: ['tavlingar'] });
     const lista = [...new Set(traffar.map((f) => f.properties.id))]
