@@ -143,6 +143,25 @@ const klass = (t) => (arFis(t) ? 'fis' : 'ovriga');
 let tavlingar = [];
 const perId = new Map();
 
+// Urval i sidomenyn: alla, bara FIS eller bara övriga. Gäller både kartan och listan.
+const URVAL = [
+  { id: 'alla', knapp: 'Alla', rubrik: 'kommande tävlingar', visa: () => true },
+  { id: 'fis', knapp: 'FIS', rubrik: 'FIS-tävlingar', visa: arFis },
+  { id: 'ovriga', knapp: 'Övriga', rubrik: 'övriga tävlingar', visa: (t) => !arFis(t) },
+];
+let urval = URVAL[0];
+const synliga = () => tavlingar.filter(urval.visa);
+
+const kartdata = (lista) => ({
+  type: 'FeatureCollection',
+  features: lista.map((t) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [t.lon, t.lat] }, properties: { id: t.id } })),
+});
+
+const urvalHtml = () => `
+  <div class="urval" role="group" aria-label="Visa tävlingar">
+    ${URVAL.map((u) => `<button type="button" data-urval="${u.id}" aria-pressed="${u === urval}">${u.knapp}</button>`).join('')}
+  </div>`;
+
 const forklaringHtml = `
   <p class="forklaring">Klicka på en prick för detaljer. Siffran i en bubbla visar hur många tävlingar som finns där – klicka för att zooma in.</p>`;
 
@@ -151,22 +170,23 @@ function listaHtml(lista) {
     <li><button type="button" data-id="${t.id}">
       <span class="prick"></span>
       <span class="text">
-        <span class="namn">${esc(t.namn)}</span>
+        <span class="namn">${esc(t.namn)}${arFis(t) ? ' <span class="etikett fis">FIS</span>' : ''}</span>
         <span class="info">${esc(formateraDatum(t.start, t.slut))} ${esc(t.plats ?? t.distrikt ?? '')}</span>
       </span>    </button></li>`).join('')}</ul>`;
 }
 
 function visaOversikt() {
   valj(null);
-  let html = `<h2>${tavlingar.length} kommande tävlingar</h2>${forklaringHtml}`;
+  const lista = synliga();
+  let html = `${urvalHtml()}<h2>${lista.length} ${urval.rubrik}</h2>${forklaringHtml}`;
   // Tävlingarna är redan sorterade på datum, så månaderna kommer i ordning
   const perManad = new Map();
-  for (const t of tavlingar) {
+  for (const t of lista) {
     const n = manadNyckel(t);
     if (!perManad.has(n)) perManad.set(n, []);
     perManad.get(n).push(t);
   }
-  for (const [nyckel, lista] of perManad) html += `<h3>${esc(manadRubrik(nyckel))}</h3>${listaHtml(lista)}`;
+  for (const [nyckel, manad] of perManad) html += `<h3>${esc(manadRubrik(nyckel))}</h3>${listaHtml(manad)}`;
   // OpenStreetMap står redan på kartan och behöver inte upprepas här
   html += `<ul class="kalla">
     <li>Tävlingar: Svenska Skidförbundets <a href="${SSF_WEBB}" target="_blank" rel="noopener">SSF-TA</a></li>
@@ -292,6 +312,12 @@ async function uppdateraMarkering() {
 
 sidomeny.addEventListener('click', (e) => {
   if (e.target.closest('.tillbaka')) return visaOversikt();
+  const urvalsknapp = e.target.closest('button[data-urval]');
+  if (urvalsknapp) {
+    urval = URVAL.find((u) => u.id === urvalsknapp.dataset.urval);
+    karta.getSource('tavlingar')?.setData(kartdata(synliga()));
+    return visaOversikt();
+  }
   const knapp = e.target.closest('button[data-id]');
   if (!knapp) return;
   const t = perId.get(+knapp.dataset.id);
@@ -351,14 +377,7 @@ karta.on('load', async () => {
   karta.addSource('tavlingar', {
     type: 'geojson',
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    data: {
-      type: 'FeatureCollection',
-      features: tavlingar.map((t) => ({
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [t.lon, t.lat] },
-        properties: { id: t.id },
-      })),
-    },
+    data: kartdata(synliga()),
     // Tävlingar som ligger nära varandra slås ihop till en bubbla med antalet
     cluster: true,
     clusterRadius: 40,
