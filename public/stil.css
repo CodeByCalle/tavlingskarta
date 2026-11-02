@@ -1,55 +1,92 @@
-/* Roboto (SIL Open Font License, se typsnitt/LICENSE.txt), latinska tecken, från @fontsource/roboto */
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(typsnitt/roboto-latin-400-normal.woff2) format('woff2');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(typsnitt/roboto-latin-500-normal.woff2) format('woff2');
-}
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(typsnitt/roboto-latin-700-normal.woff2) format('woff2');
+/* Tävlingskarta längdskidor – utseende i stil med Microsoft Office/Fluent:
+   Office-blått, ljusgrå bakgrund, vita kort med mjuka skuggor, 4 px hörn, normal skiftläge. */
+
+/* ---- Typsnitt (Roboto, SIL Open Font License, se typsnitt/LICENSE.txt), från @fontsource ---- */
+@font-face { font-family: 'Roboto'; font-weight: 400; font-display: swap; src: url(typsnitt/roboto-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Roboto'; font-weight: 500; font-display: swap; src: url(typsnitt/roboto-latin-500-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Roboto'; font-weight: 700; font-display: swap; src: url(typsnitt/roboto-latin-700-normal.woff2) format('woff2'); }
+
+:root {
+  --bla: #0078d4;        /* samma som PRICK_FARG i app.js */
+  --bla-mork: #106ebe;
+  --bla-morkare: #005a9e;
+  --bla-ljus: #deecf9;
+  --bla-ljusast: #eff6fc;
+  --bakgrund: #f3f2f1;
+  --yta: #ffffff;
+  --kant: #e1dfdd;
+  --text: #323130;
+  --text-2: #605e5c;
+  --skugga-2: 0 1.6px 3.6px rgba(0, 0, 0, 0.13), 0 0.3px 0.9px rgba(0, 0, 0, 0.11);
+  --skugga-8: 0 3.2px 7.2px rgba(0, 0, 0, 0.13), 0 0.6px 1.8px rgba(0, 0, 0, 0.11);
+  --radie: 4px;
 }
 
 * { box-sizing: border-box; }
-
 html, body { height: 100%; margin: 0; }
 
 body {
   display: flex;
   flex-direction: column;
   font-family: Roboto, system-ui, sans-serif;
-  color: #222;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bakgrund);
 }
 
-header { padding: 0.5rem 1rem; border-bottom: 1px solid #ddd; }
-header h1 { margin: 0; font-size: 1.3rem; }
+a { color: var(--bla); }
+a:hover { color: var(--bla-mork); }
+:focus-visible { outline: 2px solid var(--bla); outline-offset: 1px; }
 
-/* Dator: karta till vänster, sidomeny till höger */
+/* ---- Ikoner (Fluent UI System Icons) – färgas med textfärgen ---- */
+.ikon {
+  display: inline-block; flex: none;
+  width: 16px; height: 16px;
+  background: currentColor;
+  -webkit-mask: var(--ikon) center / contain no-repeat;
+  mask: var(--ikon) center / contain no-repeat;
+}
+.ikon-kalender { --ikon: url(ikoner/kalender.svg); }
+.ikon-plats { --ikon: url(ikoner/plats.svg); }
+.ikon-arrangor { --ikon: url(ikoner/arrangor.svg); }
+.ikon-niva { --ikon: url(ikoner/niva.svg); }
+.ikon-typ { --ikon: url(ikoner/typ.svg); }
+.ikon-status { --ikon: url(ikoner/status.svg); }
+.ikon-distrikt { --ikon: url(ikoner/distrikt.svg); }
+.ikon-dokument { --ikon: url(ikoner/dokument.svg); }
+.ikon-pdf { --ikon: url(ikoner/pdf.svg); }
+.ikon-tillbaka { --ikon: url(ikoner/tillbaka.svg); }
+.ikon-extern { --ikon: url(ikoner/extern.svg); }
+.ikon-pil-hoger { --ikon: url(ikoner/pil-hoger.svg); }
+.ikon-info { --ikon: url(ikoner/info.svg); }
+
+/* ---- Toppen ---- */
+/* Office-appens blå titelrad */
+.topp {
+  display: flex; align-items: center;
+  height: 32px; padding: 0 12px;
+  background: var(--bla);
+  color: #fff;
+}
+.topp h1 { margin: 0; font-size: 14px; font-weight: 500; }
+
+/* ---- Karta + sidomeny: sida vid sida på dator ---- */
 main {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: 1fr 400px;
 }
 
 #karta { min-height: 0; }
 .maplibregl-map { font-family: Roboto, system-ui, sans-serif; } /* MapLibre sätter annars Helvetica */
+.maplibregl-ctrl-group:not(:empty) { border-radius: var(--radie); box-shadow: var(--skugga-8); }
 
 #sidomeny {
   overflow-y: auto;
-  padding: 1rem;
-  border-left: 1px solid #ddd;
+  padding: 16px;
+  border-left: 1px solid var(--kant);
+  background: var(--bakgrund);
 }
 
 /* Mobil: sidomenyn under kartan */
@@ -59,51 +96,117 @@ main {
   main { display: block; }
   #karta { height: 60vh; }
   /* Minsta höjd så att menyns början alltid kan scrollas upp till mitten av skärmen */
-  #sidomeny { border-left: none; border-top: 1px solid #ddd; overflow: visible; min-height: 60vh; }
+  #sidomeny { border-left: none; border-top: 1px solid var(--kant); overflow: visible; min-height: 60vh; }
 }
 
-/* Urval: Alla | FIS | Övriga */
-.urval { display: flex; margin: 0 0 1rem; }
+/* ---- Urval: Alla | FIS | Övriga, som flikar i Office (blå linje under vald flik) ---- */
+.urval { display: flex; gap: 4px; border-bottom: 1px solid var(--kant); }
 .urval button {
-  flex: 1; padding: 0.4rem 0.5rem;
-  border: 1px solid #1d4ed8; background: #fff; color: #1d4ed8;
-  font: inherit; font-weight: 500; cursor: pointer;
+  position: relative;
+  padding: 8px 12px 10px;
+  border: none; border-radius: var(--radie) var(--radie) 0 0; background: none;
+  font: inherit; color: var(--text);
+  cursor: pointer;
 }
-.urval button + button { border-left: none; }
-.urval button:first-child { border-radius: 4px 0 0 4px; }
-.urval button:last-child { border-radius: 0 4px 4px 0; }
-.urval button[aria-pressed="true"] { background: #1d4ed8; color: #fff; }
-
-.forklaring { font-size: 0.85rem; color: #555; margin: 0 0 1rem; }
-
-/* Lista */
-#sidomeny h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
-#sidomeny h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin: 1.2rem 0 0.3rem; }
-
-/* Negativ sidmarginal = knapparnas inre marginal, så att texten linjerar med rubrikerna */
-.lista { list-style: none; margin: 0 -0.3rem; padding: 0; }
-.lista button {
-  display: flex; gap: 0.6rem; align-items: baseline;
-  width: 100%; padding: 0.45rem 0.3rem;
-  border: none; border-bottom: 1px solid #eee; background: none;
-  text-align: left; font: inherit; cursor: pointer;
+.urval button:hover { background: #edebe9; }
+.urval button[aria-pressed="true"] { font-weight: 500; }
+.urval button[aria-pressed="true"]::after {
+  content: ''; position: absolute; left: 8px; right: 8px; bottom: -1px;
+  height: 2px; border-radius: 1px; background: var(--bla);
 }
-.lista button:hover { background: #f4f4f4; }
-.lista .text { flex: 1; min-width: 0; }
-.lista .namn { display: block; font-weight: 500; }
-.lista .etikett { font-size: 0.65rem; padding: 0.05rem 0.35rem; margin-left: 0.3rem; vertical-align: 0.15em; }
-.lista .info { display: block; font-size: 0.85rem; color: #555; }
 
-/* Detaljer */
-.tillbaka { border: none; background: none; padding: 0; margin-bottom: 0.8rem; font: inherit; color: #1d4ed8; cursor: pointer; }
-.detaljer dl { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 0.8rem; margin: 0.8rem 0; font-size: 0.9rem; }
-.detaljer dt { color: #666; }
-.detaljer dd { margin: 0; }
-.detaljer .notis { font-size: 0.8rem; color: #8a5a00; }
-.pm { display: inline-block; margin: 0.3rem 0; padding: 0.4rem 0.8rem; background: #222; color: #fff; text-decoration: none; border-radius: 4px; }
-.etikett { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; color: #fff; font-size: 0.8rem; }
-.etikett.fis { background: #d62828; }
-.etikett.ovriga { background: #1d4ed8; }
-.detaljer ul { padding-left: 1.2rem; font-size: 0.9rem; }
-.kalla { font-size: 0.75rem; color: #777; margin: 1.5rem 0 0; padding-left: 1.2rem; }
-.kalla li { margin: 0.15rem 0; }
+/* ---- Rubriker ---- */
+.rubrik, .titel { margin: 16px 0 4px; font-weight: 500; color: var(--text); }
+.rubrik { font-size: 20px; }
+.manad, .sektion { font-size: 14px; font-weight: 500; color: var(--text); }
+.manad { margin: 20px 0 8px; }
+.sektion { margin: 16px 0 6px; }
+
+.tom, .inofficiell {
+  display: flex; gap: 8px; align-items: flex-start;
+  margin: 0; color: var(--text-2);
+}
+.tom .ikon, .inofficiell .ikon { margin-top: 1px; }
+
+/* ---- Lista med tävlingskort ---- */
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.kort {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 10px 12px;
+  background: var(--yta);
+  border: 1px solid transparent; border-radius: var(--radie);
+  box-shadow: var(--skugga-2);
+  text-align: left; font: inherit; color: inherit;
+  cursor: pointer;
+  transition: box-shadow 0.1s, border-color 0.1s;
+}
+.kort:hover { box-shadow: var(--skugga-8); border-color: var(--bla-ljus); }
+.kort-text { flex: 1; min-width: 0; }
+.kort > .ikon { color: var(--text-2); }
+.namn { display: block; font-size: 15px; font-weight: 500; color: var(--text); }
+.meta {
+  display: flex; flex-wrap: wrap; gap: 2px 14px;
+  margin-top: 4px; font-size: 13px; color: var(--text-2);
+}
+.meta > span { display: inline-flex; align-items: center; gap: 4px; }
+.meta .ikon { width: 14px; height: 14px; color: var(--bla); }
+
+.etikett {
+  display: inline-block; padding: 0 6px; border-radius: var(--radie);
+  font-size: 12px; font-weight: 500; line-height: 18px;
+  vertical-align: 1px;
+}
+.etikett.fis { background: var(--bla); color: #fff; }
+.etikett.ovriga { background: var(--bla-ljus); color: var(--bla-morkare); }
+
+/* ---- Detaljer ---- */
+.tillbaka {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin: -4px 0 12px -8px; padding: 6px 8px;
+  border: none; border-radius: var(--radie); background: none;
+  font: inherit; font-weight: 500; color: var(--bla);
+  cursor: pointer;
+}
+.tillbaka:hover { background: #edebe9; }
+
+.yta {
+  margin-bottom: 12px; padding: 16px;
+  background: var(--yta);
+  border-radius: var(--radie);
+  box-shadow: var(--skugga-2);
+}
+.yta > :first-child { margin-top: 0; }
+.titel { margin: 8px 0 0; font-size: 22px; line-height: 1.2; }
+
+.fakta { display: grid; gap: 8px; margin: 14px 0 0; }
+.yta > .fakta:first-child { margin-top: 0; }
+.avdelare { margin: 14px 0; border: none; border-top: 1px solid var(--kant); }
+.avdelare + .fakta { margin-top: 0; }
+.fakta .rad { display: grid; grid-template-columns: 16px 72px 1fr; gap: 10px; align-items: start; }
+.fakta .ikon { margin-top: 1px; color: var(--bla); }
+.fakta dt { color: var(--text-2); }
+.fakta dd { margin: 0; }
+.notis { display: block; margin-top: 2px; font-size: 12px; color: #8a5a00; }
+.ej-publicerad { color: var(--text-2); }
+
+.knapp {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid; border-radius: var(--radie);
+  font-weight: 500; text-decoration: none;
+}
+.knapp.sekundar { background: var(--yta); border-color: #8a8886; color: var(--text); }
+.knapp.sekundar:hover { background: var(--bakgrund); color: var(--text); }
+
+
+.tavlingsdagar { list-style: none; margin: 0; padding: 0; }
+.tavlingsdagar li { display: grid; grid-template-columns: 64px 1fr; gap: 10px; padding: 8px 0; border-top: 1px solid var(--kant); }
+.tavlingsdagar li:first-child { border-top: none; padding-top: 2px; }
+.dag { font-weight: 500; color: var(--text); }
+.dagnamn { display: block; }
+.discipliner { display: block; font-size: 13px; color: var(--text-2); }
+
+/* ---- Sidfot ---- */
+.sidfot { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--kant); font-size: 12px; color: var(--text-2); }
+.kalla { list-style: none; margin: 8px 0 0; padding: 0 0 0 24px; }
+.kalla li { margin: 2px 0; }

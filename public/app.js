@@ -7,7 +7,7 @@
 
 const SSF_API = 'https://api.skidor.com/api/v1';
 const SSF_WEBB = 'https://ssfta.skidor.com';
-const PRICK_FARG = '#1d4ed8';
+const PRICK_FARG = '#0078d4'; // samma blå som --bla i stil.css
 const PRICK_RADIE = 6;
 // Kartdatan (Topografi 1M) finns bara till zoom 10. Längre in förstoras bara samma ytor,
 // tills man bara ser en enda sjö eller skog – därför går det inte att zooma längre.
@@ -157,27 +157,47 @@ const kartdata = (lista) => ({
   features: lista.map((t) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [t.lon, t.lat] }, properties: { id: t.id } })),
 });
 
+// Ikon från public/ikoner (Fluent UI System Icons), färgas med textfärgen via CSS
+const ikon = (namn) => `<span class="ikon ikon-${namn}" aria-hidden="true"></span>`;
+const extern = (url, text) => `<a href="${esc(url)}" target="_blank" rel="noopener">${text}</a>`;
+
 const urvalHtml = () => `
   <div class="urval" role="group" aria-label="Visa tävlingar">
     ${URVAL.map((u) => `<button type="button" data-urval="${u.id}" aria-pressed="${u === urval}">${u.knapp}</button>`).join('')}
   </div>`;
 
-const forklaringHtml = `
-  <p class="forklaring">Klicka på en prick för detaljer. Siffran i en bubbla visar hur många tävlingar som finns där – klicka för att zooma in.</p>`;
+const fisEtikett = (t) => (arFis(t) ? '<span class="etikett fis">FIS</span>' : '');
 
 function listaHtml(lista) {
   return `<ul class="lista">${lista.map((t) => `
-    <li><button type="button" data-id="${t.id}">
-      <span class="text">
-        <span class="namn">${esc(t.namn)}${arFis(t) ? ' <span class="etikett fis">FIS</span>' : ''}</span>
-        <span class="info">${esc(formateraDatum(t.start, t.slut))} ${esc(t.plats ?? t.distrikt ?? '')}</span>
-      </span>    </button></li>`).join('')}</ul>`;
+    <li><button type="button" class="kort" data-id="${t.id}">
+      <span class="kort-text">
+        <span class="namn">${esc(t.namn)} ${fisEtikett(t)}</span>
+        <span class="meta">
+          <span>${ikon('kalender')}${esc(formateraDatum(t.start, t.slut))}</span>
+          <span>${ikon('plats')}${esc(t.plats ?? t.distrikt ?? '–')}</span>
+        </span>
+      </span>
+      ${ikon('pil-hoger')}
+    </button></li>`).join('')}</ul>`;
 }
+
+const sidfotHtml = `
+  <footer class="sidfot">
+    <p class="inofficiell">${ikon('info')}<span>Inofficiell karta – inte en tjänst från Svenska Skidförbundet.</span></p>
+    <ul class="kalla">
+      <li>Tävlingar: Svenska Skidförbundets ${extern(SSF_WEBB, 'SSF-TA')}</li>
+      <li>Karta: ${extern('https://www.lantmateriet.se', 'Lantmäteriet')} och ${extern('https://www.naturalearthdata.com', 'Natural Earth')}</li>
+      <li>Kartbibliotek: ${extern('https://maplibre.org', 'MapLibre')} · Ikoner: ${extern('https://github.com/microsoft/fluentui-system-icons', 'Fluent UI')}</li>
+    </ul>
+  </footer>`;
+
+const tillbakaHtml = `<button type="button" class="tillbaka">${ikon('tillbaka')}Alla tävlingar</button>`;
 
 function visaOversikt() {
   valj(null);
   const lista = synliga();
-  let html = `${urvalHtml()}<h2>${lista.length} ${urval.rubrik}</h2>${forklaringHtml}`;
+  let html = `${urvalHtml()}<h2 class="rubrik">${lista.length} ${urval.rubrik}</h2>`;
   // Tävlingarna är redan sorterade på datum, så månaderna kommer i ordning
   const perManad = new Map();
   for (const t of lista) {
@@ -185,50 +205,56 @@ function visaOversikt() {
     if (!perManad.has(n)) perManad.set(n, []);
     perManad.get(n).push(t);
   }
-  for (const [nyckel, manad] of perManad) html += `<h3>${esc(manadRubrik(nyckel))}</h3>${listaHtml(manad)}`;
+  for (const [nyckel, manad] of perManad) html += `<h3 class="manad">${esc(manadRubrik(nyckel))}</h3>${listaHtml(manad)}`;
   // OpenStreetMap står redan på kartan och behöver inte upprepas här
-  html += `<ul class="kalla">
-    <li>Tävlingar: Svenska Skidförbundets <a href="${SSF_WEBB}" target="_blank" rel="noopener">SSF-TA</a></li>
-    <li>Karta: <a href="https://www.lantmateriet.se" target="_blank" rel="noopener">Lantmäteriet</a> och
-      <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a></li>
-    <li>Kartbibliotek: <a href="https://maplibre.org" target="_blank" rel="noopener">MapLibre</a></li>
-  </ul>`;
-  sidomeny.innerHTML = html;
+  sidomeny.innerHTML = html + sidfotHtml;
   sidomeny.scrollTop = 0;
 }
 
 function visaFlera(lista) {
   valj(null);
-  sidomeny.innerHTML = `
-    <button type="button" class="tillbaka">← Alla tävlingar</button>
-    <h2>${lista.length} tävlingar här</h2>
-    ${listaHtml(lista)}`;
+  sidomeny.innerHTML = `${tillbakaHtml}<h2 class="rubrik">${lista.length} tävlingar här</h2>${listaHtml(lista)}`;
   visaSidomeny();
 }
+
+const faktarad = (ikonnamn, rubrik, varde) => `<div class="rad">${ikon(ikonnamn)}<dt>${rubrik}</dt><dd>${varde}</dd></div>`;
+
+const ejPublicerad = (text) => `<span class="ej-publicerad">${text}</span>`;
+
+// Inbjudan och PM: länk om de finns, annars att de inte är publicerade än
+const dokumentrader = (inbjudan, pm) =>
+  faktarad('dokument', 'Inbjudan', inbjudan ?? ejPublicerad('Inte publicerad ännu')) +
+  faktarad('pdf', 'PM', pm ?? ejPublicerad('Inte publicerat ännu'));
 
 async function visaTavling(id) {
   const t = perId.get(id);
   if (!t) return visaOversikt();
   valj(id);
+  const niva = esc(NIVAER[t.niva] ?? t.niva);
+  const hamtar = ejPublicerad('Hämtar…');
   sidomeny.innerHTML = `
-    <button type="button" class="tillbaka">← Alla tävlingar</button>
-    <div class="detaljer">
-      <span class="etikett ${klass(t)}">${arFis(t) ? 'FIS' : esc(NIVAER[t.niva] ?? t.niva)}</span>
-      <h2>${esc(t.namn)}</h2>      <dl>
-        <dt>Datum</dt><dd>${esc(formateraDatum(t.start, t.slut))}</dd>
-        <dt>Plats</dt><dd>${esc(t.plats ?? '–')}${t.ungefarlig ? '<br><span class="notis">Platsen är okänd – pricken visar bara distriktet.</span>' : ''}</dd>
-        <dt>Arrangör</dt><dd>${esc(t.arrangor)}</dd>
-        <dt>Nivå</dt><dd>${esc(NIVAER[t.niva] ?? t.niva)}</dd>
-        <dt>Typ</dt><dd>${esc(t.typ)}</dd>
-        <dt>Status</dt><dd>${esc(t.status)}</dd>
-        ${t.distrikt ? `<dt>Distrikt</dt><dd>${esc(t.distrikt)}</dd>` : ''}
+    ${tillbakaHtml}
+    <article class="yta detaljer">
+      <span class="etikett ${klass(t)}">${arFis(t) ? 'FIS' : niva}</span>
+      <h2 class="titel">${esc(t.namn)}</h2>
+      <dl class="fakta">
+        ${faktarad('kalender', 'Datum', esc(formateraDatum(t.start, t.slut)))}
+        ${faktarad('plats', 'Plats', `${esc(t.plats ?? '–')}${t.ungefarlig ? '<span class="notis">Platsen är okänd – pricken visar bara distriktet.</span>' : ''}`)}
+        ${faktarad('arrangor', 'Arrangör', esc(t.arrangor))}
+        ${faktarad('niva', 'Nivå', niva)}
+        ${faktarad('typ', 'Typ', esc(t.typ))}
+        ${faktarad('status', 'Status', esc(t.status))}
+        ${t.distrikt ? faktarad('distrikt', 'Distrikt', esc(t.distrikt)) : ''}
       </dl>
-      <div id="dokument"><p>Hämtar PM och dokument…</p></div>
-      <p><a href="${SSF_WEBB}/event/${t.id}" target="_blank" rel="noopener">Anmälan och all info på SSF-TA ↗</a></p>
-    </div>`;
+      <hr class="avdelare">
+      <dl class="fakta" id="dokument">${faktarad('dokument', 'Inbjudan', hamtar)}${faktarad('pdf', 'PM', hamtar)}</dl>
+    </article>
+    <section class="yta" id="dagar" hidden></section>
+    <a class="knapp sekundar" href="${SSF_WEBB}/event/${t.id}" target="_blank" rel="noopener">${ikon('extern')}Anmälan och all info på SSF-TA</a>`;
   visaSidomeny();
 
   const dokument = document.getElementById('dokument');
+  const dagar = document.getElementById('dagar');
   try {
     const svar = await fetch(`${SSF_API}/Events/${id}`);
     if (!svar.ok) throw new Error(svar.status);
@@ -241,30 +267,30 @@ async function visaTavling(id) {
       arPm: /\bPM\b/i.test(`${f.Description} ${f.FileName}`),
       arInbjudan: /inbjudan/i.test(`${f.Description} ${f.FileName}`),
     }));
-    const pm = filer.filter((f) => f.arPm);
-    // Finns inget PM än visas inbjudan i stället
-    const inbjudan = pm.length ? null : filer.find((f) => f.arInbjudan);
-    const ovriga = filer.filter((f) => !f.arPm && f !== inbjudan);
-    const lank = (f, text) => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(text)}</a>`;
+    // Övriga filer (startlistor, bankartor …) finns på SSF-TA via länken längst ner
+    const lankar = (lista, text) =>
+      lista.length
+        ? lista.map((f) => extern(f.url, esc(lista.length > 1 ? f.namn : text))).join('<br>')
+        : null;
+    dokument.innerHTML = dokumentrader(
+      lankar(filer.filter((f) => f.arInbjudan && !f.arPm), 'Länk till inbjudan'),
+      lankar(filer.filter((f) => f.arPm), 'Länk till PM')
+    );
 
     const tavlingsdagar = (e.Competitions ?? [])
       .slice()
       .sort((a, b) => a.Date.localeCompare(b.Date))
       .map((c) => {
         const discipliner = [...new Set((c.Classes ?? []).map((k) => k.Discipline).filter(Boolean))];
-        return `<li>${esc(formateraDatum(c.Date.slice(0, 10)))}: ${esc(c.Name)}${discipliner.length ? ` – ${esc(discipliner.join(', '))}` : ''}</li>`;
+        return `<li><span class="dag">${esc(formateraDatum(c.Date.slice(0, 10)))}</span>
+          <span><span class="dagnamn">${esc(c.Name)}</span>${discipliner.length ? `<span class="discipliner">${esc(discipliner.join(', '))}</span>` : ''}</span></li>`;
       });
-
-    dokument.innerHTML = `
-      ${pm.length
-        ? pm.map((f) => `<a class="pm" href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.namn)} (PDF)</a>`).join(' ')
-        : inbjudan
-          ? `<dl><dt>Inbjudan</dt><dd>${lank(inbjudan, 'Länk till inbjudan')}</dd></dl>`
-          : '<p>PM är inte publicerat ännu.</p>'}
-      ${ovriga.length ? `<h3>Dokument</h3><ul>${ovriga.map((f) => `<li>${lank(f, f.namn)}</li>`).join('')}</ul>` : ''}
-      ${tavlingsdagar.length ? `<h3>Tävlingar</h3><ul>${tavlingsdagar.join('')}</ul>` : ''}`;
+    if (tavlingsdagar.length) {
+      dagar.innerHTML = `<h3 class="sektion">Tävlingar</h3><ul class="tavlingsdagar">${tavlingsdagar.join('')}</ul>`;
+      dagar.hidden = false;
+    }
   } catch {
-    if (dokument.isConnected) dokument.innerHTML = '<p>Kunde inte hämta PM och dokument från SSF-TA just nu.</p>';
+    if (dokument.isConnected) dokument.innerHTML = dokumentrader(ejPublicerad('Kunde inte hämtas'), ejPublicerad('Kunde inte hämtas'));
   }
 }
 
@@ -412,7 +438,7 @@ karta.on('load', async () => {
   });
   karta.addLayer({
     id: 'tavlingar-vald', type: 'circle', source: 'vald',
-    paint: { 'circle-radius': ['get', 'radie'], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#000', 'circle-stroke-width': 2 },
+    paint: { 'circle-radius': ['get', 'radie'], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#201f1e', 'circle-stroke-width': 2 },
   });
 
   // Bubblorna ändras när man zoomar: göm ringen under zoomningen och placera om den efteråt
