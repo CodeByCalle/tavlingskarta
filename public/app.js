@@ -239,9 +239,13 @@ async function visaTavling(id) {
       namn: f.Description || f.FileName,
       url: `${SSF_API}/Events/${id}/Files/${f.Id}`,
       arPm: /\bPM\b/i.test(`${f.Description} ${f.FileName}`),
+      arInbjudan: /inbjudan/i.test(`${f.Description} ${f.FileName}`),
     }));
     const pm = filer.filter((f) => f.arPm);
-    const ovriga = filer.filter((f) => !f.arPm);
+    // Finns inget PM än visas inbjudan i stället
+    const inbjudan = pm.length ? null : filer.find((f) => f.arInbjudan);
+    const ovriga = filer.filter((f) => !f.arPm && f !== inbjudan);
+    const lank = (f, text) => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(text)}</a>`;
 
     const tavlingsdagar = (e.Competitions ?? [])
       .slice()
@@ -254,8 +258,10 @@ async function visaTavling(id) {
     dokument.innerHTML = `
       ${pm.length
         ? pm.map((f) => `<a class="pm" href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.namn)} (PDF)</a>`).join(' ')
-        : '<p>PM är inte publicerat ännu.</p>'}
-      ${ovriga.length ? `<h3>Dokument</h3><ul>${ovriga.map((f) => `<li><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.namn)}</a></li>`).join('')}</ul>` : ''}
+        : inbjudan
+          ? `<dl><dt>Inbjudan</dt><dd>${lank(inbjudan, 'Länk till inbjudan')}</dd></dl>`
+          : '<p>PM är inte publicerat ännu.</p>'}
+      ${ovriga.length ? `<h3>Dokument</h3><ul>${ovriga.map((f) => `<li>${lank(f, f.namn)}</li>`).join('')}</ul>` : ''}
       ${tavlingsdagar.length ? `<h3>Tävlingar</h3><ul>${tavlingsdagar.join('')}</ul>` : ''}`;
   } catch {
     if (dokument.isConnected) dokument.innerHTML = '<p>Kunde inte hämta PM och dokument från SSF-TA just nu.</p>';
