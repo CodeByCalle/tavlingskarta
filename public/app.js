@@ -9,6 +9,8 @@ const SSF_API = 'https://api.skidor.com/api/v1';
 const SSF_WEBB = 'https://ssfta.skidor.com';
 const PRICK_FARG = '#1d4ed8';
 const PRICK_RADIE = 6;
+// Kartdatan finns bara till zoom 10, så längre in än så här blir det bara suddigare
+const MAX_ZOOM = 14;
 
 const NIVAER = {
   FIS: 'Internationell (FIS)',
@@ -97,6 +99,7 @@ const karta = new maplibregl.Map({
   // Måste vara bred: hela vyn (inte bara mitten) hålls inom maxBounds, och Sverige är smalt
   maxBounds: [[-25.0, 50.0], [60.0, 73.0]],
   minZoom: 3,
+  maxZoom: MAX_ZOOM,
 });
 karta.addControl(new maplibregl.NavigationControl());
 
@@ -306,7 +309,9 @@ karta.on('load', async () => {
     // Tävlingar som ligger nära varandra slås ihop till en bubbla med antalet
     cluster: true,
     clusterRadius: 40,
-    clusterMaxZoom: 11,
+    // Slå ihop ända till största zoom: flera tävlingar på samma arena visas då alltid som en
+    // bubbla med antal, i stället för som prickar ovanpå varandra
+    clusterMaxZoom: MAX_ZOOM,
   });
   karta.addSource('vald', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
 
@@ -345,21 +350,14 @@ karta.on('load', async () => {
     const kalla = karta.getSource('tavlingar');
     const id = bubbla.properties.cluster_id;
     const [delar, zoom] = await Promise.all([kalla.getClusterLeaves(id, Infinity), kalla.getClusterExpansionZoom(id)]);
-    visaFlera(delar.map((f) => perId.get(f.properties.id)).filter(Boolean).sort((a, b) => a.start.localeCompare(b.start)));
-    karta.easeTo({ center: bubbla.geometry.coordinates, zoom });
+    const lista = delar.map((f) => perId.get(f.properties.id)).filter(Boolean).sort((a, b) => a.start.localeCompare(b.start));
+    visaFlera(lista);
+    // Alla på samma arena delar aldrig på sig, så då är det ingen idé att zooma
+    const sammaPlats = lista.every((t) => t.lat === lista[0].lat && t.lon === lista[0].lon);
+    if (!sammaPlats) karta.easeTo({ center: bubbla.geometry.coordinates, zoom });
   });
 
-  // Enskild tävling. Tävlingar på exakt samma plats delar aldrig på sig – samla alla under klicket.
-  karta.on('click', 'tavlingar', (e) => {
-    const { x, y } = e.point;
-    const traffar = karta.queryRenderedFeatures([[x - 4, y - 4], [x + 4, y + 4]], { layers: ['tavlingar'] });
-    const lista = [...new Set(traffar.map((f) => f.properties.id))]
-      .map((id) => perId.get(id))
-      .filter(Boolean)
-      .sort((a, b) => a.start.localeCompare(b.start));
-    if (lista.length === 1) visaTavling(lista[0].id);
-    else if (lista.length > 1) visaFlera(lista);
-  });
+  karta.on('click', 'tavlingar', (e) => visaTavling(e.features[0].properties.id));
 
   for (const lager of ['kluster', 'tavlingar']) {
     karta.on('mouseenter', lager, () => (karta.getCanvas().style.cursor = 'pointer'));
