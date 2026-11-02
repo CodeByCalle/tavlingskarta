@@ -111,11 +111,12 @@ const lokaltDatum = (d) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const IDAG = lokaltDatum(new Date());
 
-// "21 nov." eller "21 nov. – 23 nov."
+// "21 nov.", "21–23 nov." (samma månad) eller "26 feb. – 7 mars"
 function formateraDatum(start, slut) {
-  const f = (s) =>
-    new Date(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)).toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' });
+  const datum = (s) => new Date(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10));
+  const f = (s) => datum(s).toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' });
   if (!slut || slut === start) return f(start);
+  if (start.slice(0, 7) === slut.slice(0, 7)) return `${datum(start).getDate()}–${f(slut)}`;
   return `${f(start)} – ${f(slut)}`;
 }
 
@@ -148,7 +149,7 @@ function listaHtml(lista) {
       <span class="prick"></span>
       <span class="text">
         <span class="namn">${esc(t.namn)}</span>
-        <span class="info">${esc(formateraDatum(t.start, t.slut))} · ${esc(t.plats ?? t.distrikt ?? '')}</span>
+        <span class="info">${esc(formateraDatum(t.start, t.slut))} ${esc(t.plats ?? t.distrikt ?? '')}</span>
       </span>    </button></li>`).join('')}</ul>`;
 }
 
