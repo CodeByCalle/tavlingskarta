@@ -80,8 +80,6 @@ main {
 .lista .text { flex: 1; min-width: 0; }
 .lista .namn { display: block; font-weight: 500; }
 .lista .info { display: block; font-size: 0.85rem; color: #555; }
-.nedrakning { font-size: 0.8rem; color: #444; white-space: nowrap; }
-.nedrakning.snart { font-weight: 700; color: #000; }
 
 /* Detaljer */
 .tillbaka { border: none; background: none; padding: 0; margin-bottom: 0.8rem; font: inherit; color: #1d4ed8; cursor: pointer; }

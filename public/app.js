@@ -110,26 +110,17 @@ const arMobil = () => matchMedia('(max-width: 800px)').matches;
 const lokaltDatum = (d) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const IDAG = lokaltDatum(new Date());
-const tillDag = (s) => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)) / 86400000;
-const dagarTill = (s) => tillDag(s) - tillDag(IDAG);
 
+// "21 nov." eller "21 nov. – 23 nov."
 function formateraDatum(start, slut) {
-  const f = (s, alt) => new Date(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)).toLocaleDateString('sv-SE', alt);
-  if (!slut || slut === start) return f(start, { weekday: 'short', day: 'numeric', month: 'short' });
-  return `${f(start, { day: 'numeric', month: 'short' })} – ${f(slut, { day: 'numeric', month: 'short' })}`;
+  const f = (s) =>
+    new Date(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)).toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' });
+  if (!slut || slut === start) return f(start);
+  return `${f(start)} – ${f(slut)}`;
 }
 
-function nedrakning(t) {
-  if (t.dagar === 0 && t.start < IDAG) return 'Pågår';
-  if (t.dagar === 0) return 'I dag';
-  if (t.dagar === 1) return 'I morgon';
-  if (t.dagar < 14) return `Om ${t.dagar} dagar`;
-  if (t.dagar < 60) return `Om ${Math.round(t.dagar / 7)} veckor`;
-  return `Om ${Math.round(t.dagar / 30)} mån`;
-}
-
-// Listan delas upp per månad. En tävling som redan har börjat räknas till innevarande månad.
-const manadNyckel = (t) => (t.start < IDAG ? IDAG : t.start).slice(0, 7);
+// Listan delas upp per månad. En tävling som går över två månader hamnar i den månad den börjar.
+const manadNyckel = (t) => t.start.slice(0, 7);
 function manadRubrik(nyckel) {
   const namn = new Date(+nyckel.slice(0, 4), +nyckel.slice(5, 7) - 1, 1)
     .toLocaleDateString('sv-SE', { month: 'long', year: 'numeric' });
@@ -159,9 +150,7 @@ function listaHtml(lista) {
       <span class="text">
         <span class="namn">${esc(t.namn)}</span>
         <span class="info">${esc(formateraDatum(t.start, t.slut))} · ${esc(t.plats ?? t.distrikt ?? '')}</span>
-      </span>
-      <span class="nedrakning${t.dagar <= 7 ? ' snart' : ''}">${nedrakning(t)}</span>
-    </button></li>`).join('')}</ul>`;
+      </span>    </button></li>`).join('')}</ul>`;
 }
 
 function visaOversikt() {
@@ -205,9 +194,7 @@ async function visaTavling(id) {
     <button type="button" class="tillbaka">← Alla tävlingar</button>
     <div class="detaljer">
       <span class="etikett ${klass(t)}">${arFis(t) ? 'FIS' : esc(NIVAER[t.niva] ?? t.niva)}</span>
-      <h2>${esc(t.namn)}</h2>
-      <div class="nedrakning${t.dagar <= 7 ? ' snart' : ''}">${nedrakning(t)}</div>
-      <dl>
+      <h2>${esc(t.namn)}</h2>      <dl>
         <dt>Datum</dt><dd>${esc(formateraDatum(t.start, t.slut))}</dd>
         <dt>Plats</dt><dd>${esc(t.plats ?? '–')}${t.ungefarlig ? '<br><span class="notis">Platsen är okänd – pricken visar bara distriktet.</span>' : ''}</dd>
         <dt>Arrangör</dt><dd>${esc(t.arrangor)}</dd>
@@ -349,9 +336,7 @@ async function laddaTavlingar() {
   const svar = await fetch('tavlingar.json');
   const data = await svar.json();
   hamtad = data.hamtad;
-  tavlingar = data.tavlingar
-    .filter((t) => t.slut >= IDAG) // avslutade tävlingar visas inte
-    .map((t) => ({ ...t, dagar: Math.max(0, dagarTill(t.start)) }));
+  tavlingar = data.tavlingar.filter((t) => t.slut >= IDAG); // avslutade tävlingar visas inte
   for (const t of tavlingar) perId.set(t.id, t);
 }
 
