@@ -137,7 +137,6 @@ const klass = (t) => (arFis(t) ? 'fis' : 'ovriga');
 // ---- Tävlingar ----
 
 let tavlingar = [];
-let hamtad = null;
 const perId = new Map();
 
 const forklaringHtml = `
@@ -164,15 +163,13 @@ function visaOversikt() {
     perManad.get(n).push(t);
   }
   for (const [nyckel, lista] of perManad) html += `<h3>${esc(manadRubrik(nyckel))}</h3>${listaHtml(lista)}`;
-  const uppdaterad = hamtad
-    ? `, uppdaterade ${esc(new Date(hamtad).toLocaleString('sv-SE', { dateStyle: 'medium', timeStyle: 'short' }))}`
-    : '';
-  html += `<p class="kalla">Källor: tävlingar från Svenska Skidförbundets
-    <a href="${SSF_WEBB}" target="_blank" rel="noopener">SSF-TA</a>${uppdaterad}.
-    Karta: <a href="https://www.lantmateriet.se" target="_blank" rel="noopener">Lantmäteriet</a> och
-    <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a>.
-    Platser: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-bidragsgivare.
-    Kartbibliotek: <a href="https://maplibre.org" target="_blank" rel="noopener">MapLibre</a>.</p>`;
+  // OpenStreetMap står redan på kartan och behöver inte upprepas här
+  html += `<ul class="kalla">
+    <li>Tävlingar: Svenska Skidförbundets <a href="${SSF_WEBB}" target="_blank" rel="noopener">SSF-TA</a></li>
+    <li>Karta: <a href="https://www.lantmateriet.se" target="_blank" rel="noopener">Lantmäteriet</a> och
+      <a href="https://www.naturalearthdata.com" target="_blank" rel="noopener">Natural Earth</a></li>
+    <li>Kartbibliotek: <a href="https://maplibre.org" target="_blank" rel="noopener">MapLibre</a></li>
+  </ul>`;
   sidomeny.innerHTML = html;
   sidomeny.scrollTop = 0;
 }
@@ -335,7 +332,6 @@ function ritaBubbla(antal) {
 async function laddaTavlingar() {
   const svar = await fetch('tavlingar.json');
   const data = await svar.json();
-  hamtad = data.hamtad;
   tavlingar = data.tavlingar.filter((t) => t.slut >= IDAG); // avslutade tävlingar visas inte
   for (const t of tavlingar) perId.set(t.id, t);
 }
