@@ -12,6 +12,9 @@ const PRICK_RADIE = 6;
 // Kartdatan (Topografi 1M) finns bara till zoom 10. Längre in förstoras bara samma ytor,
 // tills man bara ser en enda sjö eller skog – därför går det inte att zooma längre.
 const MAX_ZOOM = 10;
+// Zoom när man väljer en tävling i listan. Bubblorna slår där bara ihop prickar inom ca 3 km,
+// så tävlingen syns som egen prick (eller som sin arenas bubbla).
+const NARA_ZOOM = 9;
 
 const NIVAER = {
   FIS: 'Internationell (FIS)',
@@ -252,20 +255,20 @@ let valdId = null;
 
 function valj(id) {
   valdId = id;
-  uppdateraRing();
+  uppdateraMarkering();
   const hash = id ? `#${id}` : '';
   if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname + location.search);
 }
 
-// Ringen runt den valda tävlingen följer sammanslagningen: ligger tävlingen i en bubbla
-// hamnar ringen runt bubblan, annars runt tävlingens egen prick.
-const RING_AVSTAND = 2; // pixlar mellan prickens ytterkant och ringen
-let ringAnrop = 0;
+// En nål ovanför den valda tävlingen pekar ner på den. Den följer sammanslagningen: ligger
+// tävlingen i en bubbla pekar nålen på bubblan, annars på tävlingens egen prick.
+const NAL_AVSTAND = 2; // pixlar mellan prickens ytterkant och nålens spets
+let markeringAnrop = 0;
 
-async function uppdateraRing() {
+async function uppdateraMarkering() {
   const kalla = karta.getSource('vald');
   if (!kalla) return;
-  const anrop = ++ringAnrop;
+  const anrop = ++markeringAnrop;
   const t = perId.get(valdId);
   if (!t) return kalla.setData({ type: 'FeatureCollection', features: [] });
 
@@ -280,10 +283,10 @@ async function uppdateraRing() {
       break;
     }
   }
-  if (anrop !== ringAnrop) return; // en nyare uppdatering har hunnit starta
+  if (anrop !== markeringAnrop) return; // en nyare uppdatering har hunnit starta
   kalla.setData({
     type: 'FeatureCollection',
-    features: [{ type: 'Feature', geometry: { type: 'Point', coordinates: plats }, properties: { radie: ytterkant + RING_AVSTAND } }],
+    features: [{ type: 'Feature', geometry: { type: 'Point', coordinates: plats }, properties: { hojd: ytterkant + NAL_AVSTAND } }],
   });
 }
 
@@ -293,7 +296,7 @@ sidomeny.addEventListener('click', (e) => {
   if (!knapp) return;
   const t = perId.get(+knapp.dataset.id);
   if (!t) return;
-  karta.flyTo({ center: [t.lon, t.lat], zoom: Math.max(karta.getZoom(), 6) });
+  karta.flyTo({ center: [t.lon, t.lat], zoom: Math.max(karta.getZoom(), NARA_ZOOM) });
   visaTavling(t.id);
 });
 
@@ -325,6 +328,33 @@ function ritaBubbla(antal) {
   g.textAlign = 'center';
   g.textBaseline = 'middle';
   g.fillText(String(antal), storlek / 2, storlek / 2 + 0.5);
+  return [g.getImageData(0, 0, canvas.width, canvas.height), { pixelRatio: skala }];
+}
+
+// Mörk kartnål med vit kant och vit prick, spetsen nedåt
+function ritaNal() {
+  const skala = Math.ceil(devicePixelRatio || 1);
+  const bredd = 22, hojd = 30, r = 9, kant = 2;
+  const canvas = document.createElement('canvas');
+  canvas.width = bredd * skala;
+  canvas.height = hojd * skala;
+  const g = canvas.getContext('2d');
+  g.scale(skala, skala);
+  const mx = bredd / 2, my = r + kant / 2, spets = hojd - kant / 2;
+  g.beginPath();
+  g.arc(mx, my, r, Math.PI * 0.8, Math.PI * 0.2); // övre delen av huvudet
+  g.quadraticCurveTo(mx + r * 0.45, my + r * 1.4, mx, spets); // ner till spetsen
+  g.quadraticCurveTo(mx - r * 0.45, my + r * 1.4, mx - r * Math.cos(Math.PI * 0.2), my + r * Math.sin(Math.PI * 0.2));
+  g.closePath();
+  g.fillStyle = '#111827';
+  g.fill();
+  g.lineWidth = kant;
+  g.strokeStyle = '#fff';
+  g.stroke();
+  g.beginPath();
+  g.arc(mx, my, 3.5, 0, 2 * Math.PI);
+  g.fillStyle = '#fff';
+  g.fill();
   return [g.getImageData(0, 0, canvas.width, canvas.height), { pixelRatio: skala }];
 }
 
@@ -383,17 +413,27 @@ karta.on('load', async () => {
     id: 'tavlingar', type: 'circle', source: 'tavlingar', filter: ['!', ['has', 'point_count']],
     paint: { 'circle-color': PRICK_FARG, 'circle-radius': PRICK_RADIE, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 },
   });
+  karta.addImage('nal', ...ritaNal());
   karta.addLayer({
-    id: 'tavlingar-vald', type: 'circle', source: 'vald',
-    paint: { 'circle-radius': ['get', 'radie'], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#000', 'circle-stroke-width': 2 },
+    id: 'tavlingar-vald', type: 'symbol', source: 'vald',
+    layout: {
+      'icon-image': 'nal',
+      'icon-anchor': 'bottom', // spetsen nederst i bilden
+      // Lyft nålen så att spetsen hamnar strax ovanför prickens eller bubblans kant
+      'icon-offset': ['match', ['get', 'hojd'],
+        ...[12, 15, 19].flatMap((r) => [r + 2 + NAL_AVSTAND, ['literal', [0, -(r + 2 + NAL_AVSTAND)]]]),
+        ['literal', [0, -(PRICK_RADIE + 2 + NAL_AVSTAND)]]],
+      'icon-allow-overlap': true,
+      'icon-ignore-placement': true,
+    },
   });
 
-  // Bubblorna ändras när man zoomar: göm ringen under zoomningen och placera om den efteråt
+  // Bubblorna ändras när man zoomar: göm nålen under zoomningen och placera om den efteråt
   karta.on('zoomstart', () => karta.setLayoutProperty('tavlingar-vald', 'visibility', 'none'));
   // Vänta tills kartan ritat klart, annars är bubblorna för den nya zoomnivån inte på plats än
   karta.on('moveend', () =>
     karta.once('idle', async () => {
-      await uppdateraRing();
+      await uppdateraMarkering();
       karta.setLayoutProperty('tavlingar-vald', 'visibility', 'visible');
     })
   );
@@ -427,7 +467,7 @@ karta.on('load', async () => {
   // En länk med #<id> öppnar tävlingen direkt
   const franLank = perId.get(+location.hash.slice(1));
   if (franLank) {
-    karta.jumpTo({ center: [franLank.lon, franLank.lat], zoom: 6 });
+    karta.jumpTo({ center: [franLank.lon, franLank.lat], zoom: NARA_ZOOM });
     visaTavling(franLank.id);
   } else {
     visaOversikt();
