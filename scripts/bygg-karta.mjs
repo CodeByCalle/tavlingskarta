@@ -26,7 +26,6 @@ const GRANNLAND = { mapp: 'grannland', omrade: [-25.0, 50.0, 60.0, 73.0], minZoo
 const LM_LAGER = [
   ['mark_sverige.zip', 'mark', ['objekttyp'], `objekttyp <> 'Ej karterat område'`],
   ['hydrografi_sverige.zip', 'hydrolinje', []],
-  ['kommunikation_sverige.zip', 'ralstrafik', []],
   ['administrativindelning_sverige.zip', 'administrativ_grans', ['objekttyp'], `objekttyp IN ('Riksgräns', 'Länsgräns')`],
 ];
 

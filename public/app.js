@@ -9,8 +9,9 @@ const SSF_API = 'https://api.skidor.com/api/v1';
 const SSF_WEBB = 'https://ssfta.skidor.com';
 const PRICK_FARG = '#1d4ed8';
 const PRICK_RADIE = 6;
-// Kartdatan finns bara till zoom 10, så längre in än så här blir det bara suddigare
-const MAX_ZOOM = 14;
+// Kartdatan (Topografi 1M) finns bara till zoom 10. Längre in förstoras bara samma ytor,
+// tills man bara ser en enda sjö eller skog – därför går det inte att zooma längre.
+const MAX_ZOOM = 10;
 
 const NIVAER = {
   FIS: 'Internationell (FIS)',
@@ -83,10 +84,6 @@ const stil = {
         'line-width': ['match', ['get', 'objekttyp'], 'Riksgräns', 1.5, 0.7],
         'line-dasharray': [3, 2],
       },
-    },
-    {
-      id: 'jarnvag', type: 'line', source: 'lm', 'source-layer': 'ralstrafik', minzoom: 6,
-      paint: { 'line-color': '#999999', 'line-width': 0.8 },
     },
   ],
 };
@@ -255,15 +252,43 @@ function visaSidomeny() {
   if (arMobil()) scrollTo({ top: Math.max(0, sidomeny.offsetTop - innerHeight / 2) });
 }
 
+let valdId = null;
+
 function valj(id) {
-  // Egen källa för markeringen: den valda tävlingen kan ligga i en sammanslagen prick
-  const t = perId.get(id);
-  karta.getSource('vald')?.setData({
-    type: 'FeatureCollection',
-    features: t ? [{ type: 'Feature', geometry: { type: 'Point', coordinates: [t.lon, t.lat] }, properties: {} }] : [],
-  });
+  valdId = id;
+  uppdateraRing();
   const hash = id ? `#${id}` : '';
   if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname + location.search);
+}
+
+// Ringen runt den valda tävlingen följer sammanslagningen: ligger tävlingen i en bubbla
+// hamnar ringen runt bubblan, annars runt tävlingens egen prick.
+const RING_AVSTAND = 2; // pixlar mellan prickens ytterkant och ringen
+let ringAnrop = 0;
+
+async function uppdateraRing() {
+  const kalla = karta.getSource('vald');
+  if (!kalla) return;
+  const anrop = ++ringAnrop;
+  const t = perId.get(valdId);
+  if (!t) return kalla.setData({ type: 'FeatureCollection', features: [] });
+
+  let plats = [t.lon, t.lat];
+  let ytterkant = PRICK_RADIE + 2; // prickens radie + vit kant
+  const tavlingskalla = karta.getSource('tavlingar');
+  for (const bubbla of karta.queryRenderedFeatures({ layers: ['kluster'] })) {
+    const delar = await tavlingskalla.getClusterLeaves(bubbla.properties.cluster_id, Infinity);
+    if (delar.some((f) => f.properties.id === t.id)) {
+      plats = bubbla.geometry.coordinates;
+      ytterkant = bubbelRadie(bubbla.properties.point_count) + 2;
+      break;
+    }
+  }
+  if (anrop !== ringAnrop) return; // en nyare uppdatering har hunnit starta
+  kalla.setData({
+    type: 'FeatureCollection',
+    features: [{ type: 'Feature', geometry: { type: 'Point', coordinates: plats }, properties: { radie: ytterkant + RING_AVSTAND } }],
+  });
 }
 
 sidomeny.addEventListener('click', (e) => {
@@ -368,20 +393,36 @@ karta.on('load', async () => {
   });
   karta.addLayer({
     id: 'tavlingar-vald', type: 'circle', source: 'vald',
-    paint: { 'circle-radius': PRICK_RADIE + 4, 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#000', 'circle-stroke-width': 2 },
+    paint: { 'circle-radius': ['get', 'radie'], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#000', 'circle-stroke-width': 2 },
   });
 
-  // Bubbla: lista tävlingarna i den och zooma in så att den delar på sig
+  // Bubblorna ändras när man zoomar: göm ringen under zoomningen och placera om den efteråt
+  karta.on('zoomstart', () => karta.setLayoutProperty('tavlingar-vald', 'visibility', 'none'));
+  // Vänta tills kartan ritat klart, annars är bubblorna för den nya zoomnivån inte på plats än
+  karta.on('moveend', () =>
+    karta.once('idle', async () => {
+      await uppdateraRing();
+      karta.setLayoutProperty('tavlingar-vald', 'visibility', 'visible');
+    })
+  );
+
+  // Bubbla: lista tävlingarna i den och zooma in så att alla får plats med marginal.
+  // Då hamnar de olika arenorna så långt isär att de visas som egna prickar.
   karta.on('click', 'kluster', async (e) => {
     const bubbla = e.features[0];
-    const kalla = karta.getSource('tavlingar');
-    const id = bubbla.properties.cluster_id;
-    const [delar, zoom] = await Promise.all([kalla.getClusterLeaves(id, Infinity), kalla.getClusterExpansionZoom(id)]);
+    const delar = await karta.getSource('tavlingar').getClusterLeaves(bubbla.properties.cluster_id, Infinity);
     const lista = delar.map((f) => perId.get(f.properties.id)).filter(Boolean).sort((a, b) => a.start.localeCompare(b.start));
     visaFlera(lista);
     // Alla på samma arena delar aldrig på sig, så då är det ingen idé att zooma
-    const sammaPlats = lista.every((t) => t.lat === lista[0].lat && t.lon === lista[0].lon);
-    if (!sammaPlats) karta.easeTo({ center: bubbla.geometry.coordinates, zoom });
+    const lon = lista.map((t) => t.lon);
+    const lat = lista.map((t) => t.lat);
+    const sammaPlats = Math.min(...lon) === Math.max(...lon) && Math.min(...lat) === Math.max(...lat);
+    if (!sammaPlats) {
+      karta.fitBounds([[Math.min(...lon), Math.min(...lat)], [Math.max(...lon), Math.max(...lat)]], {
+        padding: arMobil() ? 40 : 80,
+        maxZoom: MAX_ZOOM,
+      });
+    }
   });
 
   karta.on('click', 'tavlingar', (e) => visaTavling(e.features[0].properties.id));

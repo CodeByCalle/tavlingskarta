@@ -45,7 +45,6 @@ Kör sedan `npm run hamta-tavlingar` igen och committa.
 1. **Lantmäteriet, Topografi 1M Nedladdning, vektor** (GeoPackage, CC0). Beställs gratis via [Geotorget](https://geotorget.lantmateriet.se/geodataprodukter) (kräver konto). Lägg de här zip-filerna direkt i `data/` (övriga i beställningen används inte):
    - `mark_sverige.zip`
    - `hydrografi_sverige.zip`
-   - `kommunikation_sverige.zip`
    - `administrativindelning_sverige.zip`
 2. **Natural Earth** (public domain), för grannländerna. Ladda ner till `data/natural-earth/`:
    - [ne_10m_admin_0_countries.geojson](https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson)
