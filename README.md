@@ -1,6 +1,6 @@
 # Tävlingskarta längdskidor
 
-En karta över kommande längdskidtävlingar i Sverige. Tävlingarna hämtas från Svenska Skidförbundets SSF-TA. FIS-tävlingar visas i rött, övriga i blått, och ju närmare i tid en tävling är desto större och starkare är pricken. Klicka på en prick för detaljer, PM och dokument.
+En karta över kommande längdskidtävlingar i Sverige. Tävlingarna hämtas från Svenska Skidförbundets SSF-TA. Tävlingar som ligger nära varandra visas som en bubbla med antalet; klicka för att zooma in. Klicka på en enskild prick för detaljer, PM och dokument.
 
 ## Struktur
 
