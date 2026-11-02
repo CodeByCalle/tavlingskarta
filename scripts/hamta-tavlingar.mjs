@@ -126,23 +126,106 @@ function varianter(e) {
     const ord = utanParentes.replace(ALLMANNA_ORD, ' ').split(/[\s,&.-]+/).filter((o) => o.length >= 4);
     for (const o of ord.reverse()) lagg(o);
   }
-  // Arrangörens namn innehåller ofta orten, t.ex. "Skellefteå SKG" eller "IFK Umeå"
-  lagg((e.OrganizerName ?? '').replace(ALLMANNA_ORD, ' '));
   return ut;
 }
 
+// Hur exakt en position är – lägre är bättre. Används för att välja position när
+// flera stavningar av samma plats slås ihop (se samlaPlatser).
+const EXAKTHET = { manuell: -1, helaPlatsen: 0, arrangor: 50, distrikt: 99 };
+
 async function geokoda(e) {
   const plats = (e.Place ?? '').trim();
-  if (manuellt[plats]) return { lat: manuellt[plats].lat, lon: manuellt[plats].lon, ungefarlig: false };
+  if (manuellt[plats]) return { lat: manuellt[plats].lat, lon: manuellt[plats].lon, exakthet: EXAKTHET.manuell };
 
   const distrikt = DISTRIKT[e.District];
   const iRattLan = (t) => !distrikt || distrikt.lan.some((l) => t.namn.includes(`${l} län`));
-  for (const q of varianter(e)) {
+  // Varianter av platsnamnet: index 0 = hela platsen, högre = bara en del av den
+  const sokningar = varianter(e).map((q, i) => ({ q, exakthet: i }));
+  // Arrangörens namn innehåller ofta orten, t.ex. "Skellefteå SKG" eller "IFK Umeå"
+  sokningar.push({ q: (e.OrganizerName ?? '').replace(ALLMANNA_ORD, ' ').trim(), exakthet: EXAKTHET.arrangor });
+  for (const { q, exakthet } of sokningar) {
+    if (q.length < 3) continue;
     const traff = (await nominatim(q)).find(iRattLan);
-    if (traff) return { lat: traff.lat, lon: traff.lon, ungefarlig: false };
+    if (traff) return { lat: traff.lat, lon: traff.lon, exakthet };
   }
-  if (distrikt) return { lat: distrikt.mitt[0], lon: distrikt.mitt[1], ungefarlig: true };
+  if (distrikt) return { lat: distrikt.mitt[0], lon: distrikt.mitt[1], exakthet: EXAKTHET.distrikt };
   return null;
+}
+
+// ---- Samma plats, olika stavning ----
+//
+// Samma anläggning skrivs olika i olika evenemang ("Södra Berget Sundsvall", "Södraberget, Sundsvall",
+// "Södra berget"), och en del anger bara orten ("Sundsvall") eller ingen plats alls. Utan det här
+// hamnar de på olika ställen – t.ex. i stadens centrum i stället för vid skidstadion.
+
+const avstandKm = (a, b) => {
+  const r = Math.PI / 180;
+  const x = Math.sin(((b.lat - a.lat) * r) / 2) ** 2 +
+    Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(((b.lon - a.lon) * r) / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(x));
+};
+
+// "Södraberget, Sundsvall" och "Södra Berget Sundsvall" → "södrabergetsundsvall".
+// Ord som "skidstadion" och "arena" får vara kvar: utan dem blir "Borås Skidstadion" och
+// "Borås GIF Arena" båda bara "borås", fast de är olika anläggningar.
+const platsnyckel = (plats) =>
+  (plats ?? '').toLowerCase().replace(/skidstadium/g, 'skidstadion').replace(/[^\p{L}]/gu, '');
+
+const SAMMA_PLATS_MAX_KM = 25;
+
+function samlaPlatser(tavlingar) {
+  // Varje unik nyckel blir först en egen plats; den mest exakta positionen för nyckeln gäller
+  const perNyckel = new Map();
+  for (const t of tavlingar) {
+    const n = platsnyckel(t.plats);
+    if (n.length < 4) continue;
+    const p = perNyckel.get(n) ?? { nycklar: [n], tavlingar: [] };
+    p.tavlingar.push(t);
+    perNyckel.set(n, p);
+  }
+  const basta = (lista) =>
+    lista.reduce((a, b) => (b.exakthet < a.exakthet ? b : a));
+
+  // Längsta nycklarna först: en kort nyckel ("södraberget", "sundsvall") läggs ihop med en längre
+  // som innehåller den. Passar den flera platser väljs den som samma arrangör använder.
+  const platser = [];
+  for (const [n, p] of [...perNyckel].sort((a, b) => b[0].length - a[0].length)) {
+    const pos = basta(p.tavlingar);
+    const kandidater = platser.filter((g) =>
+      g.nycklar.some((m) => m.includes(n) || n.includes(m)) && avstandKm(basta(g.tavlingar), pos) <= SAMMA_PLATS_MAX_KM
+    );
+    let mal = kandidater.length === 1 ? kandidater[0] : null;
+    if (kandidater.length > 1) {
+      const arrangorer = new Set(p.tavlingar.map((t) => t.arrangor));
+      const samma = kandidater.filter((g) => g.tavlingar.some((t) => arrangorer.has(t.arrangor)));
+      if (samma.length === 1) mal = samma[0];
+    }
+    if (mal) {
+      mal.nycklar.push(n);
+      mal.tavlingar.push(...p.tavlingar);
+    } else {
+      platser.push(p);
+    }
+  }
+
+  // Tävlingar utan (användbar) plats hamnar där arrangören brukar vara
+  const perArrangor = new Map();
+  for (const g of platser) for (const t of g.tavlingar) {
+    const r = perArrangor.get(t.arrangor) ?? new Map();
+    r.set(g, (r.get(g) ?? 0) + 1);
+    perArrangor.set(t.arrangor, r);
+  }
+  for (const t of tavlingar) {
+    if (platsnyckel(t.plats).length >= 4) continue;
+    const vanliga = perArrangor.get(t.arrangor);
+    if (vanliga) [...vanliga].sort((a, b) => b[1] - a[1])[0][0].tavlingar.push(t);
+  }
+
+  // Alla tävlingar på samma plats får den mest exakta positionen
+  for (const g of platser) {
+    const b = basta(g.tavlingar);
+    for (const t of g.tavlingar) Object.assign(t, { lat: b.lat, lon: b.lon, exakthet: b.exakthet });
+  }
 }
 
 // Ta med evenemang som startat de senaste dagarna, så att pågående flerdagarstävlingar syns
@@ -157,7 +240,7 @@ const typer = Object.fromEntries(
 );
 
 const tavlingar = [];
-const ungefarliga = [];
+const beskrivningar = new Map();
 const utanPlats = [];
 for (const e of evenemang.sort((a, b) => a.StartDate.localeCompare(b.StartDate))) {
   if (e.EventStatus === 'Inställt') continue;
@@ -168,7 +251,7 @@ for (const e of evenemang.sort((a, b) => a.StartDate.localeCompare(b.StartDate))
     utanPlats.push(beskrivning);
     continue;
   }
-  if (pos.ungefarlig) ungefarliga.push(beskrivning);
+  beskrivningar.set(e.Id, beskrivning);
   tavlingar.push({
     id: e.Id,
     namn: e.Name,
@@ -184,7 +267,14 @@ for (const e of evenemang.sort((a, b) => a.StartDate.localeCompare(b.StartDate))
   });
 }
 
+samlaPlatser(tavlingar);
+const ungefarliga = tavlingar.filter((t) => t.exakthet === EXAKTHET.distrikt).map((t) => beskrivningar.get(t.id));
+for (const t of tavlingar) {
+  t.ungefarlig = t.exakthet === EXAKTHET.distrikt;
+  delete t.exakthet;
+}
+
 writeFileSync(UT, JSON.stringify({ hamtad: new Date().toISOString(), tavlingar }, null, 1) + '\n');
-console.log(`${tavlingar.length} tävlingar i ${UT}`);
+console.log(`${tavlingar.length} tävlingar på ${new Set(tavlingar.map((t) => `${t.lat},${t.lon}`)).size} platser i ${UT}`);
 if (ungefarliga.length) console.log(`Ungefärlig plats (distriktets mitt) – rätta i ${MANUELLT}:\n  ${ungefarliga.join('\n  ')}`);
 if (utanPlats.length) console.log(`Kunde inte placeras alls (visas inte):\n  ${utanPlats.join('\n  ')}`);

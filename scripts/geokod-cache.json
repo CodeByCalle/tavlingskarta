@@ -408,6 +408,13 @@
       "namn": "Hallbystugan, Rollercoaster, Hallbystugan, Axamo, Jönköpings kommun, Jönköpings län, 554 75, Sverige"
     }
   ],
+  "Hallstaberget, Sollefteå": [
+    {
+      "lat": 63.15548,
+      "lon": 17.22783,
+      "namn": "Hallstaberget, Sollefteå distrikt, Sollefteå kommun, Västernorrlands län, 881 60, Sverige"
+    }
+  ],
   "Hellnerstadion": [
     {
       "lat": 67.10717,
@@ -475,6 +482,7 @@
       "namn": "Häggenäs, Karstorp, Nässjö kommun, Jönköpings län, 575 91, Sverige"
     }
   ],
+  "Hägglunds   Team": [],
   "Hägglunds Team": [],
   "Hällefors": [
     {
@@ -987,6 +995,7 @@
       "namn": "Pumpen, Ekilla gårdsväg, Steninge, Märsta, Sigtuna kommun, Stockholms län, 195 33, Sverige"
     }
   ],
+  "Remsle Arena, Sollefteå": [],
   "Riksskidstadion Lugnet, Falun": [
     {
       "lat": 60.62027,
@@ -1130,6 +1139,28 @@
   ],
   "Skönviksbergets friluftscentrum": [],
   "Snöå skidstadion,Dala-Järna": [],
+  "Sollefteå": [
+    {
+      "lat": 63.38333,
+      "lon": 16.91667,
+      "namn": "Sollefteå kommun, Västernorrlands län, Sverige"
+    },
+    {
+      "lat": 63.15509,
+      "lon": 17.23649,
+      "namn": "Sollefteå församling, Västernorrlands län, Sverige"
+    },
+    {
+      "lat": 63.15509,
+      "lon": 17.23649,
+      "namn": "Sollefteå distrikt, Sollefteå kommun, Västernorrlands län, Sverige"
+    },
+    {
+      "lat": 63.16802,
+      "lon": 17.26545,
+      "namn": "Sollefteå, Sollefteå distrikt, Sollefteå kommun, Västernorrlands län, 881 30, Sverige"
+    }
+  ],
   "Storlappberget": [
     {
       "lat": 66.3161,

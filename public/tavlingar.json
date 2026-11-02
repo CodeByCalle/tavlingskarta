@@ -1,21 +1,6 @@
 {
- "hamtad": "2026-10-31T13:42:13.997Z",
+ "hamtad": "2026-11-02T05:35:46.791Z",
  "tavlingar": [
-  {
-   "id": 48064,
-   "namn": "KM Terränglöpning",
-   "start": "2026-10-25",
-   "slut": "2026-10-25",
-   "plats": "Pumpen",
-   "distrikt": "Dalarna",
-   "arrangor": "Korsnäs IF SK",
-   "niva": "Klubb",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 60.59455,
-   "lon": 15.76268,
-   "ungefarlig": false
-  },
   {
    "id": 48061,
    "namn": "Barmarksläger",
@@ -26,7 +11,7 @@
    "arrangor": "Smålands Skidförbund",
    "niva": "Distrikt",
    "typ": "Motionsarrangemang",
-   "status": "Anmälan öppen",
+   "status": "Anmälan stängd",
    "lat": 57.66744,
    "lon": 14.97356,
    "ungefarlig": false
@@ -87,8 +72,8 @@
    "niva": "Distrikt",
    "typ": "Tävling",
    "status": "Anmälan öppen",
-   "lat": 57.70723,
-   "lon": 11.96702,
+   "lat": 57.73822,
+   "lon": 12.03391,
    "ungefarlig": false
   },
   {
@@ -147,8 +132,8 @@
    "niva": "Nationell",
    "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 67.3,
-   "lon": 20.25,
+   "lat": 67.10717,
+   "lon": 20.6456,
    "ungefarlig": false
   },
   {
@@ -207,8 +192,8 @@
    "niva": "Distrikt",
    "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 63.25,
-   "lon": 14.91667,
+   "lat": 63.19121,
+   "lon": 14.66022,
    "ungefarlig": false
   },
   {
@@ -222,8 +207,8 @@
    "niva": "Nationell",
    "typ": "Tävling",
    "status": "Anmälan öppen",
-   "lat": 62.39076,
-   "lon": 17.3071,
+   "lat": 62.36762,
+   "lon": 17.31613,
    "ungefarlig": false
   },
   {
@@ -357,8 +342,8 @@
    "niva": "Nationell",
    "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 67.84961,
-   "lon": 20.30625,
+   "lat": 67.85954,
+   "lon": 20.23284,
    "ungefarlig": false
   },
   {
@@ -389,6 +374,21 @@
    "status": "Godkänt",
    "lat": 63.34241,
    "lon": 13.47202,
+   "ungefarlig": false
+  },
+  {
+   "id": 48173,
+   "namn": "Norra Skogssvängen",
+   "start": "2026-12-27",
+   "slut": "2026-12-27",
+   "plats": "Hallstaberget, Sollefteå",
+   "distrikt": "Ångermanland",
+   "arrangor": "Sollefteå Skidor IF",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.15548,
+   "lon": 17.22783,
    "ungefarlig": false
   },
   {
@@ -492,8 +492,8 @@
    "niva": "FIS",
    "typ": "Skandinavisk Cup",
    "status": "Anmälan öppen",
-   "lat": 60.62076,
-   "lon": 15.65518,
+   "lat": 60.62027,
+   "lon": 15.65621,
    "ungefarlig": false
   },
   {
@@ -747,8 +747,8 @@
    "niva": "Distrikt",
    "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 65.8275,
-   "lon": 21.69641,
+   "lat": 65.84026,
+   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -852,8 +852,8 @@
    "niva": "Nationell",
    "typ": "Motionsarrangemang",
    "status": "Godkänt",
-   "lat": 62.39076,
-   "lon": 17.3071,
+   "lat": 62.36762,
+   "lon": 17.31613,
    "ungefarlig": false
   },
   {
@@ -957,8 +957,8 @@
    "niva": "Nationell",
    "typ": "Tävling",
    "status": "Anmälan öppen",
-   "lat": 59.83333,
-   "lon": 14.56667,
+   "lat": 59.78563,
+   "lon": 14.54345,
    "ungefarlig": false
   },
   {
@@ -989,6 +989,21 @@
    "status": "Godkänt",
    "lat": 60.26315,
    "lon": 15.93737,
+   "ungefarlig": false
+  },
+  {
+   "id": 48174,
+   "namn": "Remslespelen",
+   "start": "2027-01-24",
+   "slut": "2027-01-24",
+   "plats": "Remsle Arena, Sollefteå",
+   "distrikt": "Ångermanland",
+   "arrangor": "Sollefteå Skidor IF",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.38333,
+   "lon": 16.91667,
    "ungefarlig": false
   },
   {
@@ -1257,8 +1272,8 @@
    "niva": "Distrikt",
    "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 65.8275,
-   "lon": 21.69641,
+   "lat": 65.84026,
+   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -1317,8 +1332,8 @@
    "niva": "Nordisk",
    "typ": "Nordisk tävling",
    "status": "Godkänt",
-   "lat": 61.21673,
-   "lon": 14.54012,
+   "lat": 61.21092,
+   "lon": 14.5324,
    "ungefarlig": false
   },
   {
@@ -1452,9 +1467,9 @@
    "niva": "Nationell",
    "typ": "Motionsarrangemang",
    "status": "Godkänt",
-   "lat": 59.7,
-   "lon": 16.3,
-   "ungefarlig": true
+   "lat": 60.08641,
+   "lon": 15.95332,
+   "ungefarlig": false
   },
   {
    "id": 48021,
@@ -1484,21 +1499,6 @@
    "status": "Godkänt",
    "lat": 61.21644,
    "lon": 16.60421,
-   "ungefarlig": false
-  },
-  {
-   "id": 48140,
-   "namn": "Sparbanksskidan",
-   "start": "2027-02-07",
-   "slut": "2027-02-07",
-   "plats": "Jarlstugan Rättvik",
-   "distrikt": "Dalarna",
-   "arrangor": "IK Jarl Rättvik",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 60.89732,
-   "lon": 15.12586,
    "ungefarlig": false
   },
   {
@@ -1662,8 +1662,8 @@
    "niva": "FIS",
    "typ": "Svenskt Mästerskap",
    "status": "Godkänt",
-   "lat": 65.8275,
-   "lon": 21.69641,
+   "lat": 65.84026,
+   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -1692,8 +1692,8 @@
    "niva": "FIS",
    "typ": "FIS Junior/Senior Cup",
    "status": "Godkänt",
-   "lat": 65.8275,
-   "lon": 21.69641,
+   "lat": 65.84026,
+   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -2127,9 +2127,9 @@
    "niva": "Distrikt",
    "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 58.1,
-   "lon": 13.4,
-   "ungefarlig": true
+   "lat": 57.78578,
+   "lon": 13.43651,
+   "ungefarlig": false
   },
   {
    "id": 47717,
@@ -2247,8 +2247,8 @@
    "niva": "Distrikt",
    "typ": "Motionsarrangemang",
    "status": "Godkänt",
-   "lat": 67.64692,
-   "lon": 21.05549,
+   "lat": 67.64689,
+   "lon": 21.09349,
    "ungefarlig": false
   },
   {
@@ -2262,9 +2262,9 @@
    "niva": "Nationell",
    "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 63.3,
-   "lon": 17.6,
-   "ungefarlig": true
+   "lat": 63.29573,
+   "lon": 18.73489,
+   "ungefarlig": false
   },
   {
    "id": 47913,
@@ -2442,8 +2442,8 @@
    "niva": "FIS",
    "typ": "FIS Junior/Senior Cup",
    "status": "Godkänt",
-   "lat": 67.84961,
-   "lon": 20.30625,
+   "lat": 67.85954,
+   "lon": 20.23284,
    "ungefarlig": false
   },
   {
