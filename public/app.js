@@ -260,9 +260,9 @@ function valj(id) {
   if (location.hash !== hash) history.replaceState(null, '', hash || location.pathname + location.search);
 }
 
-// En nål ovanför den valda tävlingen pekar ner på den. Den följer sammanslagningen: ligger
-// tävlingen i en bubbla pekar nålen på bubblan, annars på tävlingens egen prick.
-const NAL_AVSTAND = 2; // pixlar mellan prickens ytterkant och nålens spets
+// En ring runt den valda tävlingen. Den följer sammanslagningen: ligger tävlingen i en bubbla
+// hamnar ringen runt bubblan, annars runt tävlingens egen prick.
+const RING_AVSTAND = 2; // pixlar mellan prickens ytterkant och ringen
 let markeringAnrop = 0;
 
 async function uppdateraMarkering() {
@@ -286,7 +286,7 @@ async function uppdateraMarkering() {
   if (anrop !== markeringAnrop) return; // en nyare uppdatering har hunnit starta
   kalla.setData({
     type: 'FeatureCollection',
-    features: [{ type: 'Feature', geometry: { type: 'Point', coordinates: plats }, properties: { hojd: ytterkant + NAL_AVSTAND } }],
+    features: [{ type: 'Feature', geometry: { type: 'Point', coordinates: plats }, properties: { radie: ytterkant + RING_AVSTAND } }],
   });
 }
 
@@ -328,33 +328,6 @@ function ritaBubbla(antal) {
   g.textAlign = 'center';
   g.textBaseline = 'middle';
   g.fillText(String(antal), storlek / 2, storlek / 2 + 0.5);
-  return [g.getImageData(0, 0, canvas.width, canvas.height), { pixelRatio: skala }];
-}
-
-// Mörk kartnål med vit kant och vit prick, spetsen nedåt
-function ritaNal() {
-  const skala = Math.ceil(devicePixelRatio || 1);
-  const bredd = 22, hojd = 30, r = 9, kant = 2;
-  const canvas = document.createElement('canvas');
-  canvas.width = bredd * skala;
-  canvas.height = hojd * skala;
-  const g = canvas.getContext('2d');
-  g.scale(skala, skala);
-  const mx = bredd / 2, my = r + kant / 2, spets = hojd - kant / 2;
-  g.beginPath();
-  g.arc(mx, my, r, Math.PI * 0.8, Math.PI * 0.2); // övre delen av huvudet
-  g.quadraticCurveTo(mx + r * 0.45, my + r * 1.4, mx, spets); // ner till spetsen
-  g.quadraticCurveTo(mx - r * 0.45, my + r * 1.4, mx - r * Math.cos(Math.PI * 0.2), my + r * Math.sin(Math.PI * 0.2));
-  g.closePath();
-  g.fillStyle = '#111827';
-  g.fill();
-  g.lineWidth = kant;
-  g.strokeStyle = '#fff';
-  g.stroke();
-  g.beginPath();
-  g.arc(mx, my, 3.5, 0, 2 * Math.PI);
-  g.fillStyle = '#fff';
-  g.fill();
   return [g.getImageData(0, 0, canvas.width, canvas.height), { pixelRatio: skala }];
 }
 
@@ -413,22 +386,12 @@ karta.on('load', async () => {
     id: 'tavlingar', type: 'circle', source: 'tavlingar', filter: ['!', ['has', 'point_count']],
     paint: { 'circle-color': PRICK_FARG, 'circle-radius': PRICK_RADIE, 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 },
   });
-  karta.addImage('nal', ...ritaNal());
   karta.addLayer({
-    id: 'tavlingar-vald', type: 'symbol', source: 'vald',
-    layout: {
-      'icon-image': 'nal',
-      'icon-anchor': 'bottom', // spetsen nederst i bilden
-      // Lyft nålen så att spetsen hamnar strax ovanför prickens eller bubblans kant
-      'icon-offset': ['match', ['get', 'hojd'],
-        ...[12, 15, 19].flatMap((r) => [r + 2 + NAL_AVSTAND, ['literal', [0, -(r + 2 + NAL_AVSTAND)]]]),
-        ['literal', [0, -(PRICK_RADIE + 2 + NAL_AVSTAND)]]],
-      'icon-allow-overlap': true,
-      'icon-ignore-placement': true,
-    },
+    id: 'tavlingar-vald', type: 'circle', source: 'vald',
+    paint: { 'circle-radius': ['get', 'radie'], 'circle-color': 'rgba(0,0,0,0)', 'circle-stroke-color': '#000', 'circle-stroke-width': 2 },
   });
 
-  // Bubblorna ändras när man zoomar: göm nålen under zoomningen och placera om den efteråt
+  // Bubblorna ändras när man zoomar: göm ringen under zoomningen och placera om den efteråt
   karta.on('zoomstart', () => karta.setLayoutProperty('tavlingar-vald', 'visibility', 'none'));
   // Vänta tills kartan ritat klart, annars är bubblorna för den nya zoomnivån inte på plats än
   karta.on('moveend', () =>
