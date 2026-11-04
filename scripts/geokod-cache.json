@@ -320,6 +320,30 @@
     }
   ],
   "Elljusspåret Rydaholm": [],
+  "Filipstad": [
+    {
+      "lat": 59.71355,
+      "lon": 14.16803,
+      "namn": "Filipstad, Filipstads kommun, Värmlands län, 682 30, Sverige"
+    },
+    {
+      "lat": 59.7,
+      "lon": 14.18333,
+      "namn": "Filipstads kommun, Värmlands län, Sverige"
+    }
+  ],
+  "Fjätervålen": [
+    {
+      "lat": 61.93474,
+      "lon": 12.95599,
+      "namn": "Fjätervålen, Älvdalens kommun, Dalarnas län, Sverige"
+    },
+    {
+      "lat": 61.9416,
+      "lon": 13.00929,
+      "namn": "Fjätervålen, Älvdalens kommun, Dalarnas län, Sverige"
+    }
+  ],
   "Forslunda Gymnasiet, Umeå": [],
   "Föreningen Engelbrektsloppet": [],
   "Gimo Ski Center, Gimo": [
@@ -334,6 +358,18 @@
       "lat": 61.21092,
       "lon": 14.5324,
       "namn": "Grönklitt Skidstadion, Multibanan, Grönklitt, Orsa kommun, Dalarnas län, Sverige"
+    }
+  ],
+  "Grönklitt, Orsa": [
+    {
+      "lat": 61.21673,
+      "lon": 14.54012,
+      "namn": "Grönklitt, Orsa kommun, Dalarnas län, Sverige"
+    },
+    {
+      "lat": 61.20771,
+      "lon": 14.53776,
+      "namn": "Grönklitt, Orsa kommun, Dalarnas län, 794 90, Sverige"
     }
   ],
   "Grönklitt": [
@@ -596,6 +632,8 @@
       "namn": "Kiruna kommun, Norrbottens län, Sverige"
     }
   ],
+  "Kalhyttans Filipstad": [],
+  "Kalhyttans skidstadion Filipstad": [],
   "Kalix": [
     {
       "lat": 66,
