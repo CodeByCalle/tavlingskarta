@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-04T10:05:11.148Z",
+ "hamtad": "2026-11-05T09:59:20.100Z",
  "tavlingar": [
   {
    "id": 48061,
@@ -55,7 +55,7 @@
    "distrikt": null,
    "arrangor": "Göteborgs Skidförbund",
    "niva": "Distrikt",
-   "typ": "Motionsarrangemang",
+   "typ": "Tävling",
    "status": "Anmälan öppen",
    "lat": 57.73822,
    "lon": 12.03391,
@@ -497,21 +497,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47924,
-   "namn": "Boden Ski Maraton 2027",
-   "start": "2027-01-09",
-   "slut": "2027-01-09",
-   "plats": "Pagla skidstadion",
-   "distrikt": "Norrbotten",
-   "arrangor": "Sävast Ski Team IF",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Anmälan öppen",
-   "lat": 65.84026,
-   "lon": 21.63461,
-   "ungefarlig": false
-  },
-  {
    "id": 47777,
    "namn": "KSK-loppet",
    "start": "2027-01-09",
@@ -554,6 +539,21 @@
    "status": "Godkänt",
    "lat": 57.7403,
    "lon": 13.00069,
+   "ungefarlig": false
+  },
+  {
+   "id": 47924,
+   "namn": "Boden Ski Maraton 2027",
+   "start": "2027-01-09",
+   "slut": "2027-01-09",
+   "plats": "Pagla skidstadion",
+   "distrikt": "Norrbotten",
+   "arrangor": "Sävast Ski Team IF",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Anmälan öppen",
+   "lat": 65.84026,
+   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -782,21 +782,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47836,
-   "namn": "Östersundsspelen",
-   "start": "2027-01-23",
-   "slut": "2027-01-23",
-   "plats": "Östersunds skidstadion",
-   "distrikt": "Jämtland-Härjedalen",
-   "arrangor": "Östersunds SK",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 63.19121,
-   "lon": 14.66022,
-   "ungefarlig": false
-  },
-  {
    "id": 47820,
    "namn": "COOPloppet",
    "start": "2027-01-23",
@@ -839,6 +824,21 @@
    "status": "Godkänt",
    "lat": 57.74938,
    "lon": 12.8876,
+   "ungefarlig": false
+  },
+  {
+   "id": 47836,
+   "namn": "Östersundsspelen",
+   "start": "2027-01-23",
+   "slut": "2027-01-23",
+   "plats": "Östersunds skidstadion",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Östersunds SK",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.19121,
+   "lon": 14.66022,
    "ungefarlig": false
   },
   {
@@ -911,7 +911,7 @@
    "arrangor": "Filipstads SF",
    "niva": "Nordisk",
    "typ": "Nordisk tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 59.71355,
    "lon": 14.16803,
    "ungefarlig": false
@@ -1034,6 +1034,21 @@
    "status": "Godkänt",
    "lat": 57.66744,
    "lon": 14.97356,
+   "ungefarlig": false
+  },
+  {
+   "id": 48222,
+   "namn": "Länsförsäkringar cup, deltävling 3",
+   "start": "2027-01-28",
+   "slut": "2027-01-28",
+   "plats": "Sibo, Kilafors",
+   "distrikt": "Hälsingland",
+   "arrangor": "Kilafors SK",
+   "niva": "Klubb",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 61.21644,
+   "lon": 16.60421,
    "ungefarlig": false
   },
   {
@@ -1172,21 +1187,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47773,
-   "namn": "Umeloppet 2027",
-   "start": "2027-01-31",
-   "slut": "2027-01-31",
-   "plats": "Forslunda Gymnasiet, Umeå",
-   "distrikt": "Västerbotten",
-   "arrangor": "Västerbottens Skidveteraner",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 63.82566,
-   "lon": 20.26307,
-   "ungefarlig": false
-  },
-  {
    "id": 47818,
    "namn": "HEMArännet",
    "start": "2027-01-31",
@@ -1199,6 +1199,21 @@
    "status": "Godkänt",
    "lat": 65.22295,
    "lon": 21.28234,
+   "ungefarlig": false
+  },
+  {
+   "id": 47773,
+   "namn": "Umeloppet 2027",
+   "start": "2027-01-31",
+   "slut": "2027-01-31",
+   "plats": "Forslunda Gymnasiet, Umeå",
+   "distrikt": "Västerbotten",
+   "arrangor": "Västerbottens Skidveteraner",
+   "niva": "Nordisk",
+   "typ": "Nordisk tävling",
+   "status": "Godkänt",
+   "lat": 63.82566,
+   "lon": 20.26307,
    "ungefarlig": false
   },
   {
@@ -1247,21 +1262,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47808,
-   "namn": "Röbäcksspelen",
-   "start": "2027-02-06",
-   "slut": "2027-02-06",
-   "plats": "Röbäcks IP",
-   "distrikt": "Västerbotten",
-   "arrangor": "Röbäcks SK",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 63.7944,
-   "lon": 20.20967,
-   "ungefarlig": false
-  },
-  {
    "id": 47775,
    "namn": "Fjällrävenloppet",
    "start": "2027-02-06",
@@ -1289,6 +1289,21 @@
    "status": "Godkänt",
    "lat": 57.78578,
    "lon": 13.43651,
+   "ungefarlig": false
+  },
+  {
+   "id": 47829,
+   "namn": "Bodenloppet",
+   "start": "2027-02-06",
+   "slut": "2027-02-06",
+   "plats": "Boden, Pagla skidstadium",
+   "distrikt": "Norrbotten",
+   "arrangor": "Bodens SK",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 65.84026,
+   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -1334,21 +1349,6 @@
    "status": "Godkänt",
    "lat": 61.21092,
    "lon": 14.5324,
-   "ungefarlig": false
-  },
-  {
-   "id": 47829,
-   "namn": "Bodenloppet",
-   "start": "2027-02-06",
-   "slut": "2027-02-06",
-   "plats": "Boden, Pagla skidstadium",
-   "distrikt": "Norrbotten",
-   "arrangor": "Bodens SK",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 65.84026,
-   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -1457,6 +1457,21 @@
    "ungefarlig": false
   },
   {
+   "id": 47808,
+   "namn": "Röbäcksspelen",
+   "start": "2027-02-07",
+   "slut": "2027-02-07",
+   "plats": "Röbäcks IP",
+   "distrikt": "Västerbotten",
+   "arrangor": "Röbäcks SK",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.7944,
+   "lon": 20.20967,
+   "ungefarlig": false
+  },
+  {
    "id": 47776,
    "namn": "Lilla Fjällrävenloppet",
    "start": "2027-02-07",
@@ -1484,21 +1499,6 @@
    "status": "Godkänt",
    "lat": 57.78578,
    "lon": 13.43651,
-   "ungefarlig": false
-  },
-  {
-   "id": 48021,
-   "namn": "Wadköpingsloppet",
-   "start": "2027-02-07",
-   "slut": "2027-02-07",
-   "plats": "Örebro skidstadion",
-   "distrikt": "Örebro Län",
-   "arrangor": "Karlslunds IF SF",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 59.27473,
-   "lon": 15.21512,
    "ungefarlig": false
   },
   {
@@ -1742,18 +1742,18 @@
    "ungefarlig": false
   },
   {
-   "id": 48000,
-   "namn": "Salomonruschen och Vårbystafetten",
+   "id": 47878,
+   "namn": "Vemdalen Winter Classic",
    "start": "2027-02-20",
    "slut": "2027-02-20",
-   "plats": "Vårby skidstadion, Domsjö Örnsköldsvik",
-   "distrikt": "Ångermanland",
-   "arrangor": "Vårby IK",
+   "plats": "Vemdalsskalet",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Vemdalens IF",
    "niva": "Nationell",
-   "typ": "Tävling",
+   "typ": "Motionsarrangemang",
    "status": "Godkänt",
-   "lat": 63.25581,
-   "lon": 18.71476,
+   "lat": 62.48298,
+   "lon": 13.9736,
    "ungefarlig": false
   },
   {
@@ -1772,18 +1772,18 @@
    "ungefarlig": false
   },
   {
-   "id": 47878,
-   "namn": "Vemdalen Winter Classic",
+   "id": 48000,
+   "namn": "Salomonruschen och Vårbystafetten",
    "start": "2027-02-20",
    "slut": "2027-02-20",
-   "plats": "Vemdalsskalet",
-   "distrikt": "Jämtland-Härjedalen",
-   "arrangor": "Vemdalens IF",
+   "plats": "Vårby skidstadion, Domsjö Örnsköldsvik",
+   "distrikt": "Ångermanland",
+   "arrangor": "Vårby IK",
    "niva": "Nationell",
-   "typ": "Motionsarrangemang",
+   "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 62.48298,
-   "lon": 13.9736,
+   "lat": 63.25581,
+   "lon": 18.71476,
    "ungefarlig": false
   },
   {
@@ -2012,21 +2012,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47899,
-   "namn": "NUS längdskidor",
-   "start": "2027-02-27",
-   "slut": "2027-02-28",
-   "plats": "Östersunds skidstadion",
-   "distrikt": "Jämtland-Härjedalen",
-   "arrangor": "Frösö IF",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 63.19121,
-   "lon": 14.66022,
-   "ungefarlig": false
-  },
-  {
    "id": 47970,
    "namn": "Husumskidan Sprint",
    "start": "2027-02-27",
@@ -2039,6 +2024,21 @@
    "status": "Godkänt",
    "lat": 63.3291,
    "lon": 19.164,
+   "ungefarlig": false
+  },
+  {
+   "id": 47899,
+   "namn": "NUS längdskidor",
+   "start": "2027-02-27",
+   "slut": "2027-02-28",
+   "plats": "Östersunds skidstadion",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Frösö IF",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.19121,
+   "lon": 14.66022,
    "ungefarlig": false
   },
   {
@@ -2327,6 +2327,21 @@
    "ungefarlig": false
   },
   {
+   "id": 47881,
+   "namn": "Tjejmilen Vemdalen Längd",
+   "start": "2027-03-20",
+   "slut": "2027-03-20",
+   "plats": "Vemdalsskalet",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Vemdalens IF",
+   "niva": "Nationell",
+   "typ": "Motionsarrangemang",
+   "status": "Godkänt",
+   "lat": 62.48298,
+   "lon": 13.9736,
+   "ungefarlig": false
+  },
+  {
    "id": 47998,
    "namn": "Lilla Skidspelen",
    "start": "2027-03-20",
@@ -2354,21 +2369,6 @@
    "status": "Godkänt",
    "lat": 65.73179,
    "lon": 23.72489,
-   "ungefarlig": false
-  },
-  {
-   "id": 47881,
-   "namn": "Tjejmilen Vemdalen Längd",
-   "start": "2027-03-20",
-   "slut": "2027-03-20",
-   "plats": "Vemdalsskalet",
-   "distrikt": "Jämtland-Härjedalen",
-   "arrangor": "Vemdalens IF",
-   "niva": "Nationell",
-   "typ": "Motionsarrangemang",
-   "status": "Godkänt",
-   "lat": 62.48298,
-   "lon": 13.9736,
    "ungefarlig": false
   },
   {
@@ -2549,6 +2549,21 @@
    "status": "Godkänt",
    "lat": 62.11374,
    "lon": 13.27403,
+   "ungefarlig": false
+  },
+  {
+   "id": 47807,
+   "namn": "Lappmarksloppet",
+   "start": "2027-04-10",
+   "slut": "2027-04-10",
+   "plats": "Svergoberget skidstadion",
+   "distrikt": "Västerbotten",
+   "arrangor": "Sorsele SK",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 65.55603,
+   "lon": 17.54313,
    "ungefarlig": false
   },
   {
