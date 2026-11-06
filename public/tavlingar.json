@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-05T09:59:20.100Z",
+ "hamtad": "2026-11-06T10:02:19.306Z",
  "tavlingar": [
   {
    "id": 48061,
@@ -212,21 +212,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47816,
-   "namn": "Skelleftespelen",
-   "start": "2026-12-12",
-   "slut": "2026-12-12",
-   "plats": "Impilo Skidstadion",
-   "distrikt": "Västerbotten",
-   "arrangor": "Skellefteå SK",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 64.75202,
-   "lon": 20.95934,
-   "ungefarlig": false
-  },
-  {
    "id": 47770,
    "namn": "Vinterpremiären",
    "start": "2026-12-12",
@@ -239,6 +224,21 @@
    "status": "Godkänt",
    "lat": 67.85954,
    "lon": 20.23284,
+   "ungefarlig": false
+  },
+  {
+   "id": 47816,
+   "namn": "Skelleftespelen",
+   "start": "2026-12-12",
+   "slut": "2026-12-12",
+   "plats": "Impilo Skidstadion",
+   "distrikt": "Västerbotten",
+   "arrangor": "Skellefteå SK",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 64.75202,
+   "lon": 20.95934,
    "ungefarlig": false
   },
   {
@@ -284,6 +284,21 @@
    "status": "Godkänt",
    "lat": 57.72108,
    "lon": 12.94074,
+   "ungefarlig": false
+  },
+  {
+   "id": 48226,
+   "namn": "Skandinavisk Cup Trondheim",
+   "start": "2026-12-18",
+   "slut": "2026-12-20",
+   "plats": "Granåsen, Trondheim",
+   "distrikt": null,
+   "arrangor": "Svenska Skidförbundet",
+   "niva": "FIS",
+   "typ": "Skandinavisk Cup",
+   "status": "Anmälan öppen",
+   "lat": 61.68035,
+   "lon": 14.10131,
    "ungefarlig": false
   },
   {
@@ -371,7 +386,7 @@
    "arrangor": "Järpens SK",
    "niva": "Nationell",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 63.34241,
    "lon": 13.47202,
    "ungefarlig": false
@@ -1262,21 +1277,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47775,
-   "namn": "Fjällrävenloppet",
-   "start": "2027-02-06",
-   "slut": "2027-02-06",
-   "plats": "Skyttis Skidstadion",
-   "distrikt": "Ångermanland",
-   "arrangor": "Hägglunds Ski Team SK",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 63.29573,
-   "lon": 18.73489,
-   "ungefarlig": false
-  },
-  {
    "id": 47780,
    "namn": "VÄSTGÖTALOPPET Skate",
    "start": "2027-02-06",
@@ -1292,18 +1292,18 @@
    "ungefarlig": false
   },
   {
-   "id": 47829,
-   "namn": "Bodenloppet",
+   "id": 47775,
+   "namn": "Fjällrävenloppet",
    "start": "2027-02-06",
    "slut": "2027-02-06",
-   "plats": "Boden, Pagla skidstadium",
-   "distrikt": "Norrbotten",
-   "arrangor": "Bodens SK",
-   "niva": "Distrikt",
-   "typ": "Tävling",
+   "plats": "Skyttis Skidstadion",
+   "distrikt": "Ångermanland",
+   "arrangor": "Hägglunds Ski Team SK",
+   "niva": "Nordisk",
+   "typ": "Nordisk tävling",
    "status": "Godkänt",
-   "lat": 65.84026,
-   "lon": 21.63461,
+   "lat": 63.29573,
+   "lon": 18.73489,
    "ungefarlig": false
   },
   {
@@ -1334,6 +1334,21 @@
    "status": "Godkänt",
    "lat": 60.08641,
    "lon": 15.95332,
+   "ungefarlig": false
+  },
+  {
+   "id": 47829,
+   "namn": "Bodenloppet",
+   "start": "2027-02-06",
+   "slut": "2027-02-06",
+   "plats": "Boden, Pagla skidstadium",
+   "distrikt": "Norrbotten",
+   "arrangor": "Bodens SK",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 65.84026,
+   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -1487,21 +1502,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47781,
-   "namn": "VÄSTGÖTALOPPET Classic",
-   "start": "2027-02-07",
-   "slut": "2027-02-07",
-   "plats": "Lassalyckan, Ulricehamn",
-   "distrikt": "Västergötland",
-   "arrangor": "Västgötaloppsföreningen",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 57.78578,
-   "lon": 13.43651,
-   "ungefarlig": false
-  },
-  {
    "id": 47762,
    "namn": "Hellidsloppet",
    "start": "2027-02-09",
@@ -1547,21 +1547,6 @@
    "ungefarlig": false
   },
   {
-   "id": 48084,
-   "namn": "ASK-Loppet",
-   "start": "2027-02-13",
-   "slut": "2027-02-13",
-   "plats": "Växjö Allmänna",
-   "distrikt": "Småland",
-   "arrangor": "Allmänna Skidklubben Växjö",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 56.87872,
-   "lon": 14.80944,
-   "ungefarlig": false
-  },
-  {
    "id": 48136,
    "namn": "Åsarna Ski Marathon 2027",
    "start": "2027-02-13",
@@ -1577,6 +1562,21 @@
    "ungefarlig": false
   },
   {
+   "id": 48084,
+   "namn": "ASK-Loppet",
+   "start": "2027-02-13",
+   "slut": "2027-02-13",
+   "plats": "Växjö Allmänna",
+   "distrikt": "Småland",
+   "arrangor": "Allmänna Skidklubben Växjö",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 56.87872,
+   "lon": 14.80944,
+   "ungefarlig": false
+  },
+  {
    "id": 47772,
    "namn": "Matojärviloppet",
    "start": "2027-02-13",
@@ -1589,6 +1589,21 @@
    "status": "Godkänt",
    "lat": 67.85954,
    "lon": 20.23284,
+   "ungefarlig": false
+  },
+  {
+   "id": 47726,
+   "namn": "Kristinaloppet",
+   "start": "2027-02-13",
+   "slut": "2027-02-13",
+   "plats": "Norberg",
+   "distrikt": "Västmanland",
+   "arrangor": "Föreningen Engelbrektsloppet",
+   "niva": "Nordisk",
+   "typ": "Nordisk tävling",
+   "status": "Godkänt",
+   "lat": 60.08641,
+   "lon": 15.95332,
    "ungefarlig": false
   },
   {
@@ -1622,21 +1637,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47837,
-   "namn": "Trollhätteloppet",
-   "start": "2027-02-14",
-   "slut": "2027-02-14",
-   "plats": "Trollhättan",
-   "distrikt": "Västergötland",
-   "arrangor": "Trollhättans SOK",
-   "niva": "Regional",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 58.28279,
-   "lon": 12.29086,
-   "ungefarlig": false
-  },
-  {
    "id": 47804,
    "namn": "Byskeloppet",
    "start": "2027-02-14",
@@ -1649,6 +1649,21 @@
    "status": "Godkänt",
    "lat": 64.95451,
    "lon": 21.20575,
+   "ungefarlig": false
+  },
+  {
+   "id": 47837,
+   "namn": "Trollhätteloppet",
+   "start": "2027-02-14",
+   "slut": "2027-02-14",
+   "plats": "Trollhättan",
+   "distrikt": "Västergötland",
+   "arrangor": "Trollhättans SOK",
+   "niva": "Regional",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 58.28279,
+   "lon": 12.29086,
    "ungefarlig": false
   },
   {
@@ -1757,21 +1772,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47997,
-   "namn": "Haldo Hanssons Minne",
-   "start": "2027-02-20",
-   "slut": "2027-02-20",
-   "plats": "Trångsviken",
-   "distrikt": "Jämtland-Härjedalen",
-   "arrangor": "Alsens IF",
-   "niva": "Nationell",
-   "typ": "Motionsarrangemang",
-   "status": "Godkänt",
-   "lat": 63.3329,
-   "lon": 14.01613,
-   "ungefarlig": false
-  },
-  {
    "id": 48000,
    "namn": "Salomonruschen och Vårbystafetten",
    "start": "2027-02-20",
@@ -1784,6 +1784,21 @@
    "status": "Godkänt",
    "lat": 63.25581,
    "lon": 18.71476,
+   "ungefarlig": false
+  },
+  {
+   "id": 47997,
+   "namn": "Haldo Hanssons Minne",
+   "start": "2027-02-20",
+   "slut": "2027-02-20",
+   "plats": "Trångsviken",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Alsens IF",
+   "niva": "Nationell",
+   "typ": "Motionsarrangemang",
+   "status": "Godkänt",
+   "lat": 63.3329,
+   "lon": 14.01613,
    "ungefarlig": false
   },
   {
@@ -1832,6 +1847,21 @@
    "ungefarlig": false
   },
   {
+   "id": 47735,
+   "namn": "Laxspelen",
+   "start": "2027-02-21",
+   "slut": "2027-02-21",
+   "plats": "Täfteborg",
+   "distrikt": "Västerbotten",
+   "arrangor": "Täfteå IK",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.8519,
+   "lon": 20.47399,
+   "ungefarlig": false
+  },
+  {
    "id": 47745,
    "namn": "Flatarundan",
    "start": "2027-02-21",
@@ -1847,18 +1877,18 @@
    "ungefarlig": false
   },
   {
-   "id": 47735,
-   "namn": "Laxspelen",
+   "id": 47766,
+   "namn": "Borås Ski Maraton",
    "start": "2027-02-21",
    "slut": "2027-02-21",
-   "plats": "Täfteborg",
-   "distrikt": "Västerbotten",
-   "arrangor": "Täfteå IK",
-   "niva": "Distrikt",
+   "plats": "Borås Skidstadion",
+   "distrikt": "Västergötland",
+   "arrangor": "Borås SK",
+   "niva": "Regional",
    "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 63.8519,
-   "lon": 20.47399,
+   "lat": 57.7403,
+   "lon": 13.00069,
    "ungefarlig": false
   },
   {
@@ -1889,21 +1919,6 @@
    "status": "Godkänt",
    "lat": 60.66906,
    "lon": 16.81815,
-   "ungefarlig": false
-  },
-  {
-   "id": 47766,
-   "namn": "Borås Ski Maraton",
-   "start": "2027-02-21",
-   "slut": "2027-02-21",
-   "plats": "Borås Skidstadion",
-   "distrikt": "Västergötland",
-   "arrangor": "Borås SK",
-   "niva": "Regional",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 57.7403,
-   "lon": 13.00069,
    "ungefarlig": false
   },
   {
@@ -2012,21 +2027,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47970,
-   "namn": "Husumskidan Sprint",
-   "start": "2027-02-27",
-   "slut": "2027-02-27",
-   "plats": "Degersjön, Husum",
-   "distrikt": "Ångermanland",
-   "arrangor": "Husums IF SK",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 63.3291,
-   "lon": 19.164,
-   "ungefarlig": false
-  },
-  {
    "id": 47899,
    "namn": "NUS längdskidor",
    "start": "2027-02-27",
@@ -2039,6 +2039,21 @@
    "status": "Godkänt",
    "lat": 63.19121,
    "lon": 14.66022,
+   "ungefarlig": false
+  },
+  {
+   "id": 47970,
+   "namn": "Husumskidan Sprint",
+   "start": "2027-02-27",
+   "slut": "2027-02-27",
+   "plats": "Degersjön, Husum",
+   "distrikt": "Ångermanland",
+   "arrangor": "Husums IF SK",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.3291,
+   "lon": 19.164,
    "ungefarlig": false
   },
   {
@@ -2087,6 +2102,21 @@
    "ungefarlig": false
   },
   {
+   "id": 48227,
+   "namn": "Skandinavisk Cup Imatra",
+   "start": "2027-03-05",
+   "slut": "2027-03-07",
+   "plats": "Imatra, Finland",
+   "distrikt": null,
+   "arrangor": "Svenska Skidförbundet",
+   "niva": "FIS",
+   "typ": "Skandinavisk Cup",
+   "status": "Anmälan öppen",
+   "lat": 57.78572,
+   "lon": 16.60646,
+   "ungefarlig": false
+  },
+  {
    "id": 47746,
    "namn": "LillaVM/Malmbergsspelen",
    "start": "2027-03-06",
@@ -2132,6 +2162,21 @@
    "ungefarlig": false
   },
   {
+   "id": 47965,
+   "namn": "Sävastspelen 2027",
+   "start": "2027-03-13",
+   "slut": "2027-03-14",
+   "plats": "Pagla skidstadion",
+   "distrikt": "Norrbotten",
+   "arrangor": "Sävast Ski Team IF",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 65.84026,
+   "lon": 21.63461,
+   "ungefarlig": false
+  },
+  {
    "id": 47717,
    "namn": "Tornedalsloppet",
    "start": "2027-03-13",
@@ -2174,21 +2219,6 @@
    "status": "Godkänt",
    "lat": 64.50279,
    "lon": 14.14614,
-   "ungefarlig": false
-  },
-  {
-   "id": 47965,
-   "namn": "Sävastspelen 2027",
-   "start": "2027-03-13",
-   "slut": "2027-03-14",
-   "plats": "Pagla skidstadion",
-   "distrikt": "Norrbotten",
-   "arrangor": "Sävast Ski Team IF",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 65.84026,
-   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -2267,6 +2297,36 @@
    "ungefarlig": false
   },
   {
+   "id": 47881,
+   "namn": "Tjejmilen Vemdalen Längd",
+   "start": "2027-03-20",
+   "slut": "2027-03-20",
+   "plats": "Vemdalsskalet",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Vemdalens IF",
+   "niva": "Nationell",
+   "typ": "Motionsarrangemang",
+   "status": "Godkänt",
+   "lat": 62.48298,
+   "lon": 13.9736,
+   "ungefarlig": false
+  },
+  {
+   "id": 47872,
+   "namn": "Råneälvdalsloppet",
+   "start": "2027-03-20",
+   "slut": "2027-03-20",
+   "plats": "Niemisel",
+   "distrikt": "Norrbotten",
+   "arrangor": "Niemisels AIK",
+   "niva": "Distrikt",
+   "typ": "Motionsarrangemang",
+   "status": "Godkänt",
+   "lat": 66.0192,
+   "lon": 21.98839,
+   "ungefarlig": false
+  },
+  {
    "id": 47913,
    "namn": "FIS Senior",
    "start": "2027-03-20",
@@ -2312,33 +2372,18 @@
    "ungefarlig": false
   },
   {
-   "id": 47872,
-   "namn": "Råneälvdalsloppet",
+   "id": 48002,
+   "namn": "Luleå Gjutarens Vinterspel 2027",
    "start": "2027-03-20",
-   "slut": "2027-03-20",
-   "plats": "Niemisel",
+   "slut": "2027-03-21",
+   "plats": "Ormberget",
    "distrikt": "Norrbotten",
-   "arrangor": "Niemisels AIK",
+   "arrangor": "Luleå Gjutarens IF",
    "niva": "Distrikt",
-   "typ": "Motionsarrangemang",
+   "typ": "Tävling",
    "status": "Godkänt",
-   "lat": 66.0192,
-   "lon": 21.98839,
-   "ungefarlig": false
-  },
-  {
-   "id": 47881,
-   "namn": "Tjejmilen Vemdalen Längd",
-   "start": "2027-03-20",
-   "slut": "2027-03-20",
-   "plats": "Vemdalsskalet",
-   "distrikt": "Jämtland-Härjedalen",
-   "arrangor": "Vemdalens IF",
-   "niva": "Nationell",
-   "typ": "Motionsarrangemang",
-   "status": "Godkänt",
-   "lat": 62.48298,
-   "lon": 13.9736,
+   "lat": 65.73179,
+   "lon": 23.72489,
    "ungefarlig": false
   },
   {
@@ -2357,21 +2402,6 @@
    "ungefarlig": false
   },
   {
-   "id": 48002,
-   "namn": "Luleå Gjutarens Vinterspel 2027",
-   "start": "2027-03-20",
-   "slut": "2027-03-21",
-   "plats": "Ormberget",
-   "distrikt": "Norrbotten",
-   "arrangor": "Luleå Gjutarens IF",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 65.73179,
-   "lon": 23.72489,
-   "ungefarlig": false
-  },
-  {
    "id": 48012,
    "namn": "Sigvard Jonssons Minne",
    "start": "2027-03-20",
@@ -2387,21 +2417,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47744,
-   "namn": "Nasaloppet",
-   "start": "2027-03-20",
-   "slut": "2027-03-20",
-   "plats": "Jörn",
-   "distrikt": "Västerbotten",
-   "arrangor": "SK Järven",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 65.05392,
-   "lon": 20.02987,
-   "ungefarlig": false
-  },
-  {
    "id": 47759,
    "namn": "Nordenskiöldsloppet",
    "start": "2027-03-20",
@@ -2414,6 +2429,21 @@
    "status": "Godkänt",
    "lat": 66.66667,
    "lon": 19.25,
+   "ungefarlig": false
+  },
+  {
+   "id": 47744,
+   "namn": "Nasaloppet",
+   "start": "2027-03-20",
+   "slut": "2027-03-20",
+   "plats": "Jörn",
+   "distrikt": "Västerbotten",
+   "arrangor": "SK Järven",
+   "niva": "Nordisk",
+   "typ": "Nordisk tävling",
+   "status": "Godkänt",
+   "lat": 65.05392,
+   "lon": 20.02987,
    "ungefarlig": false
   },
   {
@@ -2462,21 +2492,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47832,
-   "namn": "Sparbanken Nord Classic",
-   "start": "2027-04-03",
-   "slut": "2027-04-03",
-   "plats": "Hellnerstadion",
-   "distrikt": "Norrbotten",
-   "arrangor": "Gellivare Skidallians IK",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 67.10717,
-   "lon": 20.6456,
-   "ungefarlig": false
-  },
-  {
    "id": 47918,
    "namn": "Idre Classic",
    "start": "2027-04-03",
@@ -2489,6 +2504,21 @@
    "status": "Godkänt",
    "lat": 61.88961,
    "lon": 12.83307,
+   "ungefarlig": false
+  },
+  {
+   "id": 47832,
+   "namn": "Sparbanken Nord Classic",
+   "start": "2027-04-03",
+   "slut": "2027-04-03",
+   "plats": "Hellnerstadion",
+   "distrikt": "Norrbotten",
+   "arrangor": "Gellivare Skidallians IK",
+   "niva": "Nordisk",
+   "typ": "Nordisk tävling",
+   "status": "Godkänt",
+   "lat": 67.10717,
+   "lon": 20.6456,
    "ungefarlig": false
   },
   {

@@ -332,6 +332,43 @@
       "namn": "Filipstads kommun, Värmlands län, Sverige"
     }
   ],
+  "Finland": [
+    {
+      "lat": 57.78572,
+      "lon": 16.60646,
+      "namn": "Finland, Gertrudsvik, Västervik, Västerviks kommun, Kalmar län, Sverige"
+    },
+    {
+      "lat": 59.74075,
+      "lon": 12.71065,
+      "namn": "Finland, Arvika kommun, Värmlands län, Sverige"
+    },
+    {
+      "lat": 58.63885,
+      "lon": 13.57202,
+      "namn": "Finland, Gamlebodarna, Forshems distrikt, Götene kommun, Västra Götalands län, Sverige"
+    },
+    {
+      "lat": 58.52812,
+      "lon": 15.18021,
+      "namn": "Finland, Ekebyborna, Österstad, Motala kommun, Östergötlands län, 591 91, Sverige"
+    },
+    {
+      "lat": 60.51334,
+      "lon": 16.65583,
+      "namn": "Finland, Sandvikens kommun, Gävleborgs län, 811 96, Sverige"
+    },
+    {
+      "lat": 58.45127,
+      "lon": 16.48649,
+      "namn": "Finland, Söderköpings kommun, Östergötlands län, Sverige"
+    },
+    {
+      "lat": 55.98368,
+      "lon": 14.14501,
+      "namn": "Finland, Liljecronas väg, Norra Åsum, Kristianstads kommun, Skåne län, 291 63, Sverige"
+    }
+  ],
   "Fjätervålen": [
     {
       "lat": 61.93474,
@@ -351,6 +388,59 @@
       "lat": 60.17366,
       "lon": 18.16609,
       "namn": "Gimo Ski Center, 2, Gymnasievägen, Stenhusen, Gimo, Östhammars kommun, Uppsala län, 747 40, Sverige"
+    }
+  ],
+  "Granåsen, Trondheim": [],
+  "Granåsen": [
+    {
+      "lat": 61.68035,
+      "lon": 14.10131,
+      "namn": "Granåsen, Härjedalens kommun, Jämtlands län, Sverige"
+    },
+    {
+      "lat": 61.98965,
+      "lon": 12.38213,
+      "namn": "Granåsen, Älvdalens kommun, Dalarnas län, Sverige"
+    },
+    {
+      "lat": 64.97509,
+      "lon": 17.98909,
+      "namn": "Granåsen, Lycksele kommun, Västerbottens län, Sverige"
+    },
+    {
+      "lat": 64.40143,
+      "lon": 18.44278,
+      "namn": "Granåsen, Hornmyr, Lycksele kommun, Västerbottens län, Sverige"
+    },
+    {
+      "lat": 62.29599,
+      "lon": 14.57521,
+      "namn": "Granåsen, Bergs kommun, Jämtlands län, Sverige"
+    },
+    {
+      "lat": 61.73216,
+      "lon": 16.42962,
+      "namn": "Granåsen, Hudiksvalls kommun, Gävleborgs län, Sverige"
+    },
+    {
+      "lat": 64.01737,
+      "lon": 16.79732,
+      "namn": "Granåsen, Dorotea kommun, Västerbottens län, Sverige"
+    },
+    {
+      "lat": 61.67618,
+      "lon": 13.49282,
+      "namn": "Granåsen, Älvdalens kommun, Dalarnas län, Sverige"
+    },
+    {
+      "lat": 61.68254,
+      "lon": 13.92691,
+      "namn": "Granåsen, Lillhärdal distrikt, Härjedalens kommun, Jämtlands län, Sverige"
+    },
+    {
+      "lat": 61.98443,
+      "lon": 12.39068,
+      "namn": "Granåsen, Älvdalens kommun, Dalarnas län, Sverige"
     }
   ],
   "Grönklitt skidstadion": [
@@ -556,6 +646,7 @@
       "namn": "Idre Fjäll, Älvdalens kommun, Dalarnas län, Sverige"
     }
   ],
+  "Imatra, Finland": [],
   "Impilo Skellefteå": [],
   "Impilo Skidstadion Skellefteå": [],
   "Impilo Skidstadion": [],
@@ -1490,6 +1581,7 @@
       "namn": "Trollhättans kommun, Västra Götalands län, Sverige"
     }
   ],
+  "Trondheim": [],
   "Trångsviken": [
     {
       "lat": 63.3329,
