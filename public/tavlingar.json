@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-08T09:39:19.078Z",
+ "hamtad": "2026-11-09T10:31:30.317Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -269,6 +269,21 @@
    "status": "Godkänt",
    "lat": 57.72108,
    "lon": 12.94074,
+   "ungefarlig": false
+  },
+  {
+   "id": 48186,
+   "namn": "BAUHAUS Cup + FIS Senior Östersund",
+   "start": "2026-12-18",
+   "slut": "2026-12-20",
+   "plats": "Östersunds skidstadion",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Östersunds SK",
+   "niva": "FIS",
+   "typ": "FIS Junior/Senior Cup",
+   "status": "Godkänt",
+   "lat": 63.19121,
+   "lon": 14.66022,
    "ungefarlig": false
   },
   {
@@ -1484,21 +1499,6 @@
    "status": "Godkänt",
    "lat": 63.29573,
    "lon": 18.73489,
-   "ungefarlig": false
-  },
-  {
-   "id": 47781,
-   "namn": "VÄSTGÖTALOPPET Classic",
-   "start": "2027-02-07",
-   "slut": "2027-02-07",
-   "plats": "Lassalyckan, Ulricehamn",
-   "distrikt": "Västergötland",
-   "arrangor": "Västgötaloppsföreningen",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 57.78578,
-   "lon": 13.43651,
    "ungefarlig": false
   },
   {
