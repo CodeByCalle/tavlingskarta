@@ -298,6 +298,23 @@
       "namn": "Drängsmark, Norra Drängsmark, Drängsmark, Skellefteå kommun, Västerbottens län, 934 96, Sverige"
     }
   ],
+  "Duved": [
+    {
+      "lat": 63.39418,
+      "lon": 12.91989,
+      "namn": "Duved, Åre kommun, Jämtlands län, 837 72, Sverige"
+    },
+    {
+      "lat": 63.38997,
+      "lon": 12.91761,
+      "namn": "Duved, Stinsvägen, Duved, Åre kommun, Jämtlands län, 837 72, Sverige"
+    },
+    {
+      "lat": 62.51399,
+      "lon": 17.51812,
+      "namn": "Duved, Söråker, Hässjö distrikt, Timrå kommun, Västernorrlands län, 861 51, Sverige"
+    }
+  ],
   "Edsbyn": [
     {
       "lat": 61.37744,
@@ -541,6 +558,7 @@
       "namn": "Hallstaberget, Sollefteå distrikt, Sollefteå kommun, Västernorrlands län, 881 60, Sverige"
     }
   ],
+  "Hamrelia, Duved": [],
   "Hellnerstadion": [
     {
       "lat": 67.10717,
@@ -670,6 +688,7 @@
       "namn": "Jokkmokk, Jokkmokks kommun, Norrbottens län, 962 85, Sverige"
     }
   ],
+  "Järpen, Röjsmon": [],
   "Järpen": [
     {
       "lat": 63.34241,
@@ -1214,6 +1233,7 @@
       "namn": "Röbacksvägen, Sörvik, Ludvika kommun, Dalarnas län, 771 92, Sverige"
     }
   ],
+  "Röjsmon": [],
   "Röjsmon, Järpen": [],
   "SCA skidstadion, Matfors": [],
   "Sibo, Kilafors": [
