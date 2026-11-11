@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-10T10:34:06.520Z",
+ "hamtad": "2026-11-11T09:56:58.598Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -194,6 +194,21 @@
    "status": "Anmälan öppen",
    "lat": 62.36762,
    "lon": 17.31613,
+   "ungefarlig": false
+  },
+  {
+   "id": 47770,
+   "namn": "Vinterpremiären",
+   "start": "2026-12-12",
+   "slut": "2026-12-13",
+   "plats": "Matojärvi IP Kiruna",
+   "distrikt": "Norrbotten",
+   "arrangor": "IFK Kiruna",
+   "niva": "Nordisk",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 67.85954,
+   "lon": 20.23284,
    "ungefarlig": false
   },
   {
@@ -797,21 +812,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47786,
-   "namn": "Hestra Skidultra",
-   "start": "2027-01-23",
-   "slut": "2027-01-23",
-   "plats": "Hestrastugan",
-   "distrikt": "Västergötland",
-   "arrangor": "Hestra IF",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 57.74938,
-   "lon": 12.8876,
-   "ungefarlig": false
-  },
-  {
    "id": 47820,
    "namn": "COOPloppet",
    "start": "2027-01-23",
@@ -839,6 +839,21 @@
    "status": "Godkänt",
    "lat": 63.82773,
    "lon": 20.34793,
+   "ungefarlig": false
+  },
+  {
+   "id": 47786,
+   "namn": "Hestra Skidultra",
+   "start": "2027-01-23",
+   "slut": "2027-01-23",
+   "plats": "Hestrastugan",
+   "distrikt": "Västergötland",
+   "arrangor": "Hestra IF",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 57.74938,
+   "lon": 12.8876,
    "ungefarlig": false
   },
   {
@@ -1277,21 +1292,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47775,
-   "namn": "Fjällrävenloppet",
-   "start": "2027-02-06",
-   "slut": "2027-02-06",
-   "plats": "Skyttis Skidstadion",
-   "distrikt": "Ångermanland",
-   "arrangor": "Hägglunds Ski Team SK",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 63.29573,
-   "lon": 18.73489,
-   "ungefarlig": false
-  },
-  {
    "id": 47780,
    "namn": "VÄSTGÖTALOPPET Skate",
    "start": "2027-02-06",
@@ -1304,6 +1304,21 @@
    "status": "Godkänt",
    "lat": 57.78578,
    "lon": 13.43651,
+   "ungefarlig": false
+  },
+  {
+   "id": 47775,
+   "namn": "Fjällrävenloppet",
+   "start": "2027-02-06",
+   "slut": "2027-02-06",
+   "plats": "Skyttis Skidstadion",
+   "distrikt": "Ångermanland",
+   "arrangor": "Hägglunds Ski Team SK",
+   "niva": "Nordisk",
+   "typ": "Nordisk tävling",
+   "status": "Godkänt",
+   "lat": 63.29573,
+   "lon": 18.73489,
    "ungefarlig": false
   },
   {
@@ -1337,21 +1352,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47857,
-   "namn": "ORSA GRÖNKLITT SKI MARATHON",
-   "start": "2027-02-06",
-   "slut": "2027-02-06",
-   "plats": "Grönklitt",
-   "distrikt": "Dalarna",
-   "arrangor": "Orsa SK",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 61.21092,
-   "lon": 14.5324,
-   "ungefarlig": false
-  },
-  {
    "id": 47829,
    "namn": "Bodenloppet",
    "start": "2027-02-06",
@@ -1364,6 +1364,21 @@
    "status": "Godkänt",
    "lat": 65.84026,
    "lon": 21.63461,
+   "ungefarlig": false
+  },
+  {
+   "id": 47857,
+   "namn": "ORSA GRÖNKLITT SKI MARATHON",
+   "start": "2027-02-06",
+   "slut": "2027-02-06",
+   "plats": "Grönklitt",
+   "distrikt": "Dalarna",
+   "arrangor": "Orsa SK",
+   "niva": "Nordisk",
+   "typ": "Nordisk tävling",
+   "status": "Godkänt",
+   "lat": 61.21092,
+   "lon": 14.5324,
    "ungefarlig": false
   },
   {
@@ -1484,21 +1499,6 @@
    "status": "Godkänt",
    "lat": 63.7944,
    "lon": 20.20967,
-   "ungefarlig": false
-  },
-  {
-   "id": 47781,
-   "namn": "VÄSTGÖTALOPPET Classic",
-   "start": "2027-02-07",
-   "slut": "2027-02-07",
-   "plats": "Lassalyckan, Ulricehamn",
-   "distrikt": "Västergötland",
-   "arrangor": "Västgötaloppsföreningen",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 57.78578,
-   "lon": 13.43651,
    "ungefarlig": false
   },
   {
