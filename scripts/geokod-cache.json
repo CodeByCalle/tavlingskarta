@@ -88,6 +88,13 @@
       "namn": "Backe, Surberget, Vilhelmina kommun, Västerbottens län, Sverige"
     }
   ],
+  "Bergeforsens IP": [
+    {
+      "lat": 62.53213,
+      "lon": 17.3819,
+      "namn": "Bergeforsens IP, Viktjärnsgatan, Forsmon, Bergeforsen, Timrå distrikt, Timrå kommun, Västernorrlands län, 861 38, Sverige"
+    }
+  ],
   "Billingen Skövde": [
     {
       "lat": 58.44335,
@@ -196,6 +203,33 @@
       "lat": 59.88215,
       "lon": 18.1377,
       "namn": "Byske, Seglinge, Uppsala kommun, Uppsala län, 740 10, Sverige"
+    }
+  ],
+  "Bålsta": [
+    {
+      "lat": 59.56821,
+      "lon": 17.52936,
+      "namn": "Bålsta, Håbo kommun, Uppsala län, 756 22, Sverige"
+    },
+    {
+      "lat": 59.56847,
+      "lon": 17.53354,
+      "namn": "Bålsta, Ullevivägen, Mansängen, Bålsta, Håbo kommun, Uppsala län, 756 22, Sverige"
+    },
+    {
+      "lat": 59.52691,
+      "lon": 16.11282,
+      "namn": "Bålsta, Munktorp, Köpings kommun, Västmanlands län, 731 70, Sverige"
+    },
+    {
+      "lat": 59.74154,
+      "lon": 16.45574,
+      "namn": "Bålsta, Västerås, Västerås kommun, Västmanlands län, 725 94, Sverige"
+    },
+    {
+      "lat": 59.75103,
+      "lon": 18.06719,
+      "namn": "Bålsta, Åby, Knivsta kommun, Uppsala län, 741 95, Sverige"
     }
   ],
   "Dala-Järna": [
@@ -460,6 +494,7 @@
       "namn": "Granåsen, Älvdalens kommun, Dalarnas län, Sverige"
     }
   ],
+  "Granåsens konstsnöspår Bålsta": [],
   "Grönklitt skidstadion": [
     {
       "lat": 61.21092,
@@ -876,6 +911,13 @@
       "namn": "Lugnet, Falun, Falu kommun, Dalarnas län, Sverige"
     }
   ],
+  "Lundåsvallen Häverödal": [
+    {
+      "lat": 60.02335,
+      "lon": 18.60107,
+      "namn": "Lundasvallen, Kilvägen, Häverödal, Norrtälje kommun, Stockholms län, 763 43, Sverige"
+    }
+  ],
   "Malmbergets AIF": [],
   "Malung": [
     {
@@ -923,6 +965,48 @@
       "lat": 67.8621,
       "lon": 20.22805,
       "namn": "Matojärvigatan, Övre Norrmalm, Kiruna, Kiruna kommun, Norrbottens län, 981 39, Sverige"
+    }
+  ],
+  "Mattila": [
+    {
+      "lat": 65.85287,
+      "lon": 24.10635,
+      "namn": "Marielund, Haparanda, Haparanda kommun, Norrbottens län, 953 36, Sverige"
+    },
+    {
+      "lat": 65.86553,
+      "lon": 24.11828,
+      "namn": "Mattila, Haparanda, Haparanda kommun, Norrbottens län, 953 35, Sverige"
+    },
+    {
+      "lat": 60.41625,
+      "lon": 12.69595,
+      "namn": "Mattila, Östmark distrikt, Torsby kommun, Värmlands län, Sverige"
+    },
+    {
+      "lat": 60.78096,
+      "lon": 12.46219,
+      "namn": "Mattila, Södra Finnskoga distrikt, Torsby kommun, Värmlands län, Sverige"
+    },
+    {
+      "lat": 66.42546,
+      "lon": 23.62226,
+      "namn": "Mattila, Kuivakangas, Övertorneå, Övertorneå kommun, Norrbottens län, 957 31, Sverige"
+    },
+    {
+      "lat": 60.41345,
+      "lon": 12.68815,
+      "namn": "Mattila, Östmark distrikt, Torsby kommun, Värmlands län, Sverige"
+    },
+    {
+      "lat": 65.85792,
+      "lon": 24.12005,
+      "namn": "Mattila, Purra, Haparanda, Haparanda kommun, Norrbottens län, 953 35, Sverige"
+    },
+    {
+      "lat": 65.85798,
+      "lon": 24.1206,
+      "namn": "Mattila, Nyland, Haparanda, Haparanda kommun, Norrbottens län, 953 35, Sverige"
     }
   ],
   "Mora skidstadion": [
@@ -1271,6 +1355,18 @@
   ],
   "Skidstadion Stugun": [],
   "Skidstadion, Backe": [],
+  "Skidstavallen, Gävle": [
+    {
+      "lat": 60.70845,
+      "lon": 17.1853,
+      "namn": "Skidstavallen, Skidstavägen, Hille, Gävle kommun, Gävleborgs län, 806 47, Sverige"
+    },
+    {
+      "lat": 60.70912,
+      "lon": 17.18542,
+      "namn": "Skidstavallen, Skidstavägen, Hille, Gävle kommun, Gävleborgs län, 806 47, Sverige"
+    }
+  ],
   "Skogså": [
     {
       "lat": 65.87463,
@@ -1414,6 +1510,18 @@
       "lat": 67.64692,
       "lon": 21.05549,
       "namn": "Svappavaara, Kiruna kommun, Norrbottens län, 982 61, Sverige"
+    }
+  ],
+  "Svartbäcksmåla": [
+    {
+      "lat": 56.72188,
+      "lon": 15.93733,
+      "namn": "Svartbäcksmåla, Nybro, Nybro kommun, Kalmar län, 382 39, Sverige"
+    },
+    {
+      "lat": 56.24162,
+      "lon": 15.38925,
+      "namn": "Svartbäcksmåla, Johannishus, Ronneby kommun, Blekinge län, 372 75, Sverige"
     }
   ],
   "Svergoberget skidstadion": [],
