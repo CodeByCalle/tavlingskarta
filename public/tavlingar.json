@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-12T10:25:55.357Z",
+ "hamtad": "2026-11-13T10:14:07.258Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -11,7 +11,7 @@
    "arrangor": "IFK Skövde SK",
    "niva": "Klubb",
    "typ": "Tävling",
-   "status": "Anmälan öppen",
+   "status": "Anmälan stängd",
    "lat": 60.136,
    "lon": 13.004,
    "ungefarlig": false
@@ -176,7 +176,7 @@
    "arrangor": "Östersunds SK",
    "niva": "Distrikt",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 63.19121,
    "lon": 14.66022,
    "ungefarlig": false
@@ -296,7 +296,7 @@
    "arrangor": "Östersunds SK",
    "niva": "FIS",
    "typ": "FIS Junior/Senior Cup",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 63.19121,
    "lon": 14.66022,
    "ungefarlig": false
@@ -701,7 +701,7 @@
    "arrangor": "Filipstads SF",
    "niva": "Regional",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 59.71355,
    "lon": 14.16803,
    "ungefarlig": false
@@ -851,7 +851,7 @@
    "arrangor": "Filipstads SF",
    "niva": "Nationell",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 59.71355,
    "lon": 14.16803,
    "ungefarlig": false
@@ -896,7 +896,7 @@
    "arrangor": "Filipstads SF",
    "niva": "Nationell",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 59.71355,
    "lon": 14.16803,
    "ungefarlig": false
@@ -1421,7 +1421,7 @@
    "arrangor": "Filipstads SF",
    "niva": "Regional",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 59.71355,
    "lon": 14.16803,
    "ungefarlig": false
@@ -2279,6 +2279,21 @@
    "status": "Godkänt",
    "lat": 64.20668,
    "lon": 19.71721,
+   "ungefarlig": false
+  },
+  {
+   "id": 48275,
+   "namn": "Höglandsserien delt 5, final",
+   "start": "2027-03-04",
+   "slut": "2027-03-04",
+   "plats": "Tallbacken",
+   "distrikt": "Småland",
+   "arrangor": "SOK Aneby",
+   "niva": "Klubb",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 56.89348,
+   "lon": 13.77849,
    "ungefarlig": false
   },
   {
