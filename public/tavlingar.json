@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-13T10:14:07.258Z",
+ "hamtad": "2026-11-14T09:35:47.252Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -1232,6 +1232,21 @@
    "ungefarlig": false
   },
   {
+   "id": 48277,
+   "namn": "DM-stafett Uppland D/H35-",
+   "start": "2027-01-29",
+   "slut": "2027-01-29",
+   "plats": "Lundåsvallen Häverödal",
+   "distrikt": "Uppland",
+   "arrangor": "Häverödals SK",
+   "niva": "Distrikt",
+   "typ": "Distriktsmästerskap",
+   "status": "Anmälan öppen",
+   "lat": 60.02335,
+   "lon": 18.60107,
+   "ungefarlig": false
+  },
+  {
    "id": 47896,
    "namn": "Häggenåsskidan",
    "start": "2027-01-30",
@@ -1484,21 +1499,6 @@
    "status": "Godkänt",
    "lat": 60.08641,
    "lon": 15.95332,
-   "ungefarlig": false
-  },
-  {
-   "id": 47829,
-   "namn": "Bodenloppet",
-   "start": "2027-02-06",
-   "slut": "2027-02-06",
-   "plats": "Boden, Pagla skidstadium",
-   "distrikt": "Norrbotten",
-   "arrangor": "Bodens SK",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 65.84026,
-   "lon": 21.63461,
    "ungefarlig": false
   },
   {
