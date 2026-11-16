@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-15T10:03:24.965Z",
+ "hamtad": "2026-11-16T10:17:20.486Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -842,6 +842,21 @@
    "ungefarlig": false
   },
   {
+   "id": 48267,
+   "namn": "Bergebo Ski Weekend",
+   "start": "2027-01-16",
+   "slut": "2027-01-17",
+   "plats": "Bergebo Skidstadion",
+   "distrikt": "Dalarna",
+   "arrangor": "Domnarvets GOIF",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 61,
+   "lon": 14.6,
+   "ungefarlig": true
+  },
+  {
    "id": 48269,
    "namn": "KALHYTTAN SKIATHLON",
    "start": "2027-01-16",
@@ -1485,21 +1500,6 @@
    "lat": 64.7,
    "lon": 18.5,
    "ungefarlig": true
-  },
-  {
-   "id": 47728,
-   "namn": "Lilla Engelbrektsloppet",
-   "start": "2027-02-06",
-   "slut": "2027-02-06",
-   "plats": "Norberg",
-   "distrikt": "Västmanland",
-   "arrangor": "Föreningen Engelbrektsloppet",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 60.08641,
-   "lon": 15.95332,
-   "ungefarlig": false
   },
   {
    "id": 48151,

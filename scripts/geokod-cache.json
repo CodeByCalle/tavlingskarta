@@ -88,6 +88,59 @@
       "namn": "Backe, Surberget, Vilhelmina kommun, Västerbottens län, Sverige"
     }
   ],
+  "Bergebo Skidstadion": [],
+  "Bergebo": [
+    {
+      "lat": 57.79597,
+      "lon": 16.256,
+      "namn": "Bergebo, Västerviks kommun, Kalmar län, Sverige"
+    },
+    {
+      "lat": 57.71854,
+      "lon": 16.58138,
+      "namn": "Bergebo, Västerviks kommun, Kalmar län, 593 43, Sverige"
+    },
+    {
+      "lat": 57.86814,
+      "lon": 16.32855,
+      "namn": "Bergebo, Dämkärr, Västerviks kommun, Kalmar län, 594 91, Sverige"
+    },
+    {
+      "lat": 58.00371,
+      "lon": 16.5685,
+      "namn": "Bergebo, Nocketorp, Västerviks kommun, Kalmar län, 615 92, Sverige"
+    },
+    {
+      "lat": 61.40577,
+      "lon": 16.29722,
+      "namn": "Bergebo, Fröste, Bollnäs kommun, Gävleborgs län, 821 94, Sverige"
+    },
+    {
+      "lat": 57.54985,
+      "lon": 16.09153,
+      "namn": "Bergebo, Vimmerby kommun, Kalmar län, 598 96, Sverige"
+    },
+    {
+      "lat": 57.34906,
+      "lon": 16.33863,
+      "namn": "Bergebo, Järngallra, Oskarshamns kommun, Kalmar län, Sverige"
+    },
+    {
+      "lat": 57.4082,
+      "lon": 16.52423,
+      "namn": "Bergebo, Värnamo, Oskarshamns kommun, Kalmar län, 572 75, Sverige"
+    },
+    {
+      "lat": 57.43826,
+      "lon": 16.30054,
+      "namn": "Bergebo, Oskarshamns kommun, Kalmar län, 570 91, Sverige"
+    },
+    {
+      "lat": 57.43453,
+      "lon": 16.16964,
+      "namn": "Bergebo, Skinshult, Oskarshamns kommun, Kalmar län, 572 73, Sverige"
+    }
+  ],
   "Bergeforsens IP": [
     {
       "lat": 62.53213,
@@ -298,6 +351,7 @@
       "namn": "Djuptjärn, Hemmingsbo, Falun, Falu kommun, Dalarnas län, Sverige"
     }
   ],
+  "Domnarvets GOIF": [],
   "Domsjö Örnsköldsvik": [
     {
       "lat": 63.25581,
