@@ -232,6 +232,23 @@
       "namn": "Borås kommun, Västra Götalands län, Sverige"
     }
   ],
+  "Boxholm": [
+    {
+      "lat": 58.16667,
+      "lon": 15,
+      "namn": "Boxholms kommun, Östergötlands län, Sverige"
+    },
+    {
+      "lat": 58.1981,
+      "lon": 15.05712,
+      "namn": "Boxholm, Boxholms kommun, Östergötlands län, 595 70, Sverige"
+    },
+    {
+      "lat": 58.2141,
+      "lon": 15.01851,
+      "namn": "Boxholm, Boxholms kommun, Östergötlands län, 590 12, Sverige"
+    }
+  ],
   "Bruksvallarna": [
     {
       "lat": 62.64031,
