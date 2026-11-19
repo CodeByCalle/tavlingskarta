@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-18T10:50:40.171Z",
+ "hamtad": "2026-11-19T10:50:31.248Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -42,8 +42,8 @@
    "niva": "Distrikt",
    "typ": "Tävling",
    "status": "Anmälan öppen",
-   "lat": 57.73822,
-   "lon": 12.03391,
+   "lat": 57.70723,
+   "lon": 11.96702,
    "ungefarlig": false
   },
   {
@@ -57,8 +57,8 @@
    "niva": "Distrikt",
    "typ": "Tävling",
    "status": "Anmälan öppen",
-   "lat": 57.73822,
-   "lon": 12.03391,
+   "lat": 57.70723,
+   "lon": 11.96702,
    "ungefarlig": false
   },
   {
@@ -1202,6 +1202,21 @@
    "ungefarlig": false
   },
   {
+   "id": 48289,
+   "namn": "Götalandsmästerskap 2027",
+   "start": "2027-01-24",
+   "slut": "2027-01-24",
+   "plats": "Göteborg",
+   "distrikt": null,
+   "arrangor": "Göteborgs Skidförbund",
+   "niva": "Regional",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 57.70723,
+   "lon": 11.96702,
+   "ungefarlig": false
+  },
+  {
    "id": 48120,
    "namn": "Tour de Höglandet, deltävling 1",
    "start": "2027-01-28",
@@ -1484,21 +1499,6 @@
    "status": "Godkänt",
    "lat": 57.78578,
    "lon": 13.43651,
-   "ungefarlig": false
-  },
-  {
-   "id": 47775,
-   "namn": "Fjällrävenloppet",
-   "start": "2027-02-06",
-   "slut": "2027-02-06",
-   "plats": "Skyttis Skidstadion",
-   "distrikt": "Ångermanland",
-   "arrangor": "Hägglunds Ski Team SK",
-   "niva": "Nordisk",
-   "typ": "Nordisk tävling",
-   "status": "Godkänt",
-   "lat": 63.29573,
-   "lon": 18.73489,
    "ungefarlig": false
   },
   {
