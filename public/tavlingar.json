@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-22T10:27:05.755Z",
+ "hamtad": "2026-11-23T11:26:35.993Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -26,7 +26,7 @@
    "arrangor": "Funäsdalens IF",
    "niva": "FIS",
    "typ": "FIS-tävling",
-   "status": "Godkänt",
+   "status": "Genomfört",
    "lat": 62.64031,
    "lon": 12.44222,
    "ungefarlig": false
@@ -524,21 +524,6 @@
    "status": "Godkänt",
    "lat": 57.78604,
    "lon": 14.08528,
-   "ungefarlig": false
-  },
-  {
-   "id": 47778,
-   "namn": "Tranemoloppet",
-   "start": "2027-01-06",
-   "slut": "2027-01-06",
-   "plats": "Hagatorpet, Tranemo",
-   "distrikt": "Västergötland",
-   "arrangor": "Tranemo IF Skidklubb",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 57.4719,
-   "lon": 13.34111,
    "ungefarlig": false
   },
   {
@@ -1499,6 +1484,21 @@
    "status": "Godkänt",
    "lat": 57.78578,
    "lon": 13.43651,
+   "ungefarlig": false
+  },
+  {
+   "id": 47775,
+   "namn": "Fjällrävenloppet",
+   "start": "2027-02-06",
+   "slut": "2027-02-06",
+   "plats": "Skyttis Skidstadion",
+   "distrikt": "Ångermanland",
+   "arrangor": "Hägglunds Ski Team SK",
+   "niva": "Nordisk",
+   "typ": "Nordisk tävling",
+   "status": "Godkänt",
+   "lat": 63.29573,
+   "lon": 18.73489,
    "ungefarlig": false
   },
   {
