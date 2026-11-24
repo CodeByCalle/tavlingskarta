@@ -516,12 +516,62 @@
     }
   ],
   "Forslunda Gymnasiet, Umeå": [],
+  "Fritidscentrum": [
+    {
+      "lat": 64.20766,
+      "lon": 19.72389,
+      "namn": "Fritidscentrum, 8, Kläppavägen, Renfors, Vindeln, Vindelns kommun, Västerbottens län, 922 32, Sverige"
+    }
+  ],
   "Föreningen Engelbrektsloppet": [],
   "Gimo Ski Center, Gimo": [
     {
       "lat": 60.17366,
       "lon": 18.16609,
       "namn": "Gimo Ski Center, 2, Gymnasievägen, Stenhusen, Gimo, Östhammars kommun, Uppsala län, 747 40, Sverige"
+    }
+  ],
+  "Graninge Fritidscentrum": [],
+  "Graninge": [
+    {
+      "lat": 62.99776,
+      "lon": 17.08131,
+      "namn": "Graninge församling, Västernorrlands län, Sverige"
+    },
+    {
+      "lat": 62.99776,
+      "lon": 17.08131,
+      "namn": "Graninge distrikt, Sollefteå kommun, Västernorrlands län, Sverige"
+    },
+    {
+      "lat": 63.06907,
+      "lon": 16.94922,
+      "namn": "Graninge, Graninge distrikt, Sollefteå kommun, Västernorrlands län, Sverige"
+    },
+    {
+      "lat": 59.32713,
+      "lon": 18.32116,
+      "namn": "Graninge, Boo, Nacka kommun, Stockholms län, 132 36, Sverige"
+    },
+    {
+      "lat": 59.71254,
+      "lon": 18.37452,
+      "namn": "Graninge, Norrtälje kommun, Stockholms län, 762 31, Sverige"
+    },
+    {
+      "lat": 63.07061,
+      "lon": 16.93372,
+      "namn": "Graninge, Graninge bruk, Graninge distrikt, Sollefteå kommun, Västernorrlands län, Sverige"
+    },
+    {
+      "lat": 59.67344,
+      "lon": 12.6019,
+      "namn": "Graninge, Arvika, Arvika kommun, Värmlands län, 671 41, Sverige"
+    },
+    {
+      "lat": 57.27719,
+      "lon": 15.02345,
+      "namn": "Graninge, Lövstad, Vetlanda kommun, Jönköpings län, Sverige"
     }
   ],
   "Granåsen, Trondheim": [],
