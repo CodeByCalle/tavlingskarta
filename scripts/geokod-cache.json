@@ -275,6 +275,13 @@
       "namn": "Brunnsjöberget, Hedemora, Hedemora kommun, Dalarnas län, 776 93, Sverige"
     }
   ],
+  "Brunnsjöberget, Hedemora": [
+    {
+      "lat": 60.26315,
+      "lon": 15.93737,
+      "namn": "Brunnsjöberget, Hedemora, Hedemora kommun, Dalarnas län, 776 93, Sverige"
+    }
+  ],
   "Byske": [
     {
       "lat": 64.95451,
@@ -454,6 +461,18 @@
     }
   ],
   "Elljusspåret Rydaholm": [],
+  "Evertsberg": [
+    {
+      "lat": 61.13511,
+      "lon": 13.95903,
+      "namn": "Evertsberg, Älvdalens kommun, Dalarnas län, Sverige"
+    },
+    {
+      "lat": 59.36864,
+      "lon": 15.86276,
+      "namn": "Evertsberg, Arboga, Arboga kommun, Västmanlands län, 732 48, Sverige"
+    }
+  ],
   "Filipstad": [
     {
       "lat": 59.71355,
@@ -748,6 +767,7 @@
       "namn": "Hestrastugan, 13, Linnés väg, Kypered, Ekås, Borås kommun, Västra Götalands län, 504 75, Sverige"
     }
   ],
+  "Hovängen": [],
   "Hurtigtorpet": [
     {
       "lat": 59.78563,
@@ -1360,6 +1380,43 @@
       "namn": "Pumpen, Ekilla gårdsväg, Steninge, Märsta, Sigtuna kommun, Stockholms län, 195 33, Sverige"
     }
   ],
+  "Rehns BK": [
+    {
+      "lat": 59.34254,
+      "lon": 18.05866,
+      "namn": "Rehnsgatan, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholms kommun, Stockholms län, 113 57, Sverige"
+    },
+    {
+      "lat": 59.34302,
+      "lon": 18.06048,
+      "namn": "Rehnsgatan, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholms kommun, Stockholms län, 113 53, Sverige"
+    },
+    {
+      "lat": 59.34225,
+      "lon": 18.05755,
+      "namn": "Rehnsgatan, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholms kommun, Stockholms län, 113 59, Sverige"
+    },
+    {
+      "lat": 60.3424,
+      "lon": 15.77134,
+      "namn": "Cecilia Rehns väg, Nämnsbo, Rutbo, Säter, Säters kommun, Dalarnas län, 783 90, Sverige"
+    },
+    {
+      "lat": 57.48718,
+      "lon": 14.13345,
+      "namn": "Johan Rehns väg, Södrapark, Vaggeryd, Vaggeryds kommun, Jönköpings län, 567 31, Sverige"
+    },
+    {
+      "lat": 61.83088,
+      "lon": 16.05695,
+      "namn": "Rehnsvägen, Stavsätter, Lillhaga, Ljusdals kommun, Gävleborgs län, 827 30, Sverige"
+    },
+    {
+      "lat": 59.34335,
+      "lon": 18.062,
+      "namn": "Rehnsgatan, Sibirien, Vasastaden, Norra innerstadens stadsdelsområde, Stockholm, Stockholms kommun, Stockholms län, 113 53, Sverige"
+    }
+  ],
   "Remsle Arena, Sollefteå": [],
   "Riksskidstadion Lugnet, Falun": [
     {
@@ -1516,6 +1573,7 @@
     }
   ],
   "Skönviksbergets friluftscentrum": [],
+  "Sköttvika Skidstadion": [],
   "Snöå skidstadion,Dala-Järna": [],
   "Sollefteå": [
     {
@@ -2108,6 +2166,18 @@
       "namn": "Ågesta Broväg, Farsta strand, Farsta stadsdelsområde, Stockholm, Stockholms kommun, Stockholms län, 123 50, Sverige"
     }
   ],
+  "Åmotfors": [
+    {
+      "lat": 59.76885,
+      "lon": 12.36687,
+      "namn": "Åmotfors, Jarnvägsgatan, Åmotfors, Eda kommun, Värmlands län, 673 35, Sverige"
+    },
+    {
+      "lat": 59.76259,
+      "lon": 12.36223,
+      "namn": "Åmotfors, Eda kommun, Värmlands län, 673 35, Sverige"
+    }
+  ],
   "Ånnaboda": [
     {
       "lat": 59.33642,
@@ -2127,6 +2197,8 @@
       "namn": "Ånäsparken, Sättna kommundel, Sättna distrikt, Sundsvalls kommun, Västernorrlands län, Sverige"
     }
   ],
+  "Ås Hovängen": [],
+  "Ås IP Hovängen": [],
   "Åsarna & Vemdalen": [],
   "Åsarna": [
     {
@@ -2225,5 +2297,6 @@
     }
   ],
   "önviksbergets": [],
+  "öttvika": [],
   "övde": []
 }
