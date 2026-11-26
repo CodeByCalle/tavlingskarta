@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-25T11:50:53.193Z",
+ "hamtad": "2026-11-26T11:38:54.814Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -71,7 +71,7 @@
    "arrangor": "Lycksele IF",
    "niva": "Nordisk",
    "typ": "Nordisk tävling",
-   "status": "Anmälan öppen",
+   "status": "Anmälan stängd",
    "lat": 64.5973,
    "lon": 18.6607,
    "ungefarlig": false
@@ -131,7 +131,7 @@
    "arrangor": "IFK Umeå",
    "niva": "Distrikt",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 63.82773,
    "lon": 20.34793,
    "ungefarlig": false
@@ -401,7 +401,7 @@
    "arrangor": "Kiruna Skidor",
    "niva": "Nationell",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 67.85954,
    "lon": 20.23284,
    "ungefarlig": false
@@ -587,21 +587,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47924,
-   "namn": "Boden Ski Maraton 2027",
-   "start": "2027-01-09",
-   "slut": "2027-01-09",
-   "plats": "Pagla skidstadion",
-   "distrikt": "Norrbotten",
-   "arrangor": "Sävast Ski Team IF",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Anmälan öppen",
-   "lat": 65.84026,
-   "lon": 21.63461,
-   "ungefarlig": false
-  },
-  {
    "id": 47777,
    "namn": "KSK-loppet",
    "start": "2027-01-09",
@@ -644,6 +629,21 @@
    "status": "Godkänt",
    "lat": 57.7403,
    "lon": 13.00069,
+   "ungefarlig": false
+  },
+  {
+   "id": 47924,
+   "namn": "Boden Ski Maraton 2027",
+   "start": "2027-01-09",
+   "slut": "2027-01-09",
+   "plats": "Pagla skidstadion",
+   "distrikt": "Norrbotten",
+   "arrangor": "Sävast Ski Team IF",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Anmälan öppen",
+   "lat": 65.84026,
+   "lon": 21.63461,
    "ungefarlig": false
   },
   {
@@ -896,7 +896,7 @@
    "arrangor": "Domnarvets GOIF",
    "niva": "Distrikt",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 61,
    "lon": 14.6,
    "ungefarlig": true
@@ -992,36 +992,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47836,
-   "namn": "Östersundsspelen",
-   "start": "2027-01-23",
-   "slut": "2027-01-23",
-   "plats": "Östersunds skidstadion",
-   "distrikt": "Jämtland-Härjedalen",
-   "arrangor": "Östersunds SK",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 63.19121,
-   "lon": 14.66022,
-   "ungefarlig": false
-  },
-  {
-   "id": 47838,
-   "namn": "Sunderbysprinten",
-   "start": "2027-01-23",
-   "slut": "2027-01-23",
-   "plats": "Ormberget",
-   "distrikt": "Norrbotten",
-   "arrangor": "Sunderby SK",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 65.73179,
-   "lon": 23.72489,
-   "ungefarlig": false
-  },
-  {
    "id": 47786,
    "namn": "Hestra Skidultra",
    "start": "2027-01-23",
@@ -1064,6 +1034,36 @@
    "status": "Godkänt",
    "lat": 63.82773,
    "lon": 20.34793,
+   "ungefarlig": false
+  },
+  {
+   "id": 47836,
+   "namn": "Östersundsspelen",
+   "start": "2027-01-23",
+   "slut": "2027-01-23",
+   "plats": "Östersunds skidstadion",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Östersunds SK",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.19121,
+   "lon": 14.66022,
+   "ungefarlig": false
+  },
+  {
+   "id": 47838,
+   "namn": "Sunderbysprinten",
+   "start": "2027-01-23",
+   "slut": "2027-01-23",
+   "plats": "Ormberget",
+   "distrikt": "Norrbotten",
+   "arrangor": "Sunderby SK",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 65.73179,
+   "lon": 23.72489,
    "ungefarlig": false
   },
   {
@@ -1142,21 +1142,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47793,
-   "namn": "Lilla Vildmannaloppet",
-   "start": "2027-01-24",
-   "slut": "2027-01-24",
-   "plats": "Nydala",
-   "distrikt": "Västerbotten",
-   "arrangor": "IFK Umeå",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 63.82773,
-   "lon": 20.34793,
-   "ungefarlig": false
-  },
-  {
    "id": 47903,
    "namn": "Åstöloppet",
    "start": "2027-01-24",
@@ -1169,6 +1154,21 @@
    "status": "Anmälan öppen",
    "lat": 62.50849,
    "lon": 17.5098,
+   "ungefarlig": false
+  },
+  {
+   "id": 47793,
+   "namn": "Lilla Vildmannaloppet",
+   "start": "2027-01-24",
+   "slut": "2027-01-24",
+   "plats": "Nydala",
+   "distrikt": "Västerbotten",
+   "arrangor": "IFK Umeå",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.82773,
+   "lon": 20.34793,
    "ungefarlig": false
   },
   {
@@ -1307,21 +1307,6 @@
    "ungefarlig": false
   },
   {
-   "id": 47851,
-   "namn": "Smart Energy och Bauhaus Cup",
-   "start": "2027-01-29",
-   "slut": "2027-01-31",
-   "plats": "Lassalyckan Ulricehamn",
-   "distrikt": "Västergötland",
-   "arrangor": "Ulricehamns IF",
-   "niva": "FIS",
-   "typ": "FIS Junior/Senior Cup",
-   "status": "Anmälan öppen",
-   "lat": 57.78578,
-   "lon": 13.43651,
-   "ungefarlig": false
-  },
-  {
    "id": 47753,
    "namn": "Billingens Långlopp 2027",
    "start": "2027-01-29",
@@ -1337,6 +1322,21 @@
    "ungefarlig": false
   },
   {
+   "id": 47851,
+   "namn": "Smart Energy och Bauhaus Cup",
+   "start": "2027-01-29",
+   "slut": "2027-01-31",
+   "plats": "Lassalyckan Ulricehamn",
+   "distrikt": "Västergötland",
+   "arrangor": "Ulricehamns IF",
+   "niva": "FIS",
+   "typ": "FIS Junior/Senior Cup",
+   "status": "Anmälan öppen",
+   "lat": 57.78578,
+   "lon": 13.43651,
+   "ungefarlig": false
+  },
+  {
    "id": 48277,
    "namn": "DM-stafett Uppland D/H35-",
    "start": "2027-01-29",
@@ -1349,6 +1349,21 @@
    "status": "Anmälan öppen",
    "lat": 60.02335,
    "lon": 18.60107,
+   "ungefarlig": false
+  },
+  {
+   "id": 47896,
+   "namn": "Häggenåsskidan",
+   "start": "2027-01-30",
+   "slut": "2027-01-30",
+   "plats": "Tigervallen, Häggenås",
+   "distrikt": "Jämtland-Härjedalen",
+   "arrangor": "Häggenås SK",
+   "niva": "Distrikt",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 63.39078,
+   "lon": 14.89369,
    "ungefarlig": false
   },
   {
@@ -1484,21 +1499,6 @@
    "status": "Godkänt",
    "lat": 62.34677,
    "lon": 17.01998,
-   "ungefarlig": false
-  },
-  {
-   "id": 48148,
-   "namn": "DM Fri stil",
-   "start": "2027-01-31",
-   "slut": "2027-01-31",
-   "plats": "Arninge GK",
-   "distrikt": "Stockholm",
-   "arrangor": "Täby IS SK",
-   "niva": "Nationell",
-   "typ": "Tävling",
-   "status": "Godkänt",
-   "lat": 59.48115,
-   "lon": 18.12579,
    "ungefarlig": false
   },
   {
