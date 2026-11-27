@@ -1,5 +1,5 @@
 {
- "hamtad": "2026-11-26T11:38:54.814Z",
+ "hamtad": "2026-11-27T11:31:54.345Z",
  "tavlingar": [
   {
    "id": 48056,
@@ -29,21 +29,6 @@
    "status": "Genomfört",
    "lat": 62.64031,
    "lon": 12.44222,
-   "ungefarlig": false
-  },
-  {
-   "id": 48170,
-   "namn": "Kompisstafett 2026",
-   "start": "2026-11-20",
-   "slut": "2026-11-20",
-   "plats": "Skidome",
-   "distrikt": null,
-   "arrangor": "Göteborgs Skidförbund",
-   "niva": "Distrikt",
-   "typ": "Tävling",
-   "status": "Anmälan stängd",
-   "lat": 57.70723,
-   "lon": 11.96702,
    "ungefarlig": false
   },
   {
@@ -89,6 +74,21 @@
    "status": "Anmälan stängd",
    "lat": 59.6244,
    "lon": 16.48491,
+   "ungefarlig": false
+  },
+  {
+   "id": 48305,
+   "namn": "Testlopp",
+   "start": "2026-11-28",
+   "slut": "2026-11-28",
+   "plats": null,
+   "distrikt": "Norrbotten",
+   "arrangor": "Gällivare SK",
+   "niva": "Klubb",
+   "typ": "Tävling",
+   "status": "Anmälan öppen",
+   "lat": 67.10717,
+   "lon": 20.6456,
    "ungefarlig": false
   },
   {
@@ -371,7 +371,7 @@
    "arrangor": "Häverödals SK",
    "niva": "Distrikt",
    "typ": "Distriktsmästerskap",
-   "status": "Anmälan öppen",
+   "status": "Anmälan stängd",
    "lat": 60.02335,
    "lon": 18.60107,
    "ungefarlig": false
@@ -551,7 +551,7 @@
    "arrangor": "Tranemo IF Skidklubb",
    "niva": "Nationell",
    "typ": "Tävling",
-   "status": "Godkänt",
+   "status": "Anmälan öppen",
    "lat": 57.4719,
    "lon": 13.34111,
    "ungefarlig": false
@@ -1397,6 +1397,21 @@
    "ungefarlig": false
   },
   {
+   "id": 48003,
+   "namn": "Renrajden",
+   "start": "2027-01-30",
+   "slut": "2027-01-30",
+   "plats": "Ormberget",
+   "distrikt": "Norrbotten",
+   "arrangor": "OK Renen",
+   "niva": "Nationell",
+   "typ": "Tävling",
+   "status": "Godkänt",
+   "lat": 65.73179,
+   "lon": 23.72489,
+   "ungefarlig": false
+  },
+  {
    "id": 48131,
    "namn": "Kilsbergsloppet 2026",
    "start": "2027-01-30",
@@ -1484,21 +1499,6 @@
    "status": "Godkänt",
    "lat": 58.50372,
    "lon": 13.15764,
-   "ungefarlig": false
-  },
-  {
-   "id": 47992,
-   "namn": "ICA Loppet",
-   "start": "2027-01-31",
-   "slut": "2027-01-31",
-   "plats": "SCA skidstadion, Matfors",
-   "distrikt": "Medelpad",
-   "arrangor": "Matfors SK",
-   "niva": "Nationell",
-   "typ": "Motionsarrangemang",
-   "status": "Godkänt",
-   "lat": 62.34677,
-   "lon": 17.01998,
    "ungefarlig": false
   },
   {
