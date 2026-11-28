@@ -473,6 +473,23 @@
       "namn": "Evertsberg, Arboga, Arboga kommun, Västmanlands län, 732 48, Sverige"
     }
   ],
+  "Falu": [
+    {
+      "lat": 60.60162,
+      "lon": 15.63676,
+      "namn": "Falu kommun, Dalarnas län, Sverige"
+    },
+    {
+      "lat": 60.59879,
+      "lon": 15.61105,
+      "namn": "Falu Gruva, Krondiket, Falun, Falu kommun, Dalarnas län, Sverige"
+    },
+    {
+      "lat": 60.60815,
+      "lon": 15.62723,
+      "namn": "Faluån, Falun, Falu kommun, Dalarnas län, Sverige"
+    }
+  ],
   "Filipstad": [
     {
       "lat": 59.71355,
@@ -1064,6 +1081,18 @@
       "namn": "Lugnet, Falun, Falu kommun, Dalarnas län, Sverige"
     }
   ],
+  "Lugnet Skidstadion, Falun": [
+    {
+      "lat": 60.61833,
+      "lon": 15.65434,
+      "namn": "FEV Lugnet Skidstadion, Lugnetvägen, Lugnet, Lilla Hälla, Falun, Falu kommun, Dalarnas län, 791 31, Sverige"
+    },
+    {
+      "lat": 60.62166,
+      "lon": 15.65693,
+      "namn": "Lugnet Falun - nationalarena för nordisk skidåkning, Sjulsarvsvägen, Lugnet, Lilla Hälla, Falun, Falu kommun, Dalarnas län, 791 31, Sverige"
+    }
+  ],
   "Lundåsvallen Häverödal": [
     {
       "lat": 60.02335,
@@ -1650,6 +1679,7 @@
       "namn": "Stugun, Ragunda kommun, Jämtlands län, Sverige"
     }
   ],
+  "Stångtjärnsstugan": [],
   "Sundsvall Hulistugan": [
     {
       "lat": 62.41943,
